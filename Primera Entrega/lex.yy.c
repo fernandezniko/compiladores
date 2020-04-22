@@ -765,7 +765,7 @@ YY_RULE_SETUP
 case 5:
 YY_RULE_SETUP
 #line 40 "lexico.l"
-{ printf("PALABRA RESERVADA: WRITE "); }
+{ printf("PALABRA RESERVADA: DISPLAY "); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
