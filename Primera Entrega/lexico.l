@@ -1,11 +1,14 @@
 %{
+
+#include <string.h>
+#include <float.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
-#include <string.h>
-#include <float.h>
-
+#include "y.tab.h"
 FILE  *yyin;
+
+
 %}
 
 %option noyywrap 
@@ -33,10 +36,10 @@ L_C						["}"]
 ESPACIO					" "
 
 %%
-"DEFVAR"|"defvar"		{ printf("PALABRA RESERVADA: DEFVAR "); }
-"Integer"|"INTEGER"		{ printf("PALABRA RESERVADA: INTEGER "); }
-"Float"|"FLOAT"			{ printf("PALABRA RESERVADA: FLOAT "); }
-"ENDDEF"|"enddef"		{ printf("PALABRA RESERVADA: ENDDEF "); }
+"DEFVAR"|"defvar"		{ printf("defvar detectado flex\n"); return INI_DEFVAR; }
+"Integer"|"INTEGER"		{ printf("INT detectado flex\n"); return DEF_INT; }
+"Float"|"FLOAT"			{ printf("FLOAT detectado flex\n"); return DEF_FLOAT; }
+"ENDDEF"|"enddef"		{ printf("endfed detectado flex\n"); return FIN_DEFVAR; }
 "display"|"DISPLAY"		{ printf("PALABRA RESERVADA: DISPLAY "); }
 "while"|"WHILE"			{ printf("PALABRA RESERVADA: WHILE "); }
 "if"|"IF"				{ printf("PALABRA RESERVADA: IF "); }
@@ -75,7 +78,7 @@ ESPACIO					" "
 "<="                    { printf("OP <= ");}
 "!="                    { printf("OP != ");}
 "=="                    { printf("OP == ");}
-":"						{ printf("DOS PUNTOS ");}
+":"						{ printf("DOS PUNTOS flex\n"); return DOSPUNTOS;}
 "+"						{ printf("MAS ");}
 "-"						{ printf("MENOS ");}
 "*"						{ printf("POR ");}
@@ -86,33 +89,12 @@ ESPACIO					" "
 "]"						{ printf("C_C ");}
 "{"						{ printf("LL_A ");}
 "}"						{ printf("LL_C ");}
-";"						{ printf("PUNTOYCOMA ");}
-","						{ printf("COMA ");}
+";"						{ printf("PUNTOYCOMA flex\n"); return PUNTOCOMA;}
+","						{ ;}
 "and"|"AND"				{ printf("OP AND");}
 "or"|"OR"				{ printf("OP OR");}
 "not"|"NOT"				{ printf("OP NOT");}
 {COMENTARIOS} 			{ printf("COMENTARIO");} 
-{ID}					{ printf("ID ");}
+{ID}					{ yylval.str_val = strdup(yytext); printf("ID detectado flex\n"); return STRI;}
 
 %%
-int main(int argc, char *argv[]){
-
-if ((yyin = fopen(argv[1], "rt")) == NULL)
-  {
-	printf("\nNo se puede abrir el archivo: %s\n", argv[1]);
-  }
-  else
-  {
-	yylex();
-  }
-  fclose(yyin);
-  return 0;
-	
-}
-
-int yyerror(void)
-     {
-       printf("Syntax Error\n");
-	 system ("Pause");
-	 exit (1);
-     }

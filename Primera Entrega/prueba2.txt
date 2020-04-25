@@ -1,0 +1,5 @@
+***/ esto es un comentario /***
+DEFVAR
+	contador: Integer;
+	promedio: Float;
+ENDDEF
