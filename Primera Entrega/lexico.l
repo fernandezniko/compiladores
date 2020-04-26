@@ -22,6 +22,7 @@ CONST_REAL              {DIGITO}+"."{DIGITO}+
 CONST_INT               {DIGITO}+
 ID						{LETRA}({LETRA}|{DIGITO})*
 OP_ASIG   				[":="]
+ASIG_ESP				["+="|"-="|"*="|"/="]
 C_A                     ["["]
 C_C                     ["]"]
 ESPACIO					" "
@@ -84,12 +85,13 @@ ESPACIO					" "
 "{"						{ return L_A;}
 "}"						{ return L_C;}
 ";"						{ return PUNTO_Y_COMA;}
+":"						{return DOSPUNTOS;}
 ","						{ printf("COMA ");}
 "and"|"AND"				{ return AND;}
 "or"|"OR"				{ return OR;}
 "not"|"NOT"				{ return NOT;}
 {COMENTARIOS} 			{ ;} 
-{ID}					{ yylval.str_val = strdup(yytext); return ID;}
+{ID}					{ yylval.strval = strdup(yytext); return ID;}
 {ASIG_ESP}				{ return ASIG_ESP;}
 \n\r
 \n

@@ -9,7 +9,7 @@ extern int yylineno;
 
 %}
 %union{
-	  char *str_val;
+	  char *strval;
 	  char a_e[2];
     
 }
@@ -26,29 +26,27 @@ extern int yylineno;
 %token INT FLOAT STRING
 %token CONST_REAL CONST_INT CONST_STR
 %token IF ELSE WHILE         
-%token P_A P_C C_A C_C L_A L_C PUNTO_Y_COMA COMA
+%token P_A P_C C_A C_C L_A L_C PUNTO_Y_COMA COMA DOSPUNTOS
 %token CMP_MAY CMP_MEN CMP_MAYI CMP_MENI CMP_DIST CMP_IGUAL
 %token OP_SUM OP_RES OP_DIV OP_MUL
 %token AND OR NOT
 %type <strval> expresion
-%union{
-	  char *strval;
-    
-}
 %token <strval> ID
 %token OP_ASIG
 
 
 %%
 
-programa: program {printf("program - program\nCompilacion OK\n");}
+programa: program {printf("program - program\nCompilacion OK\n");};
 program:
 	sentencia 				{printf("program - sentencia\n");}
 	| program sentencia 	{printf("program - program sentencia\n");}
 	;
 	
-sentencia: INI_DEFVAR declaraciones FIN_DEFVAR {printf("sentencia - INI_DEFVAR declaraciones FIN_DEFVAR\n");}
+sentencia: DEFVAR declaraciones ENDDEF {printf("sentencia - DEFVAR declaraciones ENDDEF\n");}
 			| ID ASIG_ESP ID 	{printf("sentencia - ID ASIG_ESP ID\n");}
+            | asignacion PUNTO_Y_COMA { printf("\nsentencia - asignacion");}
+            | decision              {   printf("\nsentencia - decision");};
 	;
 	
 declaraciones:         	        	
@@ -56,45 +54,33 @@ declaraciones:
              | declaraciones declaracion	{printf("declaraciones - declaraciones declaracion\n");}
     	     ;
 
-declaracion: DEF_INT DOSPUNTOS lista_ids 				{printf("declaracion - DEF_INT DOSPUNTOS lista_ids\n");}
-	|DEF_FLOAT DOSPUNTOS lista_ids 						{printf("declaracion - DEF_FLOAT DOSPUNTOS lista_ids\n");
+declaracion: INT DOSPUNTOS lista_ids 				{printf("declaracion - INT DOSPUNTOS lista_ids\n");}
+	|FLOAT DOSPUNTOS lista_ids 						{printf("declaracion - FLOAT DOSPUNTOS lista_ids\n");
 		/*printf("declarado FLOAT con nombre %s", yylval.str_val);*/
 		/*printf("declarado INT con nombre ");*/
 	}
 	;
 	
-lista_ids:  	ID				{printf("lista_ids - ID '%s'\n",yylval.str_val);}
-			| lista_ids PUNTOCOMA ID	{printf("lista_ids - lista_ids PUNTOCOMA ID\n");}
+lista_ids:  	ID				{printf("lista_ids - ID '%s'\n",yylval.strval);}
+			| lista_ids PUNTO_Y_COMA ID	{printf("lista_ids - lista_ids PUNTO_Y_COMA ID\n");}
 			;
-
-sentencias: 
-    sentencias sentencia    {   printf("\nsentencias - sentencias sentencia");   
-                                 }
-    | sentencia             {   printf("\nsentencias - sentencia"); 
-                                 }
-    ;
-
-sentencia:
-    asignacion PUNTO_Y_COMA { printf("\nsentencia - asignacion");}
-    | decision              {   printf("\nsentencia - decision");};   
    	
-
 asignacion:
     ID OP_ASIG expresion { printf("\nasignacion ID - OP_ASIG - expresion");}
     | ID OP_ASIG constanteString { printf("\nasignacion ID - OP_ASIG - CTE_STRING");}
 ;
 
 decision: 
-    IF P_A condicion P_C L_A sentencias L_C {   printf("\ndecision - IF P_A condicion P_C L_A sentencias L_C");
+    IF P_A condicion P_C L_A sentencia L_C {   printf("\ndecision - IF P_A condicion P_C L_A sentencia L_C");
  
                                                  }
-   | IF P_A condicion P_C L_A sentencias L_C {  printf("\ndecision - IF P_A condicion P_C L_A sentencias L_C");
+   | IF P_A condicion P_C L_A sentencia L_C {  printf("\ndecision - IF P_A condicion P_C L_A sentencia L_C");
                                                 
                                                
                                                  }
     ELSE                                    {   printf("\nInicio del else");
                                                    }
-    L_A sentencias L_C                      {   printf("\nFin del else");
+    L_A sentencia L_C                      {   printf("\nFin del else");
                                                 
                                             
                                                 }
