@@ -21,6 +21,7 @@ COMENTARIOS             (\*\*\*\/).*(\/\*\*\*)
 CONST_REAL              {DIGITO}+"."{DIGITO}+
 CONST_INT               {DIGITO}+
 ID						{LETRA}({LETRA}|{DIGITO})*
+ASIG_ESP				["+="|"-="|"*="|"/="]
 OP_COMPARACION          ["<"|"=="|">"|"<="|">="|"!="]
 OP_SURES                ["+"|"-"]
 OP_MULTDIV              ["*"|"/"]
@@ -34,6 +35,7 @@ PyC						[";"]
 L_A						["{"]
 L_C						["}"]
 ESPACIO					" "
+
 
 %%
 "DEFVAR"|"defvar"		{ /*printf("defvar detectado flex\n");*/ return INI_DEFVAR; }
@@ -79,10 +81,10 @@ ESPACIO					" "
 "!="                    { printf("OP != ");}
 "=="                    { printf("OP == ");}
 ":"						{ return DOSPUNTOS;}
-"+"						{ printf("MAS ");}
-"-"						{ printf("MENOS ");}
-"*"						{ printf("POR ");}
-"/"						{ printf("DIV ");}
+"+"						{ ;}
+"-"						{ ;}
+"*"						{ ;}
+"/"						{ ;}
 "("						{ printf("P_A ");}
 ")"						{ printf("P_C ");}
 "["						{ printf("C_A ");}
@@ -96,6 +98,7 @@ ESPACIO					" "
 "not"|"NOT"				{ printf("OP NOT");}
 {COMENTARIOS} 			{ ;} 
 {ID}					{ yylval.str_val = strdup(yytext); return ID;}
+{ASIG_ESP}				{ return ASIG_ESP;}
 
 \n
 \r

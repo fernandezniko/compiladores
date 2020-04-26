@@ -10,16 +10,19 @@ FILE  *yyin;
 
 %union{
 	  char *str_val;
+	  char a_e[2];
     
 }
 
 %token INI_DEFVAR
 %token FIN_DEFVAR
-%token <strval> ID
+%token <str_val> ID
 %token PUNTOCOMA
 %token DOSPUNTOS
 %token DEF_INT
 %token DEF_FLOAT
+%token <a_e> ASIG_ESP
+
 
 %%
 
@@ -28,7 +31,9 @@ program:
 	sentencia 				{printf("program - sentencia\n");}
 	| program sentencia 	{printf("program - program sentencia\n");}
 	;
-sentencia: INI_DEFVAR declaraciones FIN_DEFVAR {printf("sentencia - INI_DEFVAR declaraciones FIN_DEFVAR\n");}
+	
+sentencia	: INI_DEFVAR declaraciones FIN_DEFVAR {printf("sentencia - INI_DEFVAR declaraciones FIN_DEFVAR\n");}
+			| ID ASIG_ESP ID 	{printf("sentencia - ID ASIG_ESP ID\n");}
 	;
 	
 declaraciones:         	        	
