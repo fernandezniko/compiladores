@@ -27,6 +27,7 @@ int cont_2 = 0;
 %token DEFVAR ENDDEF 
 %token INT FLOAT STRING
 %token CONST_REAL CONST_INT CONST_STR
+%token DISPLAY GET
 %token IF ELSE WHILE         
 %token P_A P_C C_A C_C L_A L_C PUNTO_Y_COMA COMA DOSPUNTOS
 %token CMP_MAY CMP_MEN CMP_MAYI CMP_MENI CMP_DIST CMP_IGUAL
@@ -53,6 +54,8 @@ sentencia: DEFVAR declaraciones ENDDEF {printf("\nsentencia - DEFVAR declaracion
             | decision              {   printf("\nsentencia - decision");}
             | iteracion             { printf("\nsentencia - iteracion");}
 			| let					{ printf("\nsentencia - let");}
+            | entrada               {printf("\nsentencia - entrada");}
+            | salida                {printf("\nsentencia - salida");}
 	        ;
 	
 declaraciones:         	        	
@@ -76,9 +79,19 @@ asignacion:
     | ID OP_ASIG constanteString { printf("\nasignacion ID - OP_ASIG - CTE_STRING");}
 ;
 
+entrada:
+    DISPLAY ID  PUNTO_Y_COMA        {printf("\nentrada DISPLAY - ID"); }
+    | DISPLAY constanteString PUNTO_Y_COMA {printf("\nentrada DISPLAY - CONST_STR"); }
+    ;
+    
+salida:
+    GET ID  PUNTO_Y_COMA {printf("\nsalida GET - ID"); }
+    ;
+
 iteracion:
      WHILE P_A condicion P_C L_A sentencia L_C { printf("\niteracion - WHILE P_A condicion P_C L_A sentencia L_C");}
-;
+    ;
+
 decision: 
     IF P_A condicion P_C L_A sentencia L_C {   printf("\ndecision - IF P_A condicion P_C L_A sentencia L_C");
  
@@ -172,7 +185,7 @@ termino:
 factor: 
     P_A expresion P_C           {   printf("\nfactor - P_A expresion P_C");
                                     }
-    | ID                        {   printf("\nfactor - ID (insertando tipo)");
+    | ID                        {   printf("\nfactor - ID ");
                                     
                                     }
     | constanteNumerica         {   printf("\nfactor - constanteNumerica");
@@ -195,7 +208,7 @@ constanteString:
                         }
     ;
 
-let : LET_SIM cont_ids OP_IGUAL P_A cont_exp P_C {
+let: LET_SIM cont_ids OP_IGUAL P_A cont_exp P_C {
 				if(cont_1==cont_2){
 					printf("\nsentencia - LET_SIM cont_ids OP_IGUAL P_A cont_exp P_C");
 					/*printf("\nvalores cont_1: %d cont_2: %d",cont_1,cont_2);*/
@@ -207,11 +220,11 @@ let : LET_SIM cont_ids OP_IGUAL P_A cont_exp P_C {
 				}
 	;
 	
-cont_ids : cont_ids COMA ID {cont_1++;printf("\ncont_ids - cont_ids COMA ID");}
+cont_ids: cont_ids COMA ID {cont_1++;printf("\ncont_ids - cont_ids COMA ID");}
 			| ID {cont_1++; printf("\ncont_ids - ID");}
 			;
 
-cont_exp : cont_exp PUNTO_Y_COMA expresion {cont_2++;printf("\ncont_exp - cont_exp PUNTO_Y_COMA expresion");}
+cont_exp: cont_exp PUNTO_Y_COMA expresion {cont_2++;printf("\ncont_exp - cont_exp PUNTO_Y_COMA expresion");}
 			| expresion {cont_2++;printf("\ncont_exp - expresion");}
 			;
 
@@ -232,7 +245,7 @@ int main(int argc,char *argv[])
 }
 int yyerror(void)
      {
-       printf("Syntax Error at line: %d\n", yylineno);
+       printf("Syntax Error en la linea: %d\n", yylineno);
 	 system ("Pause");
 	 exit (1);
      }

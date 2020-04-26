@@ -1,0 +1,3 @@
+DISPLAY a;
+DISPLAY "hola";
+GET b;

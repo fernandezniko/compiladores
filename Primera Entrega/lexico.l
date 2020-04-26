@@ -33,7 +33,8 @@ ESPACIO					" "
 "int"|"INT"				{ return INT; }
 "float"|"FLOAT"			{ return FLOAT; }
 "ENDDEF"|"enddef"		{ return ENDDEF; }
-"display"|"DISPLAY"		{ printf("PALABRA RESERVADA: DISPLAY "); }
+"display"|"DISPLAY"		{ return DISPLAY; }
+"get"|"GET"				{ return GET; }
 "while"|"WHILE"			{ return WHILE; }
 "if"|"IF"				{ return IF; }
 "else"|"ELSE"			{ return ELSE; }
