@@ -198,7 +198,7 @@ constanteString:
 let : LET_SIM cont_ids OP_IGUAL P_A cont_exp P_C {
 				if(cont_1==cont_2){
 					printf("\nsentencia - LET_SIM cont_ids OP_IGUAL P_A cont_exp P_C");
-					printf("\nvalores cont_1: %d cont_2: %d",cont_1,cont_2);
+					/*printf("\nvalores cont_1: %d cont_2: %d",cont_1,cont_2);*/
 					cont_1 = 0;
 					cont_2 = 0;
 				}else{
