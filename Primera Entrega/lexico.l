@@ -28,10 +28,10 @@ ESPACIO					" "
 
 
 %%
-"DEFVAR"|"defvar"		{ /*printf("defvar detectado flex\n");*/ return INI_DEFVAR; }
-"int"|"INT"				{return DEF_INT; }
-"float"|"FLOAT"			{ /*printf("FLOAT detectado flex\n");*/ return DEF_FLOAT; }
-"ENDDEF"|"enddef"		{ return FIN_DEFVAR; }
+"DEFVAR"|"defvar"		{ return DEFVAR; }
+"int"|"INT"				{ return INT; }
+"float"|"FLOAT"			{ return FLOAT; }
+"ENDDEF"|"enddef"		{ return ENDDEF; }
 "display"|"DISPLAY"		{ printf("PALABRA RESERVADA: DISPLAY "); }
 "while"|"WHILE"			{ printf("PALABRA RESERVADA: WHILE "); }
 "if"|"IF"				{ return IF; }
@@ -91,11 +91,10 @@ ESPACIO					" "
 {COMENTARIOS} 			{ ;} 
 {ID}					{ yylval.str_val = strdup(yytext); return ID;}
 {ASIG_ESP}				{ return ASIG_ESP;}
-
-\n
-\r
+\n\r
 \n
 \t
+{ESPACIO}
 " "						/*estos ultimos 5 son para borrar los tabs, expacios, etc*/
 
 

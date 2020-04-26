@@ -13,15 +13,17 @@ extern int yylineno;
 	  char a_e[2];
     
 }
-
-%token INI_DEFVAR
+/*%token INI_DEFVAR
 %token FIN_DEFVAR
 %token <str_val> ID
 %token PUNTOCOMA
 %token DOSPUNTOS
 %token DEF_INT
 %token DEF_FLOAT
+*/
 %token <a_e> ASIG_ESP
+%token DEFVAR ENDDEF 
+%token INT FLOAT STRING
 %token CONST_REAL CONST_INT CONST_STR
 %token IF ELSE WHILE         
 %token P_A P_C C_A C_C L_A L_C PUNTO_Y_COMA COMA
@@ -33,20 +35,19 @@ extern int yylineno;
 	  char *strval;
     
 }
-%token DEFVAR ENDDEF
 %token <strval> ID
 %token OP_ASIG
-%token INT FLOAT
+
 
 %%
 
-programa : program {printf("program - program\nCompilacion OK\n");}
+programa: program {printf("program - program\nCompilacion OK\n");}
 program:
 	sentencia 				{printf("program - sentencia\n");}
 	| program sentencia 	{printf("program - program sentencia\n");}
 	;
 	
-sentencia	: INI_DEFVAR declaraciones FIN_DEFVAR {printf("sentencia - INI_DEFVAR declaraciones FIN_DEFVAR\n");}
+sentencia: INI_DEFVAR declaraciones FIN_DEFVAR {printf("sentencia - INI_DEFVAR declaraciones FIN_DEFVAR\n");}
 			| ID ASIG_ESP ID 	{printf("sentencia - ID ASIG_ESP ID\n");}
 	;
 	
@@ -55,14 +56,14 @@ declaraciones:
              | declaraciones declaracion	{printf("declaraciones - declaraciones declaracion\n");}
     	     ;
 
-declaracion : DEF_INT DOSPUNTOS lista_ids 				{printf("declaracion - DEF_INT DOSPUNTOS lista_ids\n");}
+declaracion: DEF_INT DOSPUNTOS lista_ids 				{printf("declaracion - DEF_INT DOSPUNTOS lista_ids\n");}
 	|DEF_FLOAT DOSPUNTOS lista_ids 						{printf("declaracion - DEF_FLOAT DOSPUNTOS lista_ids\n");
 		/*printf("declarado FLOAT con nombre %s", yylval.str_val);*/
 		/*printf("declarado INT con nombre ");*/
 	}
 	;
 	
-lista_ids 	:  	ID				{printf("lista_ids - ID '%s'\n",yylval.str_val);}
+lista_ids:  	ID				{printf("lista_ids - ID '%s'\n",yylval.str_val);}
 			| lista_ids PUNTOCOMA ID	{printf("lista_ids - lista_ids PUNTOCOMA ID\n");}
 			;
 
