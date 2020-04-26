@@ -207,12 +207,12 @@ let : LET_SIM cont_ids OP_IGUAL P_A cont_exp P_C {
 				}
 	;
 	
-cont_ids : cont_ids COMA ID {cont_1++;}
-			| ID {cont_1++;}
+cont_ids : cont_ids COMA ID {cont_1++;printf("\ncont_ids - cont_ids COMA ID");}
+			| ID {cont_1++; printf("\ncont_ids - ID");}
 			;
 
-cont_exp : cont_exp PUNTO_Y_COMA expresion {cont_2++;}
-			| expresion {cont_2++;;}
+cont_exp : cont_exp PUNTO_Y_COMA expresion {cont_2++;printf("\ncont_exp - cont_exp PUNTO_Y_COMA expresion");}
+			| expresion {cont_2++;printf("\ncont_exp - expresion");}
 			;
 
 %%
