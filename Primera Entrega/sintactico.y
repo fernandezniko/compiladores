@@ -37,32 +37,32 @@ extern int yylineno;
 
 %%
 
-programa: program {printf("program - program\nCompilacion OK\n");};
+programa: program {printf("\nprogram - program\nCompilacion OK\n");};
 program:
-	sentencia 				{printf("program - sentencia\n");}
-	| program sentencia 	{printf("program - program sentencia\n");}
+	sentencia 				{printf("\nprogram - sentencia");}
+	| program sentencia 	{printf("\nprogram - program sentencia");}
 	;
 	
-sentencia: DEFVAR declaraciones ENDDEF {printf("sentencia - DEFVAR declaraciones ENDDEF\n");}
-			| ID ASIG_ESP ID 	{printf("sentencia - ID ASIG_ESP ID\n");}
+sentencia: DEFVAR declaraciones ENDDEF {printf("\nsentencia - DEFVAR declaraciones ENDDEF");}
+			| ID ASIG_ESP ID 	{printf("\nsentencia - ID ASIG_ESP ID");}
             | asignacion PUNTO_Y_COMA { printf("\nsentencia - asignacion");}
             | decision              {   printf("\nsentencia - decision");};
 	;
 	
 declaraciones:         	        	
-             declaracion					{printf("declaraciones - declaracion\n");}
-             | declaraciones declaracion	{printf("declaraciones - declaraciones declaracion\n");}
+             declaracion					{printf("\ndeclaraciones - declaracion");}
+             | declaraciones declaracion	{printf("\ndeclaraciones - declaraciones declaracion");}
     	     ;
 
-declaracion: INT DOSPUNTOS lista_ids 				{printf("declaracion - INT DOSPUNTOS lista_ids\n");}
-	|FLOAT DOSPUNTOS lista_ids 						{printf("declaracion - FLOAT DOSPUNTOS lista_ids\n");
+declaracion: INT DOSPUNTOS lista_ids 				{printf("\ndeclaracion - INT DOSPUNTOS lista_ids");}
+	|FLOAT DOSPUNTOS lista_ids 						{printf("\ndeclaracion - FLOAT DOSPUNTOS lista_ids");
 		/*printf("declarado FLOAT con nombre %s", yylval.str_val);*/
 		/*printf("declarado INT con nombre ");*/
 	}
 	;
 	
-lista_ids:  	ID				{printf("lista_ids - ID '%s'\n",yylval.strval);}
-			| lista_ids PUNTO_Y_COMA ID	{printf("lista_ids - lista_ids PUNTO_Y_COMA ID\n");}
+lista_ids:  	ID				{printf("\nlista_ids - ID '%s'",yylval.strval);}
+			| lista_ids PUNTO_Y_COMA ID	{printf("\nlista_ids - lista_ids PUNTO_Y_COMA ID");}
 			;
    	
 asignacion:

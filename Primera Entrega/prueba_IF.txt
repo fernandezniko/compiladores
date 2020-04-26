@@ -1,40 +1,32 @@
 ***/IF SIMPLE SIN ELSE/***
 b:= 1;
-if(b!=1)
-{
-    c := "**ingresa al IF DISTINTO";
-}
-
 if(b==1)
 {
-    c := "**ingresa al IF IGUAL";
+   c := "**ingresa al IF IGUAL";
 }
 
-if(b>1)
+***/IF SIMPLE CON ELSE /***
+if(b==1)
 {
-    c := "**ingresa al IF MAYOR";
-}
-
-if(b>=1)
-{
-    c := "**ingresa al IF MAYOR IGUAL";
-}
-
-if(b<1)
-{
-    c := "**ingresa al IF MENOR";
-}
-
-if(b<=1)
-{
-    c := "**ingresa al IF MENOR IGUAL";
-}
-***/  IF CON ELSE/***
-if(b!=1)
-{
-    c := "**ingresa al IF";
+   c := "**ingresa al IF IGUAL con ELSE";
 }
 else
 {
-   c:="**ingresa al ELSE
+   d := "**ingresa al ELSE del if IGUAL";
+}
+
+***/ IF CONDICIONES MULTIPLES /***
+if((b!=1) AND (c<10))
+{
+    c := "**ingresa al IF AND";
+}
+
+if((b!=1) OR (c<10))
+{
+    c := "**ingresa al IF OR";
+}
+
+if(NOT b<1)
+{
+    c := "**ingresa al IF NOT";
 }
