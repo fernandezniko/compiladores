@@ -46,8 +46,9 @@ program:
 sentencia: DEFVAR declaraciones ENDDEF {printf("\nsentencia - DEFVAR declaraciones ENDDEF");}
 			| ID ASIG_ESP ID 	{printf("\nsentencia - ID ASIG_ESP ID");}
             | asignacion PUNTO_Y_COMA { printf("\nsentencia - asignacion");}
-            | decision              {   printf("\nsentencia - decision");};
-	;
+            | decision              {   printf("\nsentencia - decision");}
+            | iteracion             { printf("\nsentencia - iteracion");}
+	        ;
 	
 declaraciones:         	        	
              declaracion					{printf("\ndeclaraciones - declaracion");}
@@ -70,6 +71,9 @@ asignacion:
     | ID OP_ASIG constanteString { printf("\nasignacion ID - OP_ASIG - CTE_STRING");}
 ;
 
+iteracion:
+     WHILE P_A condicion P_C L_A sentencia L_C { printf("\niteracion - WHILE P_A condicion P_C L_A sentencia L_C");}
+;
 decision: 
     IF P_A condicion P_C L_A sentencia L_C {   printf("\ndecision - IF P_A condicion P_C L_A sentencia L_C");
  

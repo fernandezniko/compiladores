@@ -34,7 +34,7 @@ ESPACIO					" "
 "float"|"FLOAT"			{ return FLOAT; }
 "ENDDEF"|"enddef"		{ return ENDDEF; }
 "display"|"DISPLAY"		{ printf("PALABRA RESERVADA: DISPLAY "); }
-"while"|"WHILE"			{ printf("PALABRA RESERVADA: WHILE "); }
+"while"|"WHILE"			{ return WHILE; }
 "if"|"IF"				{ return IF; }
 "else"|"ELSE"			{ return ELSE; }
 {CONST_INT}				{ 

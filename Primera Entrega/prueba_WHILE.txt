@@ -1,0 +1,26 @@
+***/ WHILE /***
+
+b:=1;
+a:=5;
+while(b<3)
+{
+    c :=  "**entre al WHILE simple";
+}
+
+while(NOT b>3)
+{
+   c:= "**entre al WHILE con NOT";
+}
+
+while( (b >= 3) AND (a != 10))
+{
+   c:= "**entre al WHILE con AND";
+}
+
+while( b >= 3)
+{
+	while(a < 5)
+	{
+		a := "**WHILE dentro de otro WHILE" ;
+	}
+}	
