@@ -1,5 +1,5 @@
 ***/ esto es un comentario /***
 DEFVAR
-	contador: Integer;
-	promedio: Float;
+	FLOAT : a1; b1
+	int : a	
 ENDDEF

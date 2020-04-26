@@ -15,7 +15,7 @@ FILE  *yyin;
 
 %token INI_DEFVAR
 %token FIN_DEFVAR
-%token <strval> STRI
+%token <strval> ID
 %token PUNTOCOMA
 %token DOSPUNTOS
 %token DEF_INT
@@ -23,22 +23,31 @@ FILE  *yyin;
 
 %%
 
-programa	: 
-	dec_variables
+programa : program {printf("program - program\nCompilacion OK\n");}
+program:
+	sentencia 				{printf("program - sentencia\n");}
+	| program sentencia 	{printf("program - program sentencia\n");}
 	;
-
-dec_variables:	
-	INI_DEFVAR {printf("defvar bison");} declaro_variables FIN_DEFVAR {printf("ENDEF bison");}
+sentencia: INI_DEFVAR declaraciones FIN_DEFVAR {printf("sentencia - INI_DEFVAR declaraciones FIN_DEFVAR\n");}
 	;
 	
-declaro_variables: 
-	STRI DOSPUNTOS DEF_INT PUNTOCOMA {
-		printf("declarado INT con nombre %s", yylval.str_val);
-	}
-	|STRI DOSPUNTOS DEF_FLOAT PUNTOCOMA {
-		printf("declarado FLOAT con nombre %s", yylval.str_val);
+declaraciones:         	        	
+             declaracion					{printf("declaraciones - declaracion\n");}
+             | declaraciones declaracion	{printf("declaraciones - declaraciones declaracion\n");}
+    	     ;
+
+declaracion : DEF_INT DOSPUNTOS lista_ids 				{printf("declaracion - DEF_INT DOSPUNTOS lista_ids\n");}
+	|DEF_FLOAT DOSPUNTOS lista_ids 						{printf("declaracion - DEF_FLOAT DOSPUNTOS lista_ids\n");
+		/*printf("declarado FLOAT con nombre %s", yylval.str_val);*/
+		/*printf("declarado INT con nombre ");*/
 	}
 	;
+	
+lista_ids 	:  	ID				{printf("lista_ids - ID '%s'\n",yylval.str_val);}
+			| lista_ids PUNTOCOMA ID	{printf("lista_ids - lista_ids PUNTOCOMA ID\n");}
+			;
+
+
 
 %%
 

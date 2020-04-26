@@ -36,10 +36,10 @@ L_C						["}"]
 ESPACIO					" "
 
 %%
-"DEFVAR"|"defvar"		{ printf("defvar detectado flex\n"); return INI_DEFVAR; }
-"Integer"|"INTEGER"		{ printf("INT detectado flex\n"); return DEF_INT; }
-"Float"|"FLOAT"			{ printf("FLOAT detectado flex\n"); return DEF_FLOAT; }
-"ENDDEF"|"enddef"		{ printf("endfed detectado flex\n"); return FIN_DEFVAR; }
+"DEFVAR"|"defvar"		{ /*printf("defvar detectado flex\n");*/ return INI_DEFVAR; }
+"int"|"INT"				{return DEF_INT; }
+"float"|"FLOAT"			{ /*printf("FLOAT detectado flex\n");*/ return DEF_FLOAT; }
+"ENDDEF"|"enddef"		{ return FIN_DEFVAR; }
 "display"|"DISPLAY"		{ printf("PALABRA RESERVADA: DISPLAY "); }
 "while"|"WHILE"			{ printf("PALABRA RESERVADA: WHILE "); }
 "if"|"IF"				{ printf("PALABRA RESERVADA: IF "); }
@@ -78,7 +78,7 @@ ESPACIO					" "
 "<="                    { printf("OP <= ");}
 "!="                    { printf("OP != ");}
 "=="                    { printf("OP == ");}
-":"						{ printf("DOS PUNTOS flex\n"); return DOSPUNTOS;}
+":"						{ return DOSPUNTOS;}
 "+"						{ printf("MAS ");}
 "-"						{ printf("MENOS ");}
 "*"						{ printf("POR ");}
@@ -89,12 +89,19 @@ ESPACIO					" "
 "]"						{ printf("C_C ");}
 "{"						{ printf("LL_A ");}
 "}"						{ printf("LL_C ");}
-";"						{ printf("PUNTOYCOMA flex\n"); return PUNTOCOMA;}
+";"						{ return PUNTOCOMA;}
 ","						{ ;}
 "and"|"AND"				{ printf("OP AND");}
 "or"|"OR"				{ printf("OP OR");}
 "not"|"NOT"				{ printf("OP NOT");}
-{COMENTARIOS} 			{ printf("COMENTARIO");} 
-{ID}					{ yylval.str_val = strdup(yytext); printf("ID detectado flex\n"); return STRI;}
+{COMENTARIOS} 			{ ;} 
+{ID}					{ yylval.str_val = strdup(yytext); return ID;}
+
+\n
+\r
+\n
+\t
+" "						/*estos ultimos 5 son para borrar los tabs, expacios, etc*/
+
 
 %%
