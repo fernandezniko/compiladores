@@ -2,7 +2,7 @@ c:\GnuWin32\bin\flex lexico.l
 pause
 c:\GnuWin32\bin\bison -dyv sintactico.y
 pause
-c:\MinGW\bin\gcc.exe lex.yy.c y.tab.c -o primera.exe
+c:\MinGW\bin\gcc.exe ts.c lex.yy.c y.tab.c -o primera.exe
 pause
 primera.exe prueba_ENTSAL.txt
 del lex.yy.c

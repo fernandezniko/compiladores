@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include "y.tab.h"
+#include "ts.h"
 FILE  *yyin;
 
 
@@ -45,8 +46,9 @@ ESPACIO					" "
 							if( casteado > 32767) {
 								
 								printf("ERROR Lexico - Entero \'%d\' fuera de rango. Debe estar entre [0; 32767]", casteado);
-								
+								return 0;
 							}
+							insertInTs(yytext, "CONST_INT", yytext, "");
 							return CONST_INT;
 						 }
 {CONST_REAL}			{ 	
@@ -55,8 +57,9 @@ ESPACIO					" "
 							if(casteado > FLT_MAX) {
 								
 								printf("ERROR Lexico - Float \'%f\' fuera de rango. Debe estar entre [0; %e]", casteado, FLT_MAX);
-								
+								return 0;
 							}
+							insertInTs(yytext, "CONST_REAL", yytext, "");
 							return CONST_REAL;
 						}
 {CONST_STR}				{	strcpy(yylval.strval, yytext);
@@ -65,8 +68,11 @@ ESPACIO					" "
 							if(longitud > 32){
 								char msg[150];
 								printf("ERROR Lexico - Cadena \'%s\' demasiado larga. Maximo de 30 caracteres y contiene: %d", yytext, longitud-2);
-								
+								return 0;
 							}
+							char stringLength[20];
+							sprintf(stringLength, "%d", longitud);
+							insertInTs(yytext, "CONST_STRING", yytext, stringLength);
 							return CONST_STR;	
 						}
 ">"                     { return CMP_MAY;}
@@ -94,7 +100,10 @@ ESPACIO					" "
 "or"|"OR"				{ return OR;}
 "not"|"NOT"				{ return NOT;}
 {COMENTARIOS} 			{ ;} 
-{ID}					{ yylval.strval = strdup(yytext); return ID;}
+{ID}					{ 	yylval.strval = strdup(yytext); 
+ 							insertInTs(yytext, "", "", "");
+							return ID;
+						}
 {ASIG_ESP}				{ return ASIG_ESP;}
 \n\r
 \n
@@ -104,3 +113,4 @@ ESPACIO					" "
 
 
 %%
+
