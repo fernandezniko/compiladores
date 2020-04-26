@@ -6,6 +6,8 @@
 int yystopparser=0;
 FILE  *yyin;
 extern int yylineno;
+int cont_1 = 0;
+int cont_2 = 0;
 
 %}
 %union{
@@ -33,6 +35,8 @@ extern int yylineno;
 %type <strval> expresion
 %token <strval> ID
 %token OP_ASIG
+%token LET_SIM
+%token OP_IGUAL
 
 
 %%
@@ -48,6 +52,7 @@ sentencia: DEFVAR declaraciones ENDDEF {printf("\nsentencia - DEFVAR declaracion
             | asignacion PUNTO_Y_COMA { printf("\nsentencia - asignacion");}
             | decision              {   printf("\nsentencia - decision");}
             | iteracion             { printf("\nsentencia - iteracion");}
+			| let					{ printf("\nsentencia - let");}
 	        ;
 	
 declaraciones:         	        	
@@ -189,6 +194,26 @@ constanteString:
                             printf("\nconstante - STRING %s" , yylval.strval);
                         }
     ;
+
+let : LET_SIM cont_ids OP_IGUAL P_A cont_exp P_C {
+				if(cont_1==cont_2){
+					printf("\nsentencia - LET_SIM cont_ids OP_IGUAL P_A cont_exp P_C");
+					printf("\nvalores cont_1: %d cont_2: %d",cont_1,cont_2);
+					cont_1 = 0;
+					cont_2 = 0;
+				}else{
+					yyerror();
+				}
+				}
+	;
+	
+cont_ids : cont_ids COMA ID {cont_1++;}
+			| ID {cont_1++;}
+			;
+
+cont_exp : cont_exp PUNTO_Y_COMA expresion {cont_2++;}
+			| expresion {cont_2++;;}
+			;
 
 %%
 

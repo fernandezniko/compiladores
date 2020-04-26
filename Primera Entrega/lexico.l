@@ -37,6 +37,7 @@ ESPACIO					" "
 "while"|"WHILE"			{ return WHILE; }
 "if"|"IF"				{ return IF; }
 "else"|"ELSE"			{ return ELSE; }
+"LET"|"let"				{ return LET_SIM;}
 {CONST_INT}				{ 
 							strcpy(yylval.strval, yytext);
 							int casteado = atoi(yytext);
@@ -86,7 +87,8 @@ ESPACIO					" "
 "}"						{ return L_C;}
 ";"						{ return PUNTO_Y_COMA;}
 ":"						{return DOSPUNTOS;}
-","						{ printf("COMA ");}
+","						{ return COMA;}
+"="						{ return OP_IGUAL;}
 "and"|"AND"				{ return AND;}
 "or"|"OR"				{ return OR;}
 "not"|"NOT"				{ return NOT;}
