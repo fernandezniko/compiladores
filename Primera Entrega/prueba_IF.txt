@@ -1,0 +1,40 @@
+***/IF SIMPLE SIN ELSE/***
+b:= 1;
+if(b!=1)
+{
+    c := "**ingresa al IF DISTINTO";
+}
+
+if(b==1)
+{
+    c := "**ingresa al IF IGUAL";
+}
+
+if(b>1)
+{
+    c := "**ingresa al IF MAYOR";
+}
+
+if(b>=1)
+{
+    c := "**ingresa al IF MAYOR IGUAL";
+}
+
+if(b<1)
+{
+    c := "**ingresa al IF MENOR";
+}
+
+if(b<=1)
+{
+    c := "**ingresa al IF MENOR IGUAL";
+}
+***/  IF CON ELSE/***
+if(b!=1)
+{
+    c := "**ingresa al IF";
+}
+else
+{
+   c:="**ingresa al ELSE
+}

@@ -21,19 +21,9 @@ COMENTARIOS             (\*\*\*\/).*(\/\*\*\*)
 CONST_REAL              {DIGITO}+"."{DIGITO}+
 CONST_INT               {DIGITO}+
 ID						{LETRA}({LETRA}|{DIGITO})*
-ASIG_ESP				["+="|"-="|"*="|"/="]
-OP_COMPARACION          ["<"|"=="|">"|"<="|">="|"!="]
-OP_SURES                ["+"|"-"]
-OP_MULTDIV              ["*"|"/"]
-OP_AS   				[":"]
-OP_LOG 					["and"|"or"|"not"]
+OP_ASIG   				[":="]
 C_A                     ["["]
 C_C                     ["]"]
-P_A                     ["("]
-P_C                     [")"]
-PyC						[";"]
-L_A						["{"]
-L_C						["}"]
 ESPACIO					" "
 
 
@@ -44,27 +34,29 @@ ESPACIO					" "
 "ENDDEF"|"enddef"		{ return FIN_DEFVAR; }
 "display"|"DISPLAY"		{ printf("PALABRA RESERVADA: DISPLAY "); }
 "while"|"WHILE"			{ printf("PALABRA RESERVADA: WHILE "); }
-"if"|"IF"				{ printf("PALABRA RESERVADA: IF "); }
-"else"|"ELSE"			{ printf("PALABRA RESERVADA: ELSE "); }
+"if"|"IF"				{ return IF; }
+"else"|"ELSE"			{ return ELSE; }
 {CONST_INT}				{ 
-							
+							strcpy(yylval.strval, yytext);
 							int casteado = atoi(yytext);
 							if( casteado > 32767) {
 								
 								printf("ERROR Lexico - Entero \'%d\' fuera de rango. Debe estar entre [0; 32767]", casteado);
 								
 							}
-							
+							return CONST_INT;
 						 }
 {CONST_REAL}			{ 	
+							strcpy(yylval.strval, yytext);
 							double casteado = atof(yytext);
 							if(casteado > FLT_MAX) {
 								
 								printf("ERROR Lexico - Float \'%f\' fuera de rango. Debe estar entre [0; %e]", casteado, FLT_MAX);
 								
 							}
+							return CONST_REAL;
 						}
-{CONST_STR}				{
+{CONST_STR}				{	strcpy(yylval.strval, yytext);
 							int longitud = strlen(yytext);
 							//en lugar de 30 verifica con 32 porque el string viene entre comillas
 							if(longitud > 32){
@@ -72,30 +64,30 @@ ESPACIO					" "
 								printf("ERROR Lexico - Cadena \'%s\' demasiado larga. Maximo de 30 caracteres y contiene: %d", yytext, longitud-2);
 								
 							}
-								
+							return CONST_STR;	
 						}
-">"                     { printf("OP > ");}
-">="                    { printf("OP >= ");}
-"<"                     { printf("OP < " );}
-"<="                    { printf("OP <= ");}
-"!="                    { printf("OP != ");}
-"=="                    { printf("OP == ");}
-":"						{ return DOSPUNTOS;}
-"+"						{ ;}
-"-"						{ ;}
-"*"						{ ;}
-"/"						{ ;}
-"("						{ printf("P_A ");}
-")"						{ printf("P_C ");}
+">"                     { return CMP_MAY;}
+">="                    { return CMP_MAYI;}
+"<"                     { return CMP_MEN;}
+"<="                    { return CMP_MENI;}
+"!="                    { return CMP_DIST;}
+"=="                    { return CMP_IGUAL;}
+":="					{ return OP_ASIG;}
+"+"						{ return OP_SUM;}
+"-"						{ return OP_RES;}
+"*"						{ return OP_MUL;}
+"/"						{ return OP_DIV;}
+"("						{ return P_A;}
+")"						{ return P_C;}
 "["						{ printf("C_A ");}
 "]"						{ printf("C_C ");}
-"{"						{ printf("LL_A ");}
-"}"						{ printf("LL_C ");}
-";"						{ return PUNTOCOMA;}
-","						{ ;}
-"and"|"AND"				{ printf("OP AND");}
-"or"|"OR"				{ printf("OP OR");}
-"not"|"NOT"				{ printf("OP NOT");}
+"{"						{ return L_A;}
+"}"						{ return L_C;}
+";"						{ return PUNTO_Y_COMA;}
+","						{ printf("COMA ");}
+"and"|"AND"				{ return AND;}
+"or"|"OR"				{ return OR;}
+"not"|"NOT"				{ return NOT;}
 {COMENTARIOS} 			{ ;} 
 {ID}					{ yylval.str_val = strdup(yytext); return ID;}
 {ASIG_ESP}				{ return ASIG_ESP;}
