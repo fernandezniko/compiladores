@@ -10,4 +10,5 @@ del y.tab.c
 del y.output
 del y.tab.h
 del primera.exe
+del ts.txt
 pause
