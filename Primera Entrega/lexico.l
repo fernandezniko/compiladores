@@ -22,7 +22,7 @@ CONST_REAL              {DIGITO}+"."{DIGITO}+
 CONST_INT               {DIGITO}+
 ID						{LETRA}({LETRA}|{DIGITO})*
 OP_ASIG   				[":="]
-ASIG_ESP				["+="|"-="|"*="|"/="]
+ASIG_ESP				(\+=)|(\-=)|(\*=)|(\/=)
 C_A                     ["["]
 C_C                     ["]"]
 ESPACIO					" "
