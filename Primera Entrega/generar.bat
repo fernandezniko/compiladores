@@ -5,6 +5,7 @@ pause
 c:\MinGW\bin\gcc.exe ts.c lex.yy.c y.tab.c -o primera.exe
 pause
 primera.exe prueba_ENTSAL.txt
+pause
 del lex.yy.c
 del y.tab.c
 del y.output
