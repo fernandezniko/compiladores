@@ -54,3 +54,62 @@ int searchTs(char *text){
 }
 
 
+int modifyTypeTs(char *name, char *type){
+
+	char linea[124], lineaName[36];
+	int esLineaEncabezado = 0;
+	int i = 34;
+	char * seps = "\t\n\v\f\r ";
+
+	FILE *fp = fopen("ts.txt", READ_FILE);
+	FILE *fpTemp = fopen("temp_ts.txt", APPEND_FILE);
+    if(fp!= NULL) 
+	{	
+		while(fgets(linea,124,fp))
+		{
+			if(esLineaEncabezado == 0) {
+				esLineaEncabezado = 1;
+				fprintf(fpTemp, "%s", linea);
+			} else {
+				strncpy(lineaName, &linea[0], 35);
+				lineaName[35] = '\0';
+
+				//TODO faltaria trimmear del lado izquierdo
+				i = 34;
+				while(i > 0 && strchr(seps, lineaName[i]) != NULL){
+					lineaName[i] = '\0';
+					i--;
+				}
+				
+
+				if(strcmp(lineaName, name) == 0) {
+					fprintf(fpTemp, "%-35s %-20s %-45s %-20s", lineaName, type, "", "");
+				} else {
+					fprintf(fpTemp, "%s", linea);
+				}
+			}
+
+		}
+	}
+
+
+	fclose(fp);
+	fclose(fpTemp);
+	
+	char lineaAux[125];
+	
+	FILE *fpDestino = fopen("ts.txt", "w+");
+	FILE *fpOrigen = fopen("temp_ts.txt", "r+");
+
+	while (fgets(lineaAux, sizeof(lineaAux), fpOrigen))
+	{
+		fprintf(fpDestino, "%s", lineaAux);
+	}
+
+
+	fclose(fpDestino);
+	fclose(fpOrigen);
+	remove("temp_ts.txt");
+
+	return 1;
+}

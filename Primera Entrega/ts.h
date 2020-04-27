@@ -7,3 +7,4 @@ void initTs(FILE *);
 int searchTs(char *);
 void saveTs(char *, char *, char *, char *);
 void insertInTs(char *text, char *type, char *value, char *length);
+int modifyTypeTs(char *, char *);

@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <conio.h>
 #include "y.tab.h"
+#include "pila-dinamica.h"
+#include "ts.h"
+
 int yystopparser=0;
 FILE  *yyin;
 extern int yylineno;
@@ -15,6 +18,12 @@ int cont_2 = 0;
 	  char a_e[2];
     
 }
+
+%{
+pila_s pilaDeclares;
+%}
+
+
 /*%token INI_DEFVAR
 %token FIN_DEFVAR
 %token <str_val> ID
@@ -48,7 +57,7 @@ program:
 	| program sentencia 	{printf("\nprogram - program sentencia");}
 	;
 	
-sentencia: DEFVAR declaraciones ENDDEF {printf("\nsentencia - DEFVAR declaraciones ENDDEF");}
+sentencia: DEFVAR {crearPilaS(&pilaDeclares); } declaraciones ENDDEF {printf("\nsentencia - DEFVAR declaraciones ENDDEF");}
 			| ID ASIG_ESP ID 	{printf("\nsentencia - ID ASIG_ESP ID");}
             | asignacion PUNTO_Y_COMA { printf("\nsentencia - asignacion");}
             | decision              {   printf("\nsentencia - decision");}
@@ -59,20 +68,38 @@ sentencia: DEFVAR declaraciones ENDDEF {printf("\nsentencia - DEFVAR declaracion
 	        ;
 	
 declaraciones:         	        	
-             declaracion					{printf("\ndeclaraciones - declaracion");}
+             declaracion					{ printf("\ndeclaraciones - declaracion");}
              | declaraciones declaracion	{printf("\ndeclaraciones - declaraciones declaracion");}
     	     ;
 
-declaracion: INT DOSPUNTOS lista_ids 				{printf("\ndeclaracion - INT DOSPUNTOS lista_ids");}
-	|FLOAT DOSPUNTOS lista_ids 						{printf("\ndeclaracion - FLOAT DOSPUNTOS lista_ids");}
-	|STRING DOSPUNTOS lista_ids						{printf("\ndeclaracion - STRING DOSPUNTOS lista_ids");
-		/*printf("declarado FLOAT con nombre %s", yylval.str_val);*/
-		/*printf("declarado INT con nombre ");*/
-	}
-	;
+declaracion: INT DOSPUNTOS lista_ids {  
+
+                                        while(!pilaVaciaS(&pilaDeclares)){
+                                            char *id = sacarDePilaS(&pilaDeclares);
+                                            char *type = "INTEGER";
+                                            modifyTypeTs(id, type);
+                                        } 
+                                        printf("\ndeclaracion - INT DOSPUNTOS lista_ids");
+                                    }
+            |FLOAT DOSPUNTOS lista_ids {    
+                                            while(!pilaVaciaS(&pilaDeclares)){
+                                                char *id = sacarDePilaS(&pilaDeclares);
+                                                char *type = "FLOAT";
+                                                modifyTypeTs(id, type);
+                                            } 
+                                            printf("\ndeclaracion - FLOAT DOSPUNTOS lista_ids");
+            |STRING DOSPUNTOS lista_ids	{
+                                             while(!pilaVaciaS(&pilaDeclares)){
+                                                char *id = sacarDePilaS(&pilaDeclares);
+                                                char *type = "STRING";
+                                                
+                                                modifyTypeTs(id, type);
+                                            } 
+                                            printf("\ndeclaracion - STRING DOSPUNTOS lista_ids");
+            };
 	
-lista_ids:  	ID				{printf("\nlista_ids - ID '%s'",yylval.strval);}
-			| lista_ids PUNTO_Y_COMA ID	{printf("\nlista_ids - lista_ids PUNTO_Y_COMA ID");}
+lista_ids:  	ID 	{ ponerEnPilaS(&pilaDeclares, $1); printf("\nlista_ids - ID '%s'",yylval.strval);}
+			| lista_ids PUNTO_Y_COMA ID	{ponerEnPilaS(&pilaDeclares, $3), printf("\nlista_ids - lista_ids PUNTO_Y_COMA ID '%s'",yylval.strval);}
 			;
    	
 asignacion:

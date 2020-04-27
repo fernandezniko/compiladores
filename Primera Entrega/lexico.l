@@ -9,6 +9,8 @@
 #include "ts.h"
 FILE  *yyin;
 
+char* normalizar(char*);
+
 
 %}
 
@@ -49,7 +51,7 @@ ESPACIO					" "
 								printf("ERROR Lexico - Entero \'%d\' fuera de rango. Debe estar entre [0; 32767]", casteado);
 								return 0;
 							}
-							insertInTs(yytext, "CONST_INT", yytext, "");
+							insertInTs(normalizar(yytext), "CONST_INT", yytext, "");
 							return CONST_INT;
 						 }
 {CONST_REAL}			{ 	
@@ -60,7 +62,7 @@ ESPACIO					" "
 								printf("ERROR Lexico - Float \'%f\' fuera de rango. Debe estar entre [0; %e]", casteado, FLT_MAX);
 								return 0;
 							}
-							insertInTs(yytext, "CONST_REAL", yytext, "");
+							insertInTs(normalizar(yytext), "CONST_REAL", yytext, "");
 							return CONST_REAL;
 						}
 {CONST_STR}				{	strcpy(yylval.strval, yytext);
@@ -73,7 +75,7 @@ ESPACIO					" "
 							}
 							char stringLength[20];
 							sprintf(stringLength, "%d", longitud);
-							insertInTs(yytext, "CONST_STRING", yytext, stringLength);
+							insertInTs(normalizar(yytext), "CONST_STRING", yytext, stringLength);
 							return CONST_STR;	
 						}
 ">"                     { return CMP_MAY;}
@@ -114,4 +116,11 @@ ESPACIO					" "
 
 
 %%
+
+char* normalizar(char* cadena){
+	char *aux = (char *) malloc( sizeof(char) * (strlen(cadena)) + 2);
+	strcpy(aux,"_");
+	strcat(aux,cadena);
+	return aux;
+}
 
