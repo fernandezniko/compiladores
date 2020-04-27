@@ -64,7 +64,8 @@ declaraciones:
     	     ;
 
 declaracion: INT DOSPUNTOS lista_ids 				{printf("\ndeclaracion - INT DOSPUNTOS lista_ids");}
-	|FLOAT DOSPUNTOS lista_ids 						{printf("\ndeclaracion - FLOAT DOSPUNTOS lista_ids");
+	|FLOAT DOSPUNTOS lista_ids 						{printf("\ndeclaracion - FLOAT DOSPUNTOS lista_ids");}
+	|STRING DOSPUNTOS lista_ids						{printf("\ndeclaracion - STRING DOSPUNTOS lista_ids");
 		/*printf("declarado FLOAT con nombre %s", yylval.str_val);*/
 		/*printf("declarado INT con nombre ");*/
 	}

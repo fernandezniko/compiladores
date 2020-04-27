@@ -4,6 +4,7 @@
 DEFVAR
 	FLOAT : a1; b1
 	int : a	
+	STRING : z
 ENDDEF
 
 ***/ ENTSAL /***
