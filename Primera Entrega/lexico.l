@@ -11,6 +11,9 @@ FILE  *yyin;
 
 char* normalizar(char*);
 
+/* FUNCIONES */
+
+int validarID(char *str);
 
 %}
 
@@ -103,7 +106,8 @@ ESPACIO					" "
 "or"|"OR"				{ return OR;}
 "not"|"NOT"				{ return NOT;}
 {COMENTARIOS} 			{ ;} 
-{ID}					{ 	yylval.strval = strdup(yytext); 
+{ID}					{ 	yylval.strval = strdup(yytext);
+							validarID(yylval.strval);
  							insertInTs(yytext, "", "", "");
 							return ID;
 						}
@@ -122,5 +126,21 @@ char* normalizar(char* cadena){
 	strcpy(aux,"_");
 	strcat(aux,cadena);
 	return aux;
+}
+
+int validarID(char *str)
+{
+    int largo = strlen(str);
+ 
+	if(largo > 10){
+		printf("(!) ERROR: Identificador fuera de rango (10 caracteres maximo) -> Linea %d\n", yylineno);
+		fprintf(stderr, "Fin de ejecucion.\n");
+		system ("Pause");
+		exit (1);
+	}else{
+		//printf(" Valide bien el identificador! : %s\n", str);
+	}
+	
+	return 1;
 }
 

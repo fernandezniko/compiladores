@@ -2,8 +2,8 @@
 
 ***/ DEFVAR /***
 DEFVAR
-	FLOAT : a1; b1
-	int : a; b
+	FLOAT : a1; a2
+	int : a; b; b1; b2; c1; c2; d1; d2; uno; dos; tres; v
 	STRING : z; y; x; c; d
 ENDDEF
 
