@@ -35,6 +35,7 @@ ESPACIO					" "
 "DEFVAR"|"defvar"		{ return DEFVAR; }
 "int"|"INT"				{ return INT; }
 "float"|"FLOAT"			{ return FLOAT; }
+"string"|"STRING"		{ return STRING; }
 "ENDDEF"|"enddef"		{ return ENDDEF; }
 "display"|"DISPLAY"		{ return DISPLAY; }
 "get"|"GET"				{ return GET; }

@@ -1,41 +1,95 @@
 ***/ esto es un comentario /***
+
+***/ DEFVAR /***
 DEFVAR
-	contador: Integer;
-	promedio: Float;
-	actual, suma: Float;
+	FLOAT : a1; b1
+	int : a	
+	STRING : z
 ENDDEF
-display "Hola mundo!";
-contador: 0;
-actual: 999;
-suma: 02;
-contador: contador+1;
-while (contador <= 92) {
-	contador: contador + 1;
-	actual: (contador/0.342) + (contador*contador);
-	suma: suma + actual;
+
+***/ ENTSAL /***
+DISPLAY a;
+DISPLAY "hola";
+GET b;
+
+***/ ASIG /***
+a := 5 ;
+b := 8.5 ;
+x := z ;
+y := "boca campeon" ;
+
+***/ ASIG ESP /***
+a1 += a2
+b1 -= b2
+c1 *= c2
+d1 /= d2
+d1 /= d2
+
+***/ IF /***
+
+b:= 1;
+if(b==1)
+{
+   c := "**ingresa al IF IGUAL";
 }
-display"La suma es: ";
-display suma;
-if (actual > 2){
-	display "2 > 3";
+
+***/IF SIMPLE CON ELSE /***
+if(b==1)
+{
+   c := "**ingresa al IF IGUAL con ELSE";
 }
-if (actual < 3){
-	if(actual >= 3){
-		display "soy true";
-	}
-	if(actual <= 3){
-		display "soy true";
-	}
-	if(actual != 3){
-		display "soy true";
-	}
-	if(actual == 3){
-		display "soy true";
-	}
+else
+{
+   d := "**ingresa al ELSE del if IGUAL";
 }
-else{
-	actual:333.3333;
+
+***/ IF CONDICIONES MULTIPLES /***
+if((b!=1) AND (c<10))
+{
+    c := "**ingresa al IF AND";
 }
-"estoesunacadenademasde32caracteres"
-32768
-3400000000000000000000000000000000000000.0
+
+if((b!=1) OR (c<10))
+{
+    c := "**ingresa al IF OR";
+}
+
+if(NOT b<1)
+{
+    c := "**ingresa al IF NOT";
+}
+
+***/ LET /***
+LET uno = (3)
+LET uno,dos = (3; 4)
+
+LET uno,dos = (3;a*b)
+
+LET uno, dos, tres = (3; 5; a*b)
+LET uno = (v*c)
+
+***/ WHILE /***
+b:=1;
+a:=5;
+while(b<3)
+{
+    c :=  "**entre al WHILE simple";
+}
+
+while(NOT b>3)
+{
+   c:= "**entre al WHILE con NOT";
+}
+
+while( (b >= 3) AND (a != 10))
+{
+   c:= "**entre al WHILE con AND";
+}
+
+while( b >= 3)
+{
+	while(a < 5)
+	{
+		a := "**WHILE dentro de otro WHILE" ;
+	}
+}	

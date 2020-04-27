@@ -77,7 +77,6 @@ declaracion: INT DOSPUNTOS lista_ids {
                                         while(!pilaVaciaS(&pilaDeclares)){
                                             char *id = sacarDePilaS(&pilaDeclares);
                                             char *type = "INTEGER";
-                                            printf("\nENTRA AL WHILE con %s", id);
                                             modifyTypeTs(id, type);
                                         } 
                                         printf("\ndeclaracion - INT DOSPUNTOS lista_ids");
@@ -86,10 +85,17 @@ declaracion: INT DOSPUNTOS lista_ids {
                                             while(!pilaVaciaS(&pilaDeclares)){
                                                 char *id = sacarDePilaS(&pilaDeclares);
                                                 char *type = "FLOAT";
-                                                printf("\nENTRA AL WHILE con %s", id);
                                                 modifyTypeTs(id, type);
                                             } 
                                             printf("\ndeclaracion - FLOAT DOSPUNTOS lista_ids");
+            |STRING DOSPUNTOS lista_ids	{
+                                             while(!pilaVaciaS(&pilaDeclares)){
+                                                char *id = sacarDePilaS(&pilaDeclares);
+                                                char *type = "STRING";
+                                                
+                                                modifyTypeTs(id, type);
+                                            } 
+                                            printf("\ndeclaracion - STRING DOSPUNTOS lista_ids");
             };
 	
 lista_ids:  	ID 	{ ponerEnPilaS(&pilaDeclares, $1); printf("\nlista_ids - ID '%s'",yylval.strval);}

@@ -1,4 +1,0 @@
-NAME                                TYPE                 VALUE                                         LENGTH              
-a1                                  FLOAT                                                                                  
-b1                                  FLOAT                                                                                  
-a                                   INTEGER                                                                                
