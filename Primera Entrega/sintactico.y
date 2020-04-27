@@ -88,6 +88,7 @@ declaracion: INT DOSPUNTOS lista_ids {
                                                 modifyTypeTs(id, type);
                                             } 
                                             printf("\ndeclaracion - FLOAT DOSPUNTOS lista_ids");
+                                        }
             |STRING DOSPUNTOS lista_ids	{
                                              while(!pilaVaciaS(&pilaDeclares)){
                                                 char *id = sacarDePilaS(&pilaDeclares);
