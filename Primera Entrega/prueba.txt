@@ -3,8 +3,8 @@
 ***/ DEFVAR /***
 DEFVAR
 	FLOAT : a1; b1
-	int : a	
-	STRING : z
+	int : a; b
+	STRING : z; y; x; c; d
 ENDDEF
 
 ***/ ENTSAL /***
@@ -25,6 +25,10 @@ c1 *= c2
 d1 /= d2
 d1 /= d2
 
+***/ ASIG CON OPERACIONES /***
+a := ( 5 * 5) ;
+a := b + 2 ;
+
 ***/ IF /***
 
 b:= 1;
@@ -44,12 +48,12 @@ else
 }
 
 ***/ IF CONDICIONES MULTIPLES /***
-if((b!=1) AND (c<10))
+if((b!=1) AND (a<10))
 {
     c := "**ingresa al IF AND";
 }
 
-if((b!=1) OR (c<10))
+if((b!=1) OR (a<10))
 {
     c := "**ingresa al IF OR";
 }
