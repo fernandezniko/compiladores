@@ -1,17 +1,13 @@
-c:\GnuWin32\bin\flex lexico.l
-pause
-c:\GnuWin32\bin\bison -dyv sintactico.y
-pause
+@echo off
+del y.output
+c:\GnuWin32\bin\flex -d lexico.l
+
+c:\GnuWin32\bin\bison -dyv sintactico.y 
+
 c:\MinGW\bin\gcc.exe ts.c lex.yy.c y.tab.c -o primera.exe
-pause
-
 primera.exe prueba.txt
-
 pause
+@echo off
+
 del lex.yy.c
 del y.tab.c
-del y.output
-del y.tab.h
-del primera.exe
-del ts.txt
-pause
