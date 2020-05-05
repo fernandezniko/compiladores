@@ -49,9 +49,9 @@ ESPACIO					" "
 {CONST_INT}				{ 
 							strcpy(yylval.strval, yytext);
 							int casteado = atoi(yytext);
-							if( casteado > 32767) {
+							if( casteado > 65536) {
 								
-								printf("ERROR Lexico - Entero \'%d\' fuera de rango. Debe estar entre [0; 32767]", casteado);
+								printf("ERROR Lexico - Entero \'%d\' fuera de rango. Debe estar entre [0; 65536]", casteado);
 								return 0;
 							}
 							insertInTs(normalizar(yytext), "CONST_INT", yytext, "");

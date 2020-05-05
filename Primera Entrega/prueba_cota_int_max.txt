@@ -1,0 +1,14 @@
+***/ INT Debe estar entre [0; 65536] /***
+
+***/ DEFVAR /***
+DEFVAR
+	
+	int : a; b; c
+	
+ENDDEF
+
+***/ ASIG /***
+a := 5 ;
+b := 65536 ;
+c := 65537 ;
+
