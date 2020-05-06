@@ -1,5 +1,11 @@
 ***/ esto es un comentario /***
 
+***/COMENTARIOSD eberán estar delimitados por “***/” y “/***” y podrán estar anidados en un solo nivel. /***
+
+***/ Así son los comentarios en el 1°Cuat de LyC /*** Comentario ***/ /***
+
+***/ comentario /*** anidado a un solo nivel***/ /***
+
 ***/ DEFVAR /***
 DEFVAR
 	FLOAT : a1; a2
