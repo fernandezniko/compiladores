@@ -3,7 +3,7 @@
 
 ***/ Así son los comentarios en el 1°Cuat de LyC /*** Comentario ***/ /***
 
-***/ comentario /*** anidado a un solo nivel***/ /***
+***/ comentario 1 ***/ comentario 2 anidado /*** fin del primer comentario /***
 
 
 ***/ ENTSAL /***
