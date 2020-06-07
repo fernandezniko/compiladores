@@ -1,1 +1,1 @@
-b := 1 _Cuerpo_1 _Cuerpo_2 a := 5 _Cuerpo_3 b < 3 WHILE a := 5 _Cuerpo_4 b <= 3 WHILE a := 5 _Cuerpo_5 b >= 3 AND a != 10 WHILE a := 5 _Cuerpo_6 a < 5 WHILE a < 5 WHILE a := 5 
+b := 1 _Cuerpo_1 _Cuerpo_2 a := 5 _Cuerpo_3 b < 3 WHILE c := "**entre al WHILE simple" _Cuerpo_4 b <= 3 WHILE c := "**entre al WHILE con NOT" _Cuerpo_5 b >= 3 AND a != 10 WHILE c := "**entre al WHILE con AND" _Cuerpo_6 a < 5 WHILE a < 5 WHILE a := "**WHILE dentro de otro WHILE" 

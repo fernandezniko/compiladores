@@ -21,6 +21,8 @@ int c = 1; //Contador para nodos auxiliares
 %union{
 	  char *strval;
 	  char a_e[2];
+    float val;
+    char  name[100];
 }
 
 %{
@@ -39,8 +41,8 @@ pila_s pilaDeclares;
 %token <a_e> ASIG_ESP
 %token DEFVAR ENDDEF 
 %token INT FLOAT STRING
-%token CONST_REAL CONST_INT CONST_STR
 
+%token CONST_REAL CONST_INT CONST_STR
 %token DISPLAY GET
 %token IF ELSE WHILE         
 %token P_A P_C C_A C_C L_A L_C PUNTO_Y_COMA COMA DOSPUNTOS
@@ -52,7 +54,6 @@ pila_s pilaDeclares;
 %token OP_ASIG
 %token LET_SIM
 %token OP_IGUAL
-<<<<<<< HEAD
 
 
 %%
@@ -135,7 +136,12 @@ asignacion:
                           Aptr = crearNodo(":=",*Auxptr,*Eptr) ;
                           printf("\nasignacion ID - OP_ASIG - expresion");
                           }
-    | ID OP_ASIG constanteString { printf("\nasignacion ID - OP_ASIG - CTE_STRING");}
+    | ID OP_ASIG constanteString { 
+        
+                            sprintf(str_aux, "%s",$1);
+                            Auxptr=crearHoja(str_aux);
+                            Aptr = crearNodo(":=",*Auxptr,*cteStringptr) ;
+                            printf("\nasignacion ID - OP_ASIG - CTE_STRING");}
 
 ;
 
@@ -143,7 +149,7 @@ entrada:
     DISPLAY ID  PUNTO_Y_COMA        {printf("\nentrada DISPLAY - ID"); }
     | DISPLAY constanteString PUNTO_Y_COMA {printf("\nentrada DISPLAY - CONST_STR"); }
     ;
-    
+
 
 salida:
     GET ID  PUNTO_Y_COMA {printf("\nsalida GET - ID"); }
@@ -250,8 +256,6 @@ condicion:
                                         }
     ;
 
-
-
     
 expresion:
     expresion OP_SUM termino        {   
@@ -284,7 +288,6 @@ termino:
     ;
 
 factor: 
-
     P_A expresion P_C           {   printf("\nfactor - P_A expresion P_C");
                                     }
     | ID                        {   
@@ -316,7 +319,8 @@ constanteNumerica:
                             };
 
 constanteString: 
-    CONST_STR        {  
+    CONST_STR        {      sprintf(str_aux, "%s", yylval.strval); 
+                            cteStringptr = crearHoja(str_aux);
                             printf("\nconstante - STRING %s" , yylval.strval);
                         }
     ;

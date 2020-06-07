@@ -1,0 +1,1 @@
+c := "**ingresa al IF IGUAL" ;

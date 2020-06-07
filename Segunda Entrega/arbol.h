@@ -29,6 +29,8 @@ t_arbol *constNumPtr;
 t_arbol *SentVPtr;
 t_arbol *CondIzqPtr;
 t_arbol *IteraPtr;
+t_arbol *cteStringptr;
+
 
 FILE *pf;
 
