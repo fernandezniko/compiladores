@@ -26,6 +26,7 @@ t_arbol *Auxptr;
 t_arbol *ifPtr;
 t_arbol *BloqPtr;
 t_arbol *constNumPtr;
+t_arbol *cteStringptr;
 
 FILE *pf;
 

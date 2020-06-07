@@ -7,3 +7,16 @@ _17                                 CONST_INT            17
 _17.5                               CONST_REAL           17.5                                                              
 a                                                                                                                          
 y                                                                                                                          
+b                                                                                                                          
+_1                                  CONST_INT            1                                                                 
+c                                                                                                                          
+_"**ingresa al IF IGUAL"            CONST_STRING         "**ingresa al IF IGUAL"                       23                  
+_"**ingresa al IF IGUAL"            CONST_STRING         "**ingresa al IF IGUAL"                       23                  
+_"**ingresa al IF IGUAL"            CONST_STRING         "**ingresa al IF IGUAL"                       23                  
+_"**ingresa al IF IGUAL"            CONST_STRING         "**ingresa al IF IGUAL"                       23                  
+_"**ingresa al IF IGUAL"            CONST_STRING         "**ingresa al IF IGUAL"                       23                  
+_"**ingresa al IF IGUAL"            CONST_STRING         "**ingresa al IF IGUAL"                       23                  
+_"**ingresa al IF IGUAL"            CONST_STRING         "**ingresa al IF IGUAL"                       23                  
+_"**ingresa al IF IGUAL"            CONST_STRING         "**ingresa al IF IGUAL"                       23                  
+_"**ingresa al IF IGUAL"            CONST_STRING         "**ingresa al IF IGUAL"                       23                  
+_"**ingresa al IF IGUAL"            CONST_STRING         "**ingresa al IF IGUAL"                       23                  

@@ -6,7 +6,6 @@ Terminals unused in grammar
    INT
    FLOAT
    STRING
-   CONST_STR
    DISPLAY
    GET
    IF
@@ -40,11 +39,11 @@ Gramática
     1 programa: program
 
     2 program: sentencia
-    3        | program sentencia
 
-    4 sentencia: asignacion PUNTO_Y_COMA
+    3 sentencia: asignacion PUNTO_Y_COMA
 
-    5 asignacion: ID OP_ASIG expresion
+    4 asignacion: ID OP_ASIG expresion
+    5           | ID OP_ASIG constanteString
 
     6 expresion: expresion OP_SUM termino
     7          | expresion OP_RES termino
@@ -60,6 +59,8 @@ Gramática
    14 constanteNumerica: CONST_INT
    15                  | CONST_REAL
 
+   16 constanteString: CONST_STR
+
 
 Terminales con las reglas donde aparecen
 
@@ -71,7 +72,7 @@ ENDDEF (260)
 INT (261)
 FLOAT (262)
 STRING (263)
-CONST_STR (264)
+CONST_STR (264) 16
 CONST_REAL (265) 15
 CONST_INT (266) 14
 DISPLAY (267)
@@ -85,7 +86,7 @@ C_A (274)
 C_C (275)
 L_A (276)
 L_C (277)
-PUNTO_Y_COMA (278) 4
+PUNTO_Y_COMA (278) 3
 COMA (279)
 DOSPUNTOS (280)
 CMP_MAY (281)
@@ -101,8 +102,8 @@ OP_MUL (290) 9
 AND (291)
 OR (292)
 NOT (293)
-ID (294) 5 12
-OP_ASIG (295) 5
+ID (294) 4 5 12
+OP_ASIG (295) 4 5
 LET_SIM (296)
 OP_IGUAL (297)
 
@@ -114,19 +115,21 @@ $accept (43)
 programa (44)
     en la izquierda: 1, en la derecha: 0
 program (45)
-    en la izquierda: 2 3, en la derecha: 1 3
+    en la izquierda: 2, en la derecha: 1
 sentencia (46)
-    en la izquierda: 4, en la derecha: 2 3
+    en la izquierda: 3, en la derecha: 2
 asignacion (47)
-    en la izquierda: 5, en la derecha: 4
+    en la izquierda: 4 5, en la derecha: 3
 expresion (48)
-    en la izquierda: 6 7 8, en la derecha: 5 6 7
+    en la izquierda: 6 7 8, en la derecha: 4 6 7
 termino (49)
     en la izquierda: 9 10 11, en la derecha: 6 7 8 9 10
 factor (50)
     en la izquierda: 12 13, en la derecha: 9 10 11
 constanteNumerica (51)
     en la izquierda: 14 15, en la derecha: 13
+constanteString (52)
+    en la izquierda: 16, en la derecha: 5
 
 
 estado 0
@@ -143,7 +146,8 @@ estado 0
 
 estado 1
 
-    5 asignacion: ID . OP_ASIG expresion
+    4 asignacion: ID . OP_ASIG expresion
+    5           | ID . OP_ASIG constanteString
 
     OP_ASIG  desplazar e ir al estado 6
 
@@ -158,14 +162,8 @@ estado 2
 estado 3
 
     1 programa: program .
-    3 program: program . sentencia
-
-    ID  desplazar e ir al estado 1
 
     $default  reduce usando la regla 1 (programa)
-
-    sentencia   ir al estado 8
-    asignacion  ir al estado 5
 
 
 estado 4
@@ -177,15 +175,17 @@ estado 4
 
 estado 5
 
-    4 sentencia: asignacion . PUNTO_Y_COMA
+    3 sentencia: asignacion . PUNTO_Y_COMA
 
-    PUNTO_Y_COMA  desplazar e ir al estado 9
+    PUNTO_Y_COMA  desplazar e ir al estado 8
 
 
 estado 6
 
-    5 asignacion: ID OP_ASIG . expresion
+    4 asignacion: ID OP_ASIG . expresion
+    5           | ID OP_ASIG . constanteString
 
+    CONST_STR   desplazar e ir al estado 9
     CONST_REAL  desplazar e ir al estado 10
     CONST_INT   desplazar e ir al estado 11
     ID          desplazar e ir al estado 12
@@ -194,6 +194,7 @@ estado 6
     termino            ir al estado 14
     factor             ir al estado 15
     constanteNumerica  ir al estado 16
+    constanteString    ir al estado 17
 
 
 estado 7
@@ -205,16 +206,16 @@ estado 7
 
 estado 8
 
-    3 program: program sentencia .
+    3 sentencia: asignacion PUNTO_Y_COMA .
 
-    $default  reduce usando la regla 3 (program)
+    $default  reduce usando la regla 3 (sentencia)
 
 
 estado 9
 
-    4 sentencia: asignacion PUNTO_Y_COMA .
+   16 constanteString: CONST_STR .
 
-    $default  reduce usando la regla 4 (sentencia)
+    $default  reduce usando la regla 16 (constanteString)
 
 
 estado 10
@@ -240,14 +241,14 @@ estado 12
 
 estado 13
 
-    5 asignacion: ID OP_ASIG expresion .
+    4 asignacion: ID OP_ASIG expresion .
     6 expresion: expresion . OP_SUM termino
     7          | expresion . OP_RES termino
 
-    OP_SUM  desplazar e ir al estado 17
-    OP_RES  desplazar e ir al estado 18
+    OP_SUM  desplazar e ir al estado 18
+    OP_RES  desplazar e ir al estado 19
 
-    $default  reduce usando la regla 5 (asignacion)
+    $default  reduce usando la regla 4 (asignacion)
 
 
 estado 14
@@ -256,8 +257,8 @@ estado 14
     9 termino: termino . OP_MUL factor
    10        | termino . OP_DIV factor
 
-    OP_DIV  desplazar e ir al estado 19
-    OP_MUL  desplazar e ir al estado 20
+    OP_DIV  desplazar e ir al estado 20
+    OP_MUL  desplazar e ir al estado 21
 
     $default  reduce usando la regla 8 (expresion)
 
@@ -278,20 +279,14 @@ estado 16
 
 estado 17
 
-    6 expresion: expresion OP_SUM . termino
+    5 asignacion: ID OP_ASIG constanteString .
 
-    CONST_REAL  desplazar e ir al estado 10
-    CONST_INT   desplazar e ir al estado 11
-    ID          desplazar e ir al estado 12
-
-    termino            ir al estado 21
-    factor             ir al estado 15
-    constanteNumerica  ir al estado 16
+    $default  reduce usando la regla 5 (asignacion)
 
 
 estado 18
 
-    7 expresion: expresion OP_RES . termino
+    6 expresion: expresion OP_SUM . termino
 
     CONST_REAL  desplazar e ir al estado 10
     CONST_INT   desplazar e ir al estado 11
@@ -304,19 +299,20 @@ estado 18
 
 estado 19
 
-   10 termino: termino OP_DIV . factor
+    7 expresion: expresion OP_RES . termino
 
     CONST_REAL  desplazar e ir al estado 10
     CONST_INT   desplazar e ir al estado 11
     ID          desplazar e ir al estado 12
 
-    factor             ir al estado 23
+    termino            ir al estado 23
+    factor             ir al estado 15
     constanteNumerica  ir al estado 16
 
 
 estado 20
 
-    9 termino: termino OP_MUL . factor
+   10 termino: termino OP_DIV . factor
 
     CONST_REAL  desplazar e ir al estado 10
     CONST_INT   desplazar e ir al estado 11
@@ -328,36 +324,48 @@ estado 20
 
 estado 21
 
+    9 termino: termino OP_MUL . factor
+
+    CONST_REAL  desplazar e ir al estado 10
+    CONST_INT   desplazar e ir al estado 11
+    ID          desplazar e ir al estado 12
+
+    factor             ir al estado 25
+    constanteNumerica  ir al estado 16
+
+
+estado 22
+
     6 expresion: expresion OP_SUM termino .
     9 termino: termino . OP_MUL factor
    10        | termino . OP_DIV factor
 
-    OP_DIV  desplazar e ir al estado 19
-    OP_MUL  desplazar e ir al estado 20
+    OP_DIV  desplazar e ir al estado 20
+    OP_MUL  desplazar e ir al estado 21
 
     $default  reduce usando la regla 6 (expresion)
 
 
-estado 22
+estado 23
 
     7 expresion: expresion OP_RES termino .
     9 termino: termino . OP_MUL factor
    10        | termino . OP_DIV factor
 
-    OP_DIV  desplazar e ir al estado 19
-    OP_MUL  desplazar e ir al estado 20
+    OP_DIV  desplazar e ir al estado 20
+    OP_MUL  desplazar e ir al estado 21
 
     $default  reduce usando la regla 7 (expresion)
 
 
-estado 23
+estado 24
 
    10 termino: termino OP_DIV factor .
 
     $default  reduce usando la regla 10 (termino)
 
 
-estado 24
+estado 25
 
     9 termino: termino OP_MUL factor .
 

@@ -60,23 +60,25 @@ pila_s pilaDeclares;
 %type<val> CONST_REAL
 %type<val> CONST_INT
 
+
+
 %%
-/*programa: program { 
-                    printf("\nprogram - program\nCompilacion OK\n");
-                    
-                    }
-                    {arbol=*ProgPtr;}
-;*/
+programa: program { 
+                    printf("\nREGLA 00 program - program Compilacion OK\n");
+                    arbol=*ProgPtr;
+                    }                   
+;
 
 program: 
-        sentencia {printf("\nprogram - sentencia");
+        sentencia {printf("\nREGLA 1 program - sentencia");
         
 						//Nodos auxiliares para anidar sentencias 
-						sprintf(str_aux,"_Cuerpo_%d",c++); 
+						//sprintf(str_aux,"_Cuerpo_%d",c++); 
 						ProgPtr=crearNodo(str_aux,*SentPtr,NULL); 
 					
         }
-        | program sentencia {printf("\nprogram - program sentencia");
+        ;
+        /*| program sentencia {printf("\nREGLA 2 program - program sentencia");
         
         
 						//Nodos auxiliares para anidar sentencias 
@@ -85,17 +87,18 @@ program:
 					}
           
         
-        ;
+        ;*/
 
 sentencia:
           asignacion PUNTO_Y_COMA { 
-                                    printf("\nsentencia - asignacion");
+                                    printf("\nREGLA 3 sentencia - asignacion");
                                     SentPtr = Aptr ;
+                                    //arbol=*ProgPtr;
           }
-          decision {
-                  printf("\nsentencia - decision")
+          /*| decision {
+                  printf("\nREGLA 4 sentencia - decision")
                   SentPtr = Decptr ;
-          }
+          }*/
           
 ;
 
@@ -103,51 +106,56 @@ asignacion:
     ID OP_ASIG expresion {sprintf(str_aux, "%s",$1);
                           Auxptr=crearHoja(str_aux);
                           Aptr = crearNodo(":=",*Auxptr,*Eptr) ;
-                          printf("\nasignacion ID - OP_ASIG - expresion");
+                          printf("\nREGLA 5 asignacion ID - OP_ASIG - expresion");
                           
                           }
+    | ID OP_ASIG constanteString {  sprintf(str_aux, "%s",$1);
+                                    Auxptr=crearHoja(str_aux);
+                                    Aptr = crearNodo(":=",*Auxptr,*cteStringptr) ;
+                                    printf("\nREGLA 6 asignacion ID - OP_ASIG - CTE_STRING");
+                                    }
 ;
 
     
 expresion:
     expresion OP_SUM termino        { Eptr = crearNodo("+", *Eptr, *Tptr)  ;
-                                      printf("\nexpresion - expresion OP_SUM termino"); 
+                                      printf("\nREGLA 7 expresion - expresion OP_SUM termino"); 
                                         
                                          }
 
     | expresion OP_RES termino      {  Eptr = crearNodo("-", *Eptr, *Tptr)  ; 
-                                      printf("\nexpresion - expresion OP_RES termino");
+                                      printf("\nREGLA 8 expresion - expresion OP_RES termino");
                                          }                                     
     | termino                       { Eptr = Tptr ;  
-                                      printf("\nexpresion - termino");   }
+                                      printf("\nREGLA 9 expresion - termino");   }
     ;
 
 termino: 
     termino OP_MUL factor       { Tptr = crearNodo("*", *Tptr, *Fptr)   ;
-                                  printf("\ntermino - termino OP_MUL factor"); 
+                                  printf("\nREGLA 10 termino - termino OP_MUL factor"); 
                                     
                                    
                                     }
 
     | termino OP_DIV factor     { Tptr = crearNodo("/", *Tptr, *Fptr)   ;  
-                                  printf("\ntermino - termino OP_DIV factor"); 
+                                  printf("\nREGLA 11 termino - termino OP_DIV factor"); 
                                                                       
                                    }
                                    
     | factor                    { Tptr = Fptr ;  
-                                  printf("\ntermino - factor");
+                                  printf("\nREGLA 12 termino - factor");
                                        }
     ;
 
 factor: 
      ID                        {  sprintf(str_aux, "%s",$1);
                                   Fptr = crearHoja(str_aux);   
-                                  printf("\nfactor - ID ");
+                                  printf("\nREGLA 13 factor - ID ");
                                    
                                     }
 
     | constanteNumerica         { Fptr = constNumPtr ; 
-                                  printf("\nfactor - constanteNumerica");
+                                  printf("\nREGLA 14 factor - constanteNumerica");
                                   
                                      }                    
     ;
@@ -157,27 +165,34 @@ constanteNumerica:
     CONST_INT               { sprintf(str_aux, "%s", yylval.strval);
                               
                               constNumPtr = crearHoja(str_aux);
-                              printf("\nconstanteNumerica - ENTERO");
+                              printf("\nREGLA 15 constanteNumerica - ENTERO");
                             
                             }
 
     | CONST_REAL            {sprintf(str_aux, "%s", yylval.strval); 
                              constNumPtr = crearHoja(str_aux);
                              
-                             printf("\nconstanteNumerica - REAL");
+                             printf("\nREGLA 16 constanteNumerica - REAL");
                                                        
                             }
     ;
  
+constanteString: 
+    CONST_STR        {  sprintf(str_aux, "%s", yylval.strval); 
+                             cteStringptr = crearHoja(str_aux);
+                            printf("\nREGLA 17 constante - STRING %s" , yylval.strval);
+                        }
+    ;
 
+/*
 decision: 
-    IF P_A condicion P_C L_A sentencia L_C {   printf("\ndecision - IF P_A condicion P_C L_A sentencia L_C");
+    IF P_A condicion P_C L_A sentencia L_C {   printf("\nREGLA 18 decision - IF P_A condicion P_C L_A sentencia L_C");
                                                Decptr = crearNodo("IF",*CondPtr,*SentPtr);
     }
     ;
 
 condicion: 
-    expresion {E1ptr = Eptr} CMP_MAY expresion     {   printf("\ncondicion - expresion CMP_MAY expresion");
+    expresion {E1ptr = Eptr} CMP_MAY expresion     {   printf("\nREGLA 19 condicion - expresion CMP_MAY expresion");
                                         CondPtr = crearNodo(">",*E1ptr,*Eptr);
                                         
                                          }
@@ -196,7 +211,7 @@ condicion:
     | expresion {E1ptr = Eptr} CMP_IGUAL expresion {   printf("\ncondicion - expresion CMP_IGUAL expresion");
                                         CondPtr = crearNodo("==",*E1ptr,*Eptr);
                                            }
-    ;
+    ;*/
 %%
 
 int main(int argc,char *argv[])
