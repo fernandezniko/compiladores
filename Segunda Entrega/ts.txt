@@ -20,3 +20,13 @@ _"**ingresa al IF IGUAL"            CONST_STRING         "**ingresa al IF IGUAL"
 _"**ingresa al IF IGUAL"            CONST_STRING         "**ingresa al IF IGUAL"                       23                  
 _"**ingresa al IF IGUAL"            CONST_STRING         "**ingresa al IF IGUAL"                       23                  
 _"**ingresa al IF IGUAL"            CONST_STRING         "**ingresa al IF IGUAL"                       23                  
+_"**ingresa al IF IGUAL"            CONST_STRING         "**ingresa al IF IGUAL"                       23                  
+_"**ingresa al IF IGUAL"            CONST_STRING         "**ingresa al IF IGUAL"                       23                  
+_"**ingresa al IF IGUAL"            CONST_STRING         "**ingresa al IF IGUAL"                       23                  
+_5.5                                CONST_REAL           5.5                                                               
+_7                                  CONST_INT            7                                                                 
+asdf                                                                                                                       
+_5                                  CONST_INT            5                                                                 
+h                                                                                                                          
+_55                                 CONST_INT            55                                                                
+_"55"                               CONST_STRING         "55"                                          4                   

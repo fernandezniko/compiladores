@@ -25,7 +25,8 @@ int c = 1; //Contador para nodos auxiliares
 	  char *strval;
 	  char a_e[2];
     float val;
-    char    name[100];
+    char  name[100];
+    char *str_val;
 }
 
 %{
@@ -44,21 +45,24 @@ pila_s pilaDeclares;
 %token <a_e> ASIG_ESP
 %token DEFVAR ENDDEF 
 %token INT FLOAT STRING
-%token CONST_STR CONST_REAL CONST_INT
+%token <strval> CONST_STR 
+%token <strval> CONST_REAL 
+%token <strval> CONST_INT
 %token DISPLAY GET
 %token IF ELSE WHILE         
 %token P_A P_C C_A C_C L_A L_C PUNTO_Y_COMA COMA DOSPUNTOS
 %token CMP_MAY CMP_MEN CMP_MAYI CMP_MENI CMP_DIST CMP_IGUAL
 %token OP_SUM OP_RES OP_DIV OP_MUL
 %token AND OR NOT
-%type <strval> expresion
+//%type <strval> expresion
 %token <strval> ID
 %token OP_ASIG
 %token LET_SIM
 %token OP_IGUAL
 //%type<name> ID
-%type<val> CONST_REAL
-%type<val> CONST_INT
+//%type<strval> CONST_REAL
+//%type<strval> CONST_INT
+//%type<strval> CONST_STR
 
 
 
@@ -74,8 +78,8 @@ program:
         
 						//Nodos auxiliares para anidar sentencias 
 						//sprintf(str_aux,"_Cuerpo_%d",c++); 
-						ProgPtr=crearNodo(str_aux,*SentPtr,NULL); 
-					
+						//ProgPtr=crearNodo(str_aux,*SentPtr,NULL); 
+            ProgPtr = SentPtr ;
         }
         ;
         /*| program sentencia {printf("\nREGLA 2 program - program sentencia");
@@ -95,15 +99,16 @@ sentencia:
                                     SentPtr = Aptr ;
                                     //arbol=*ProgPtr;
           }
-          /*| decision {
-                  printf("\nREGLA 4 sentencia - decision")
+          | decision {
+                  printf("\nREGLA 4 sentencia - decision");
                   SentPtr = Decptr ;
-          }*/
+          }
           
 ;
 
 asignacion:
     ID OP_ASIG expresion {sprintf(str_aux, "%s",$1);
+
                           Auxptr=crearHoja(str_aux);
                           Aptr = crearNodo(":=",*Auxptr,*Eptr) ;
                           printf("\nREGLA 5 asignacion ID - OP_ASIG - expresion");
@@ -148,7 +153,7 @@ termino:
     ;
 
 factor: 
-     ID                        {  sprintf(str_aux, "%s",$1);
+     ID                        {  sprintf(str_aux, "%s", $1);
                                   Fptr = crearHoja(str_aux);   
                                   printf("\nREGLA 13 factor - ID ");
                                    
@@ -162,14 +167,14 @@ factor:
 
 
 constanteNumerica: 
-    CONST_INT               { sprintf(str_aux, "%s", yylval.strval);
+    CONST_INT               { sprintf(str_aux, "%s", $1);
                               
                               constNumPtr = crearHoja(str_aux);
                               printf("\nREGLA 15 constanteNumerica - ENTERO");
                             
                             }
 
-    | CONST_REAL            {sprintf(str_aux, "%s", yylval.strval); 
+    | CONST_REAL            {sprintf(str_aux, "%s", $1); 
                              constNumPtr = crearHoja(str_aux);
                              
                              printf("\nREGLA 16 constanteNumerica - REAL");
@@ -178,13 +183,13 @@ constanteNumerica:
     ;
  
 constanteString: 
-    CONST_STR        {  sprintf(str_aux, "%s", yylval.strval); 
+    CONST_STR        {  sprintf(str_aux, "%s", $1); 
                              cteStringptr = crearHoja(str_aux);
-                            printf("\nREGLA 17 constante - STRING %s" , yylval.strval);
+                            printf("\nREGLA 17 constante - STRING");
                         }
     ;
 
-/*
+
 decision: 
     IF P_A condicion P_C L_A sentencia L_C {   printf("\nREGLA 18 decision - IF P_A condicion P_C L_A sentencia L_C");
                                                Decptr = crearNodo("IF",*CondPtr,*SentPtr);
@@ -192,26 +197,26 @@ decision:
     ;
 
 condicion: 
-    expresion {E1ptr = Eptr} CMP_MAY expresion     {   printf("\nREGLA 19 condicion - expresion CMP_MAY expresion");
+    expresion {E1ptr = Eptr ;} CMP_MAY expresion     {   printf("\nREGLA 19 condicion - expresion CMP_MAY expresion");
                                         CondPtr = crearNodo(">",*E1ptr,*Eptr);
                                         
                                          }
-    | expresion {E1ptr = Eptr} CMP_MEN expresion   {   printf("\ncondicion - expresion CMP_MEN expresion");
+    | expresion {E1ptr = Eptr ;} CMP_MEN expresion   {   printf("\ncondicion - expresion CMP_MEN expresion");
                                         CondPtr = crearNodo("<",*E1ptr,*Eptr);
                                           }
-    | expresion {E1ptr = Eptr} CMP_MAYI expresion   {  printf("\ncondicion - expresion CMP_MAYI expresion");
+    | expresion {E1ptr = Eptr ;} CMP_MAYI expresion   {  printf("\ncondicion - expresion CMP_MAYI expresion");
                                         CondPtr = crearNodo(">=",*E1ptr,*Eptr);
                                           }
-    | expresion {E1ptr = Eptr} CMP_MENI expresion  {   printf("\ncondicion - expresion CMP_MENI expresion");
+    | expresion {E1ptr = Eptr ;} CMP_MENI expresion  {   printf("\ncondicion - expresion CMP_MENI expresion");
                                         CondPtr = crearNodo("<=",*E1ptr,*Eptr);
                                          }
-    | expresion {E1ptr = Eptr} CMP_DIST expresion  {   printf("\ncondicion - expresion CMP_DIST expresion");
+    | expresion {E1ptr = Eptr ;} CMP_DIST expresion  {   printf("\ncondicion - expresion CMP_DIST expresion");
                                         CondPtr = crearNodo("!=",*E1ptr,*Eptr);
                                         }
-    | expresion {E1ptr = Eptr} CMP_IGUAL expresion {   printf("\ncondicion - expresion CMP_IGUAL expresion");
+    | expresion {E1ptr = Eptr ;} CMP_IGUAL expresion {   printf("\ncondicion - expresion CMP_IGUAL expresion");
                                         CondPtr = crearNodo("==",*E1ptr,*Eptr);
                                            }
-    ;*/
+    ;
 %%
 
 int main(int argc,char *argv[])

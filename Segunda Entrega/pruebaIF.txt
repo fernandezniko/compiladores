@@ -1,5 +1,4 @@
-b:= 1;
 if(b==1)
 {
-   c := "**ingresa al IF IGUAL";
+   c := 8;
 }

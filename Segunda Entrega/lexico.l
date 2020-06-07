@@ -45,7 +45,7 @@ ESPACIO					" "
 "if"|"IF"				{ return IF; }
 "else"|"ELSE"			{ return ELSE; }
 "LET"|"let"				{ return LET_SIM;}
-{CONST_STR}				{	strcpy(yylval.strval, yytext);
+{CONST_STR}				{	yylval.strval = strdup(yytext);
 							int longitud = strlen(yytext);
 							//en lugar de 30 verifica con 32 porque el string viene entre comillas
 							if(longitud > 32){
@@ -60,7 +60,7 @@ ESPACIO					" "
 						}
 
 {CONST_INT}				{ 
-							strcpy(yylval.strval, yytext);
+							yylval.strval = strdup(yytext);
 							int casteado = atoi(yytext);
 							if( casteado > 65536) {
 								
@@ -71,7 +71,7 @@ ESPACIO					" "
 							return CONST_INT;
 						 }
 {CONST_REAL}			{ 	
-							strcpy(yylval.strval, yytext);
+							yylval.strval = strdup(yytext);
 							double casteado = atof(yytext);
 							if(casteado > FLT_MAX) {
 								
