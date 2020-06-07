@@ -21,7 +21,6 @@ int c = 1; //Contador para nodos auxiliares
 %union{
 	  char *strval;
 	  char a_e[2];
-    
 }
 
 %{
@@ -41,17 +40,19 @@ pila_s pilaDeclares;
 %token DEFVAR ENDDEF 
 %token INT FLOAT STRING
 %token CONST_REAL CONST_INT CONST_STR
+
 %token DISPLAY GET
 %token IF ELSE WHILE         
 %token P_A P_C C_A C_C L_A L_C PUNTO_Y_COMA COMA DOSPUNTOS
 %token CMP_MAY CMP_MEN CMP_MAYI CMP_MENI CMP_DIST CMP_IGUAL
 %token OP_SUM OP_RES OP_DIV OP_MUL
 %token AND OR NOT
-%type <strval> expresion
+//%type <strval> expresion
 %token <strval> ID
 %token OP_ASIG
 %token LET_SIM
 %token OP_IGUAL
+<<<<<<< HEAD
 
 
 %%
@@ -127,6 +128,7 @@ lista_ids:  	ID 	{ ponerEnPilaS(&pilaDeclares, $1); printf("\nlista_ids - ID '%s
 			;
    	
 asignacion:
+
     ID OP_ASIG expresion { 
                           sprintf(str_aux, "%s",$1);
                           Auxptr=crearHoja(str_aux);
@@ -134,6 +136,7 @@ asignacion:
                           printf("\nasignacion ID - OP_ASIG - expresion");
                           }
     | ID OP_ASIG constanteString { printf("\nasignacion ID - OP_ASIG - CTE_STRING");}
+
 ;
 
 entrada:
@@ -141,6 +144,7 @@ entrada:
     | DISPLAY constanteString PUNTO_Y_COMA {printf("\nentrada DISPLAY - CONST_STR"); }
     ;
     
+
 salida:
     GET ID  PUNTO_Y_COMA {printf("\nsalida GET - ID"); }
     ;
@@ -215,6 +219,8 @@ condicion:
 
                                         CondPtr = crearNodo("<=",*E1ptr,*Eptr);
                                         printf("\ncondicion - NOT expresion CMP_MAY expresion");
+
+
                                         
                                          }
     |NOT expresion  {E1ptr = Eptr;} CMP_MEN expresion   {   
@@ -245,6 +251,7 @@ condicion:
     ;
 
 
+
     
 expresion:
     expresion OP_SUM termino        {   
@@ -272,10 +279,12 @@ termino:
     | factor                    {   
                                     Tptr = Fptr;
                                     printf("\ntermino - factor");
+
                                        }
     ;
 
 factor: 
+
     P_A expresion P_C           {   printf("\nfactor - P_A expresion P_C");
                                     }
     | ID                        {   
@@ -287,10 +296,12 @@ factor:
     | constanteNumerica         {   
                                     Fptr = constNumPtr;
                                     printf("\nfactor - constanteNumerica");
+
                                      }                    
     ;
 
 constanteNumerica: 
+
     CONST_INT               {   
                                 sprintf(str_aux, "%s", yylval.strval);
                                 constNumPtr = crearHoja(str_aux);
@@ -329,6 +340,7 @@ cont_ids: cont_ids COMA ID {cont_1++;printf("\ncont_ids - cont_ids COMA ID");}
 cont_exp: cont_exp PUNTO_Y_COMA expresion {cont_2++;printf("\ncont_exp - cont_exp PUNTO_Y_COMA expresion");}
 			| expresion {cont_2++;printf("\ncont_exp - expresion");}
 			;
+
 
 %%
 
