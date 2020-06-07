@@ -1,1 +1,1 @@
-x := z * 17.5 + 8 _Cuerpo_1 _Cuerpo_2 a := y / 17 - 8 
+b := 1 _Cuerpo_1 _Cuerpo_2 a := 5 _Cuerpo_3 b < 3 WHILE a := 5 _Cuerpo_4 b <= 3 WHILE a := 5 _Cuerpo_5 b >= 3 AND a != 10 WHILE a := 5 _Cuerpo_6 a < 5 WHILE a < 5 WHILE a := 5 

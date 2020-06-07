@@ -1,32 +1,12 @@
-***/IF SIMPLE SIN ELSE/***
-b:= 1;
-if(b==1)
-{
-   c := "**ingresa al IF IGUAL";
-}
 
+b:= 1;
 ***/IF SIMPLE CON ELSE /***
 if(b==1)
 {
-   c := "**ingresa al IF IGUAL con ELSE";
+   c := 3;
 }
 else
 {
-   d := "**ingresa al ELSE del if IGUAL";
+   d := 3;
 }
 
-***/ IF CONDICIONES MULTIPLES /***
-if((b!=1) AND (c<10))
-{
-    c := "**ingresa al IF AND";
-}
-
-if((b!=1) OR (c<10))
-{
-    c := "**ingresa al IF OR";
-}
-
-if(NOT b<1)
-{
-    c := "**ingresa al IF NOT";
-}

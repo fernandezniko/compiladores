@@ -60,7 +60,7 @@ ESPACIO					" "
 						}
 
 {CONST_INT}				{ 
-							strcpy(yylval.strval, yytext);
+							yylval.strval = strdup(yytext);
 							int casteado = atoi(yytext);
 							if( casteado > 65536) {
 								

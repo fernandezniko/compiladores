@@ -1,5 +1,13 @@
+
 b:= 1;
-if(b==1)
+j:=2;
+***/IF SIMPLE CON ELSE /***
+if((b==1) AND (j==2))
 {
-   c := "**ingresa al IF IGUAL";
+   c := 3;
 }
+else
+{
+   d := 3;
+}
+

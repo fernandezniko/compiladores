@@ -4,7 +4,7 @@ c:\GnuWin32\bin\bison -dyv sintactico.y
 
 c:\MinGW\bin\gcc.exe ts.c lex.yy.c y.tab.c -o primera.exe
 pause
-primera.exe prueba.txt
+primera.exe prueba_WHILE.txt
 pause
 
 

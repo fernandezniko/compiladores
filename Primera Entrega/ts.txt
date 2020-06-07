@@ -196,3 +196,27 @@ _"**entre al WHILE simple"          CONST_STRING         "**entre al WHILE simpl
 _"**entre al WHILE con NOT"         CONST_STRING         "**entre al WHILE con NOT"                    26                  
 _"**entre al WHILE con AND"         CONST_STRING         "**entre al WHILE con AND"                    26                  
 _"**WHILE dentro de otro WHILE"     CONST_STRING         "**WHILE dentro de otro WHILE"                30                  
+_"boca campeon"                     CONST_STRING         "boca campeon"                                14                  
+_"**ingresa al IF IGUAL"            CONST_STRING         "**ingresa al IF IGUAL"                       23                  
+_"**ingresa al IF IGUAL con ELSE"   CONST_STRING         "**ingresa al IF IGUAL con ELSE"              32                  
+_"**ingresa al ELSE del if IGUAL"   CONST_STRING         "**ingresa al ELSE del if IGUAL"              32                  
+_"**ingresa al IF AND"              CONST_STRING         "**ingresa al IF AND"                         21                  
+_"**ingresa al IF OR"               CONST_STRING         "**ingresa al IF OR"                          20                  
+_"**ingresa al IF NOT"              CONST_STRING         "**ingresa al IF NOT"                         21                  
+_"**entre al WHILE simple"          CONST_STRING         "**entre al WHILE simple"                     25                  
+_"**entre al WHILE con NOT"         CONST_STRING         "**entre al WHILE con NOT"                    26                  
+_"**entre al WHILE con AND"         CONST_STRING         "**entre al WHILE con AND"                    26                  
+_"**WHILE dentro de otro WHILE"     CONST_STRING         "**WHILE dentro de otro WHILE"                30                  
+_"boca campeon"                     CONST_STRING         "boca campeon"                                14                  
+_"**ingresa al IF IGUAL"            CONST_STRING         "**ingresa al IF IGUAL"                       23                  
+_"boca campeon"                     CONST_STRING         "boca campeon"                                14                  
+_"**ingresa al IF IGUAL"            CONST_STRING         "**ingresa al IF IGUAL"                       23                  
+_"**ingresa al IF IGUAL con ELSE"   CONST_STRING         "**ingresa al IF IGUAL con ELSE"              32                  
+_"**ingresa al ELSE del if IGUAL"   CONST_STRING         "**ingresa al ELSE del if IGUAL"              32                  
+_"**ingresa al IF AND"              CONST_STRING         "**ingresa al IF AND"                         21                  
+_"**ingresa al IF OR"               CONST_STRING         "**ingresa al IF OR"                          20                  
+_"**ingresa al IF NOT"              CONST_STRING         "**ingresa al IF NOT"                         21                  
+_"**entre al WHILE simple"          CONST_STRING         "**entre al WHILE simple"                     25                  
+_"**entre al WHILE con NOT"         CONST_STRING         "**entre al WHILE con NOT"                    26                  
+_"**entre al WHILE con AND"         CONST_STRING         "**entre al WHILE con AND"                    26                  
+_"**WHILE dentro de otro WHILE"     CONST_STRING         "**WHILE dentro de otro WHILE"                30                  
