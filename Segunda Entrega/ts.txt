@@ -1,0 +1,9 @@
+NAME                                TYPE                 VALUE                                         LENGTH              
+x                                                                                                                          
+z                                                                                                                          
+_17.1                               CONST_REAL           17.1                                                              
+_8                                  CONST_INT            8                                                                 
+_17                                 CONST_INT            17                                                                
+_17.5                               CONST_REAL           17.5                                                              
+a                                                                                                                          
+y                                                                                                                          

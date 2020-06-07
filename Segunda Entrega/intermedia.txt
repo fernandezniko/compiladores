@@ -1,0 +1,1 @@
+x := z * 17.5 + 8 _Cuerpo_1 _Cuerpo_2 a := y / 17 - 8 
