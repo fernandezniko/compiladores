@@ -34,6 +34,9 @@ t_arbol *IteraPtr;
 t_arbol *cteStringptr;
 t_arbol *displayPtr;
 t_arbol *hojaIOPtr;
+t_arbol *getPtr;
+t_arbol *AuxGetPtr;
+
 FILE *pf;
 //punteros para el LET
 t_arbol *LetPtr;

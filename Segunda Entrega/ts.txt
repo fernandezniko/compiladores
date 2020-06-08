@@ -27,3 +27,5 @@ _"**entre al WHILE simple"          CONST_STRING         "**entre al WHILE simpl
 _"**entre al WHILE con NOT"         CONST_STRING         "**entre al WHILE con NOT"                    26                  
 _"**entre al WHILE con AND"         CONST_STRING         "**entre al WHILE con AND"                    26                  
 _"**WHILE dentro de otro WHILE"     CONST_STRING         "**WHILE dentro de otro WHILE"                30                  
+x                                                                                                                          
+_55                                 CONST_INT            55                                                                

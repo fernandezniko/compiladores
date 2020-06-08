@@ -100,9 +100,10 @@ sentencia: DEFVAR {crearPilaS(&pilaDeclares); } declaraciones ENDDEF {printf("\n
 										SentPtr = LetPtr;
 										printf("\nsentencia - let");
 									}
-            | entrada               {printf("\nsentencia - entrada");}
+            | entrada               {   SentPtr = getPtr ;
+                                        printf("\nsentencia - entrada");}
             | salida                {  SentPtr = displayPtr;
-							 												 printf("\nsentencia - salida");}
+							 			printf("\nsentencia - salida");}
 	        ;
 
 declaraciones:
@@ -160,18 +161,25 @@ asignacion:
 
 salida:
     DISPLAY ID PUNTO_Y_COMA        { 			sprintf(str_aux, "%s",$2);
-																					hojaIOPtr =crearHoja(str_aux);
-																					displayPtr = crearNodo("DISPLAY",*hojaIOPtr,NULL); 	}
+												hojaIOPtr = crearHoja(str_aux);
+												displayPtr = crearNodo("DISPLAY",*hojaIOPtr,NULL);
+                                                printf("\nentrada DISPLAY - CONST_STR");
+                                                }
     |
 		DISPLAY constanteString PUNTO_Y_COMA {
-																						displayPtr = crearNodo("DISPLAY",*cteStringptr,NULL) ;
-																						printf("\nentrada DISPLAY - CONST_STR");
-																				  }
+												displayPtr = crearNodo("DISPLAY",*cteStringptr,NULL) ;
+												printf("\nentrada DISPLAY - CONST_STR");
+												}
     ;
 
 
 entrada:
-    GET ID  PUNTO_Y_COMA {printf("\nsalida GET - ID"); }
+    GET ID  PUNTO_Y_COMA { 
+                          sprintf(str_aux, "%s",$2);
+                          AuxGetPtr = crearHoja(str_aux);
+                          getPtr = crearNodo("GET", *AuxGetPtr, NULL); 
+                          printf("\nsalida GET - ID"); 
+    }
     ;
 
 iteracion:

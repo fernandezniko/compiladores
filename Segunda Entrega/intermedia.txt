@@ -1,1 +1,1 @@
-a1 = a1 + a2 _Cuerpo_1 _Cuerpo_2 b1 = b1 - b2 _Cuerpo_3 c1 = c1 * c2 _Cuerpo_4 d1 = d1 / d2 _Cuerpo_5 d1 = d1 / d2 
+x := 55 _Cuerpo_1 
