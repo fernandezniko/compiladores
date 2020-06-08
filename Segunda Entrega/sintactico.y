@@ -90,7 +90,7 @@ sentencia: DEFVAR {crearPilaS(&pilaDeclares); } declaraciones ENDDEF {printf("\n
             | iteracion             {
                                         SentPtr = IteraPtr;
                                         printf("\nsentencia - iteracion");}
-			| let					{ 
+			| let					{
 										SentPtr = LetPtr;
 										printf("\nsentencia - let");
 									}
@@ -153,8 +153,10 @@ asignacion:
 ;
 
 salida:
-    /*DISPLAY ID  PUNTO_Y_COMA        {printf("\nentrada DISPLAY - ID"); }
-    | */
+    DISPLAY ID PUNTO_Y_COMA        { 			sprintf(str_aux, "%s",$2);
+																					hojaIOPtr =crearHoja(str_aux);
+																					displayPtr = crearNodo("DISPLAY",*hojaIOPtr,NULL); 	}
+    |
 		DISPLAY constanteString PUNTO_Y_COMA {
 																						displayPtr = crearNodo("DISPLAY",*cteStringptr,NULL) ;
 																						printf("\nentrada DISPLAY - CONST_STR");
@@ -345,7 +347,7 @@ let: LET_SIM {crearCola(&colaLet);}cont_ids OP_IGUAL P_A cont_exp P_C {
 				}else{
 					yyerror();
 				}
-				
+
 				LetPtr = Let_cont_id;
 			}
 	;
@@ -364,7 +366,7 @@ cont_exp: cont_exp PUNTO_Y_COMA expresion {
 								Let_cont_id = crearNodo(";",*Let_cont_id,*crearNodo("=",*crearHoja(sacarDeCola(&colaLet)),*Eptr));
 								cont_2++;printf("\ncont_exp - cont_exp PUNTO_Y_COMA expresion");
 								}
-			| expresion {		
+			| expresion {
 								Let_cont_id = crearNodo("=",*crearHoja(sacarDeCola(&colaLet)),*Eptr);
 								cont_2++;printf("\ncont_exp - expresion");
 								}
