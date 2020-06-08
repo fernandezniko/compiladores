@@ -30,8 +30,8 @@ t_arbol *SentVPtr;
 t_arbol *CondIzqPtr;
 t_arbol *IteraPtr;
 t_arbol *cteStringptr;
-
-
+t_arbol *displayPtr;
+t_arbol *hojaIOPtr;
 FILE *pf;
 
 void grabar(const char *p);
