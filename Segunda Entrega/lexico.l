@@ -28,7 +28,7 @@ CONST_REAL              {DIGITO}+"."{DIGITO}+
 CONST_INT               {DIGITO}+
 ID						{LETRA}({LETRA}|{DIGITO})*
 OP_ASIG   				[":="]
-ASIG_ESP				(\+=)|(\-=)|(\*=)|(\/=)
+
 C_A                     ["["]
 C_C                     ["]"]
 ESPACIO					" "
@@ -111,7 +111,11 @@ ESPACIO					" "
  							insertInTs(yytext, "", "", "");
 							return ID;
 						}
-{ASIG_ESP}				{ return ASIG_ESP;}
+
+"+="					{return AE_MAIG;}
+"-="					{return AE_MEIG;}
+"*="					{return AE_MUIG;}
+"/="					{return AE_DIIG;}
 \n\r
 \n
 \t

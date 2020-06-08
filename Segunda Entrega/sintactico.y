@@ -16,12 +16,13 @@ int cont_2 = 0;
 
 t_arbol arbol;
 char str_aux[50];
+char str_aux2[50];
 int c = 1; //Contador para nodos auxiliares
 
 %}
 %union{
 	  char *strval;
-	  char a_e[2];
+	  //char a_e[2];
     float val;
     char  name[100];
 }
@@ -40,7 +41,7 @@ t_cola colaLet;
 %token DEF_INT
 %token DEF_FLOAT
 */
-%token <a_e> ASIG_ESP
+//%token <a_e> ASIG_ESP
 %token DEFVAR ENDDEF
 %token INT FLOAT STRING
 
@@ -57,6 +58,8 @@ t_cola colaLet;
 %token LET_SIM
 %token OP_IGUAL
 %type <strval> expresion
+
+%token AE_MAIG AE_MEIG AE_MUIG AE_DIIG
 
 
 %%
@@ -78,7 +81,10 @@ program:
 	;
 
 sentencia: DEFVAR {crearPilaS(&pilaDeclares); } declaraciones ENDDEF {printf("\nsentencia - DEFVAR declaraciones ENDDEF");}
-			| ID ASIG_ESP ID 	{printf("\nsentencia - ID ASIG_ESP ID");}
+			| asignacion_especial 	{	
+									SentPtr = AEPtr;
+									printf("\nsentencia - asignacion_especial");
+								}
             | asignacion PUNTO_Y_COMA {
                                         SentPtr = Aptr ;
                                         printf("\nsentencia - asignacion");
@@ -372,7 +378,50 @@ cont_exp: cont_exp PUNTO_Y_COMA expresion {
 								}
 			;
 
-
+asignacion_especial: ID AE_MAIG ID 	{	
+										sprintf(str_aux, "%s",$1);
+										sprintf(str_aux2, "%s",$3);
+										Auxptr = crearHoja(str_aux);
+										Auxptr2 = crearHoja(str_aux);
+										Auxptr3 = crearHoja(str_aux2);
+										
+										AEPtr = crearNodo("=",*Auxptr,*crearNodo("+",*Auxptr2,*Auxptr3));
+										printf("\nasignacion_especial - ID MAIG ID");
+									}
+					|ID AE_MEIG ID 	{
+										sprintf(str_aux, "%s",$1);
+										sprintf(str_aux2, "%s",$3);
+										Auxptr = crearHoja(str_aux);
+										Auxptr2 = crearHoja(str_aux);
+										Auxptr3 = crearHoja(str_aux2);
+										
+										AEPtr = crearNodo("=",*Auxptr,*crearNodo("-",*Auxptr2,*Auxptr3));
+										printf("\nasignacion_especial - ID MAIG ID");
+									}
+					|ID AE_MUIG ID 	{
+										sprintf(str_aux, "%s",$1);
+										sprintf(str_aux2, "%s",$3);
+										Auxptr = crearHoja(str_aux);
+										Auxptr2 = crearHoja(str_aux);
+										Auxptr3 = crearHoja(str_aux2);
+										
+										AEPtr = crearNodo("=",*Auxptr,*crearNodo("*",*Auxptr2,*Auxptr3));
+										
+										
+										printf("\nasignacion_especial - ID MAIG ID");
+									}
+					|ID AE_DIIG ID 	{
+										sprintf(str_aux, "%s",$1);
+										sprintf(str_aux2, "%s",$3);
+										Auxptr = crearHoja(str_aux);
+										Auxptr2 = crearHoja(str_aux);
+										Auxptr3 = crearHoja(str_aux2);
+										
+										AEPtr = crearNodo("=",*Auxptr,*crearNodo("/",*Auxptr2,*Auxptr3));
+										printf("\nasignacion_especial - ID MAIG ID");
+									}
+									
+									;
 %%
 
 int main(int argc,char *argv[])

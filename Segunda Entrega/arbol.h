@@ -23,6 +23,8 @@ t_arbol *SentPtr;
 t_arbol *CondPtr;
 t_arbol *Decptr;
 t_arbol *Auxptr;
+t_arbol *Auxptr2;
+t_arbol *Auxptr3;
 t_arbol *ifPtr;
 t_arbol *BloqPtr;
 t_arbol *constNumPtr;
@@ -37,6 +39,9 @@ FILE *pf;
 t_arbol *LetPtr;
 t_arbol *Let_cont_id;
 t_arbol *Let_cont_exp;
+//punteros para asignaciones especiales
+t_arbol *AEPtr;
+
 
 void grabar(const char *p);
 void crear_arbol(t_nodo2 **);
