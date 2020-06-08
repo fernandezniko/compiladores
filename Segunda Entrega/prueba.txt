@@ -1,1 +1,54 @@
-x:= 55 ;
+x:= 2 ;
+b:= 1;
+j:=2;
+b1:=1;
+a1:=5;
+***/IF SIMPLE CON ELSE /***
+if((b==1) AND (j==2))
+{
+   c := 3;
+}
+else
+{
+   d := 3;
+}
+
+while(b1<3)
+{
+    c :=  "**entre al WHILE simple";
+}
+
+while(NOT b1>3)
+{
+   c:= "**entre al WHILE con NOT";
+}
+
+while( (b1 >= 3) AND (a1 != 10))
+{
+   c:= "**entre al WHILE con AND";
+}
+
+while( b1 >= 3)
+{
+	while(a1 < 5)
+	{
+		a1 := "**WHILE dentro de otro WHILE" ;
+	}
+}	
+
+DISPLAY x ;
+DISPLAY "Constante" ;
+
+LET uno = (3)
+LET uno,dos = (3; 4)
+
+LET uno,dos = (3;a5*b5)
+
+LET uno, dos, tres = (3; 5; a5*b5)
+LET uno = (v*c)
+
+a3 += a4
+b3 -= b4
+c3 *= c4
+d3 /= d4
+d3 /= d4
