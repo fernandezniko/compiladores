@@ -5,7 +5,7 @@ pause
 c:\MinGW\bin\gcc.exe ts.c lex.yy.c y.tab.c -o segunda.exe
 pause
 
-segunda.exe prueba_WHILE.txt
+segunda.exe prueba_LET.txt
 
 
 

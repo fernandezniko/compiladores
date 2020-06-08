@@ -6,6 +6,7 @@
 #include "pila-dinamica.h"
 #include "ts.h"
 #include "arbol.c"
+#include "cola.c"
 
 int yystopparser=0;
 FILE  *yyin;
@@ -27,6 +28,7 @@ int c = 1; //Contador para nodos auxiliares
 
 %{
 pila_s pilaDeclares;
+t_cola colaLet;
 %}
 
 
@@ -54,6 +56,7 @@ pila_s pilaDeclares;
 %token OP_ASIG
 %token LET_SIM
 %token OP_IGUAL
+%type <strval> expresion
 
 
 %%
@@ -87,7 +90,10 @@ sentencia: DEFVAR {crearPilaS(&pilaDeclares); } declaraciones ENDDEF {printf("\n
             | iteracion             {
                                         SentPtr = IteraPtr;
                                         printf("\nsentencia - iteracion");}
-			| let					{ printf("\nsentencia - let");}
+			| let					{ 
+										SentPtr = LetPtr;
+										printf("\nsentencia - let");
+									}
             | entrada               {printf("\nsentencia - entrada");}
             | salida                {  SentPtr = displayPtr;
 							 												 printf("\nsentencia - salida");}
@@ -330,7 +336,7 @@ constanteString:
                         }
     ;
 
-let: LET_SIM cont_ids OP_IGUAL P_A cont_exp P_C {
+let: LET_SIM {crearCola(&colaLet);}cont_ids OP_IGUAL P_A cont_exp P_C {
 				if(cont_1==cont_2){
 					printf("\nsentencia - LET_SIM cont_ids OP_IGUAL P_A cont_exp P_C");
 					/*printf("\nvalores cont_1: %d cont_2: %d",cont_1,cont_2);*/
@@ -339,15 +345,29 @@ let: LET_SIM cont_ids OP_IGUAL P_A cont_exp P_C {
 				}else{
 					yyerror();
 				}
-				}
+				
+				LetPtr = Let_cont_id;
+			}
 	;
 
-cont_ids: cont_ids COMA ID {cont_1++;printf("\ncont_ids - cont_ids COMA ID");}
-			| ID {cont_1++; printf("\ncont_ids - ID");}
+cont_ids: cont_ids COMA ID {
+								ponerEnCola(&colaLet, $3);
+								cont_1++;printf("\ncont_ids - cont_ids COMA ID");
+							}
+			| ID 			{
+								ponerEnCola(&colaLet, $1);
+								cont_1++; printf("\ncont_ids - ID");
+							}
 			;
 
-cont_exp: cont_exp PUNTO_Y_COMA expresion {cont_2++;printf("\ncont_exp - cont_exp PUNTO_Y_COMA expresion");}
-			| expresion {cont_2++;printf("\ncont_exp - expresion");}
+cont_exp: cont_exp PUNTO_Y_COMA expresion {
+								Let_cont_id = crearNodo(";",*Let_cont_id,*crearNodo("=",*crearHoja(sacarDeCola(&colaLet)),*Eptr));
+								cont_2++;printf("\ncont_exp - cont_exp PUNTO_Y_COMA expresion");
+								}
+			| expresion {		
+								Let_cont_id = crearNodo("=",*crearHoja(sacarDeCola(&colaLet)),*Eptr);
+								cont_2++;printf("\ncont_exp - expresion");
+								}
 			;
 
 

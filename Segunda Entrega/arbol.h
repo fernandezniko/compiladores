@@ -33,6 +33,10 @@ t_arbol *cteStringptr;
 t_arbol *displayPtr;
 t_arbol *hojaIOPtr;
 FILE *pf;
+//punteros para el LET
+t_arbol *LetPtr;
+t_arbol *Let_cont_id;
+t_arbol *Let_cont_exp;
 
 void grabar(const char *p);
 void crear_arbol(t_nodo2 **);
