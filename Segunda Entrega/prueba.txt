@@ -47,6 +47,8 @@ LET uno,dos = (3;a5*b5)
 LET uno, dos, tres = (3; 5; a5*b5)
 LET uno = (v*c)
 
+GET z ;
+
 a3 += a4
 b3 -= b4
 c3 *= c4
