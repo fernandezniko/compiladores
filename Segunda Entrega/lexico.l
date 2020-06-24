@@ -108,7 +108,7 @@ ESPACIO					" "
 {COMENTARIOS} 			{ ;} 
 {ID}					{ 	yylval.strval = strdup(yytext);
 							validarID(yylval.strval);
- 							
+ 							insertInTs(yytext, "", "", "");
 							return ID;
 						}
 

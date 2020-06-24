@@ -1,5 +1,7 @@
 DEFVAR
-	INT : b1 
+	INT: a1
+	FLOAT: b1
+	STRING: c1
 ENDDEF
 
-a1 := 5 ;
+z1 := 5 ;
