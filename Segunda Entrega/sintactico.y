@@ -63,7 +63,7 @@ t_cola colaLet;
 
 
 %%
-
+/*
 programa: program {
     arbol=*ProgPtr;
     printf("\nprogram - program\nCompilacion OK\n");};
@@ -79,32 +79,21 @@ program:
                         printf("\nprogram - program sentencia");
                         }
 	;
+*/
+programa: program {
+    arbol=*ProgPtr;
+    printf("\nprogram - program\nCompilacion OK\n");};
 
-sentencia: DEFVAR {crearPilaS(&pilaDeclares); } declaraciones ENDDEF {printf("\nsentencia - DEFVAR declaraciones ENDDEF");}
-			| asignacion_especial 	{	
-									SentPtr = AEPtr;
-									printf("\nsentencia - asignacion_especial");
-								}
-            | asignacion PUNTO_Y_COMA {
-                                        SentPtr = Aptr ;
-                                        printf("\nsentencia - asignacion");
-                                        }
-            | decision              {
-                                        SentPtr = Decptr ;
-                                        printf("\nsentencia - decision");
+program: bloq_declaracion sentencia {
+                                    sprintf(str_aux,"_Cuerpo_%d",c++);
+                                    ProgPtr=crearNodo(str_aux,*SentPtr,NULL);
+                                    printf("\nprograma: bloq_declaracion sentencia");
                                     }
-            | iteracion             {
-                                        SentPtr = IteraPtr;
-                                        printf("\nsentencia - iteracion");}
-			| let					{
-										SentPtr = LetPtr;
-										printf("\nsentencia - let");
-									}
-            | entrada               {   SentPtr = getPtr ;
-                                        printf("\nsentencia - entrada");}
-            | salida                {  SentPtr = displayPtr;
-							 			printf("\nsentencia - salida");}
-	        ;
+        ;
+
+bloq_declaracion:
+        DEFVAR {crearPilaS(&pilaDeclares); } declaraciones ENDDEF {printf("\nbloq_declaracion - DEFVAR declaraciones ENDDEF");}
+        ;
 
 declaraciones:
              declaracion					{ printf("\ndeclaraciones - declaracion");}
@@ -142,10 +131,40 @@ lista_ids:  	ID 	{ ponerEnPilaS(&pilaDeclares, $1); printf("\nlista_ids - ID '%s
 			| lista_ids PUNTO_Y_COMA ID	{ponerEnPilaS(&pilaDeclares, $3), printf("\nlista_ids - lista_ids PUNTO_Y_COMA ID '%s'",yylval.strval);}
 			;
 
+sentencia: 
+			asignacion_especial 	{	
+									SentPtr = AEPtr;
+									printf("\nsentencia - asignacion_especial");
+								}
+            | asignacion PUNTO_Y_COMA {
+                                        SentPtr = Aptr ;
+                                        printf("\nsentencia - asignacion");
+                                        }
+            | decision              {
+                                        SentPtr = Decptr ;
+                                        printf("\nsentencia - decision");
+                                    }
+            | iteracion             {
+                                        SentPtr = IteraPtr;
+                                        printf("\nsentencia - iteracion");}
+			| let					{
+										SentPtr = LetPtr;
+										printf("\nsentencia - let");
+									}
+            | entrada               {   SentPtr = getPtr ;
+                                        printf("\nsentencia - entrada");}
+            | salida                {  SentPtr = displayPtr;
+							 			printf("\nsentencia - salida");}
+	        ;
+
+
+
 asignacion:
 
     ID OP_ASIG expresion {
                           sprintf(str_aux, "%s",$1);
+                          if(!searchTs(str_aux))
+                            printf("ERROR el id : %s no se encuentra declarado", str_aux);
                           Auxptr=crearHoja(str_aux);
                           Aptr = crearNodo(":=",*Auxptr,*Eptr) ;
                           printf("\nasignacion ID - OP_ASIG - expresion");
@@ -240,15 +259,9 @@ condicion:
                                         CondPtr = crearNodo("AND", *CondIzqPtr, *CondPtr);
                                         printf("\ncondicion - AND");
 
-    }
+                                        }
 
-    | P_A condicion {CondIzqPtr = CondPtr;} P_C OR P_A condicion P_C    {
-                                        CondPtr = crearNodo("OR", *CondIzqPtr, *CondPtr);
-                                        printf("\ncondicion - OR");
-    }
-
-
-    |NOT expresion {E1ptr = Eptr;} CMP_MAY expresion     {
+    | NOT expresion {E1ptr = Eptr;} CMP_MAY expresion     {
 
                                         CondPtr = crearNodo("<=",*E1ptr,*Eptr);
                                         printf("\ncondicion - NOT expresion CMP_MAY expresion");
