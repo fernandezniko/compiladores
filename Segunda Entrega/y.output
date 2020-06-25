@@ -39,106 +39,109 @@ Gramática
    20 $@2: /* vacío */
 
    21 asignacion: ID OP_ASIG $@2 expresion
-   22           | ID OP_ASIG constanteString
 
-   23 salida: DISPLAY ID PUNTO_Y_COMA
-   24       | DISPLAY constanteString PUNTO_Y_COMA
+   22 $@3: /* vacío */
 
-   25 entrada: GET ID PUNTO_Y_COMA
+   23 asignacion: ID OP_ASIG $@3 constanteString
 
-   26 iteracion: WHILE P_A condicion P_C L_A sentencia L_C
+   24 salida: DISPLAY ID PUNTO_Y_COMA
+   25       | DISPLAY constanteString PUNTO_Y_COMA
 
-   27 decision: IF P_A condicion P_C L_A sentencia L_C
+   26 entrada: GET ID PUNTO_Y_COMA
 
-   28 $@3: /* vacío */
+   27 iteracion: WHILE P_A condicion P_C L_A sentencia L_C
+
+   28 decision: IF P_A condicion P_C L_A sentencia L_C
 
    29 $@4: /* vacío */
 
-   30 decision: IF P_A condicion P_C L_A sentencia L_C $@3 ELSE $@4 L_A sentencia L_C
+   30 $@5: /* vacío */
 
-   31 $@5: /* vacío */
+   31 decision: IF P_A condicion P_C L_A sentencia L_C $@4 ELSE $@5 L_A sentencia L_C
 
-   32 condicion: expresion $@5 CMP_MAY expresion
+   32 $@6: /* vacío */
 
-   33 $@6: /* vacío */
+   33 condicion: expresion $@6 CMP_MAY expresion
 
-   34 condicion: expresion $@6 CMP_MEN expresion
+   34 $@7: /* vacío */
 
-   35 $@7: /* vacío */
+   35 condicion: expresion $@7 CMP_MEN expresion
 
-   36 condicion: expresion $@7 CMP_MAYI expresion
+   36 $@8: /* vacío */
 
-   37 $@8: /* vacío */
+   37 condicion: expresion $@8 CMP_MAYI expresion
 
-   38 condicion: expresion $@8 CMP_MENI expresion
+   38 $@9: /* vacío */
 
-   39 $@9: /* vacío */
+   39 condicion: expresion $@9 CMP_MENI expresion
 
-   40 condicion: expresion $@9 CMP_DIST expresion
+   40 $@10: /* vacío */
 
-   41 $@10: /* vacío */
+   41 condicion: expresion $@10 CMP_DIST expresion
 
-   42 condicion: expresion $@10 CMP_IGUAL expresion
+   42 $@11: /* vacío */
 
-   43 $@11: /* vacío */
+   43 condicion: expresion $@11 CMP_IGUAL expresion
 
-   44 condicion: P_A condicion $@11 P_C AND P_A condicion P_C
+   44 $@12: /* vacío */
 
-   45 $@12: /* vacío */
+   45 condicion: P_A condicion $@12 P_C AND P_A condicion P_C
 
-   46 condicion: NOT expresion $@12 CMP_MAY expresion
+   46 $@13: /* vacío */
 
-   47 $@13: /* vacío */
+   47 condicion: NOT expresion $@13 CMP_MAY expresion
 
-   48 condicion: NOT expresion $@13 CMP_MEN expresion
+   48 $@14: /* vacío */
 
-   49 $@14: /* vacío */
+   49 condicion: NOT expresion $@14 CMP_MEN expresion
 
-   50 condicion: NOT expresion $@14 CMP_MAYI expresion
+   50 $@15: /* vacío */
 
-   51 $@15: /* vacío */
+   51 condicion: NOT expresion $@15 CMP_MAYI expresion
 
-   52 condicion: NOT expresion $@15 CMP_MENI expresion
+   52 $@16: /* vacío */
 
-   53 $@16: /* vacío */
+   53 condicion: NOT expresion $@16 CMP_MENI expresion
 
-   54 condicion: NOT expresion $@16 CMP_DIST expresion
+   54 $@17: /* vacío */
 
-   55 $@17: /* vacío */
+   55 condicion: NOT expresion $@17 CMP_DIST expresion
 
-   56 condicion: NOT expresion $@17 CMP_IGUAL expresion
+   56 $@18: /* vacío */
 
-   57 expresion: expresion OP_SUM termino
-   58          | expresion OP_RES termino
-   59          | termino
+   57 condicion: NOT expresion $@18 CMP_IGUAL expresion
 
-   60 termino: termino OP_MUL factor
-   61        | termino OP_DIV factor
-   62        | factor
+   58 expresion: expresion OP_SUM termino
+   59          | expresion OP_RES termino
+   60          | termino
 
-   63 factor: P_A expresion P_C
-   64       | ID
-   65       | constanteNumerica
+   61 termino: termino OP_MUL factor
+   62        | termino OP_DIV factor
+   63        | factor
 
-   66 constanteNumerica: CONST_INT
-   67                  | CONST_REAL
+   64 factor: P_A expresion P_C
+   65       | ID
+   66       | constanteNumerica
 
-   68 constanteString: CONST_STR
+   67 constanteNumerica: CONST_INT
+   68                  | CONST_REAL
 
-   69 $@18: /* vacío */
+   69 constanteString: CONST_STR
 
-   70 let: LET_SIM $@18 cont_ids OP_IGUAL P_A cont_exp P_C
+   70 $@19: /* vacío */
 
-   71 cont_ids: cont_ids COMA ID
-   72         | ID
+   71 let: LET_SIM $@19 cont_ids OP_IGUAL P_A cont_exp P_C
 
-   73 cont_exp: cont_exp PUNTO_Y_COMA expresion
-   74         | expresion
+   72 cont_ids: cont_ids COMA ID
+   73         | ID
 
-   75 asignacion_especial: ID AE_MAIG ID
-   76                    | ID AE_MEIG ID
-   77                    | ID AE_MUIG ID
-   78                    | ID AE_DIIG ID
+   74 cont_exp: cont_exp PUNTO_Y_COMA expresion
+   75         | expresion
+
+   76 asignacion_especial: ID AE_MAIG ID
+   77                    | ID AE_MEIG ID
+   78                    | ID AE_MUIG ID
+   79                    | ID AE_DIIG ID
 
 
 Terminales con las reglas donde aparecen
@@ -150,44 +153,44 @@ ENDDEF (259) 5
 INT (260) 8
 FLOAT (261) 9
 STRING (262) 10
-CONST_REAL (263) 67
-CONST_INT (264) 66
-CONST_STR (265) 68
-DISPLAY (266) 23 24
-GET (267) 25
-IF (268) 27 30
-ELSE (269) 30
-WHILE (270) 26
-P_A (271) 26 27 30 44 63 70
-P_C (272) 26 27 30 44 63 70
+CONST_REAL (263) 68
+CONST_INT (264) 67
+CONST_STR (265) 69
+DISPLAY (266) 24 25
+GET (267) 26
+IF (268) 28 31
+ELSE (269) 31
+WHILE (270) 27
+P_A (271) 27 28 31 45 64 71
+P_C (272) 27 28 31 45 64 71
 C_A (273)
 C_C (274)
-L_A (275) 26 27 30
-L_C (276) 26 27 30
-PUNTO_Y_COMA (277) 12 14 23 24 25 73
-COMA (278) 71
+L_A (275) 27 28 31
+L_C (276) 27 28 31
+PUNTO_Y_COMA (277) 12 14 24 25 26 74
+COMA (278) 72
 DOSPUNTOS (279) 8 9 10
-CMP_MAY (280) 32 46
-CMP_MEN (281) 34 48
-CMP_MAYI (282) 36 50
-CMP_MENI (283) 38 52
-CMP_DIST (284) 40 54
-CMP_IGUAL (285) 42 56
-OP_SUM (286) 57
-OP_RES (287) 58
-OP_DIV (288) 61
-OP_MUL (289) 60
-AND (290) 44
+CMP_MAY (280) 33 47
+CMP_MEN (281) 35 49
+CMP_MAYI (282) 37 51
+CMP_MENI (283) 39 53
+CMP_DIST (284) 41 55
+CMP_IGUAL (285) 43 57
+OP_SUM (286) 58
+OP_RES (287) 59
+OP_DIV (288) 62
+OP_MUL (289) 61
+AND (290) 45
 OR (291)
-NOT (292) 46 48 50 52 54 56
-ID (293) 11 12 21 22 23 25 64 71 72 75 76 77 78
-OP_ASIG (294) 21 22
-LET_SIM (295) 70
-OP_IGUAL (296) 70
-AE_MAIG (297) 75
-AE_MEIG (298) 76
-AE_MUIG (299) 77
-AE_DIIG (300) 78
+NOT (292) 47 49 51 53 55 57
+ID (293) 11 12 21 23 24 26 65 72 73 76 77 78 79
+OP_ASIG (294) 21 23
+LET_SIM (295) 71
+OP_IGUAL (296) 71
+AE_MAIG (297) 76
+AE_MEIG (298) 77
+AE_MUIG (299) 78
+AE_DIIG (300) 79
 
 
 No terminales con las reglas donde aparecen
@@ -209,74 +212,76 @@ declaracion (52)
 lista_ids (53)
     en la izquierda: 11 12, en la derecha: 8 9 10 12
 sentencia (54)
-    en la izquierda: 13 14 15 16 17 18 19, en la derecha: 2 3 26 27
-    30
+    en la izquierda: 13 14 15 16 17 18 19, en la derecha: 2 3 27 28
+    31
 asignacion (55)
-    en la izquierda: 21 22, en la derecha: 14
+    en la izquierda: 21 23, en la derecha: 14
 $@2 (56)
     en la izquierda: 20, en la derecha: 21
-salida (57)
-    en la izquierda: 23 24, en la derecha: 19
-entrada (58)
-    en la izquierda: 25, en la derecha: 18
-iteracion (59)
-    en la izquierda: 26, en la derecha: 16
-decision (60)
-    en la izquierda: 27 30, en la derecha: 15
-$@3 (61)
-    en la izquierda: 28, en la derecha: 30
+$@3 (57)
+    en la izquierda: 22, en la derecha: 23
+salida (58)
+    en la izquierda: 24 25, en la derecha: 19
+entrada (59)
+    en la izquierda: 26, en la derecha: 18
+iteracion (60)
+    en la izquierda: 27, en la derecha: 16
+decision (61)
+    en la izquierda: 28 31, en la derecha: 15
 $@4 (62)
-    en la izquierda: 29, en la derecha: 30
-condicion (63)
-    en la izquierda: 32 34 36 38 40 42 44 46 48 50 52 54 56, en la derecha:
-    26 27 30 44
-$@5 (64)
-    en la izquierda: 31, en la derecha: 32
+    en la izquierda: 29, en la derecha: 31
+$@5 (63)
+    en la izquierda: 30, en la derecha: 31
+condicion (64)
+    en la izquierda: 33 35 37 39 41 43 45 47 49 51 53 55 57, en la derecha:
+    27 28 31 45
 $@6 (65)
-    en la izquierda: 33, en la derecha: 34
+    en la izquierda: 32, en la derecha: 33
 $@7 (66)
-    en la izquierda: 35, en la derecha: 36
+    en la izquierda: 34, en la derecha: 35
 $@8 (67)
-    en la izquierda: 37, en la derecha: 38
+    en la izquierda: 36, en la derecha: 37
 $@9 (68)
-    en la izquierda: 39, en la derecha: 40
+    en la izquierda: 38, en la derecha: 39
 $@10 (69)
-    en la izquierda: 41, en la derecha: 42
+    en la izquierda: 40, en la derecha: 41
 $@11 (70)
-    en la izquierda: 43, en la derecha: 44
+    en la izquierda: 42, en la derecha: 43
 $@12 (71)
-    en la izquierda: 45, en la derecha: 46
+    en la izquierda: 44, en la derecha: 45
 $@13 (72)
-    en la izquierda: 47, en la derecha: 48
+    en la izquierda: 46, en la derecha: 47
 $@14 (73)
-    en la izquierda: 49, en la derecha: 50
+    en la izquierda: 48, en la derecha: 49
 $@15 (74)
-    en la izquierda: 51, en la derecha: 52
+    en la izquierda: 50, en la derecha: 51
 $@16 (75)
-    en la izquierda: 53, en la derecha: 54
+    en la izquierda: 52, en la derecha: 53
 $@17 (76)
-    en la izquierda: 55, en la derecha: 56
-expresion (77)
-    en la izquierda: 57 58 59, en la derecha: 21 32 34 36 38 40 42
-    46 48 50 52 54 56 57 58 63 73 74
-termino (78)
-    en la izquierda: 60 61 62, en la derecha: 57 58 59 60 61
-factor (79)
-    en la izquierda: 63 64 65, en la derecha: 60 61 62
-constanteNumerica (80)
-    en la izquierda: 66 67, en la derecha: 65
-constanteString (81)
-    en la izquierda: 68, en la derecha: 22 24
-let (82)
-    en la izquierda: 70, en la derecha: 17
-$@18 (83)
-    en la izquierda: 69, en la derecha: 70
-cont_ids (84)
-    en la izquierda: 71 72, en la derecha: 70 71
-cont_exp (85)
-    en la izquierda: 73 74, en la derecha: 70 73
-asignacion_especial (86)
-    en la izquierda: 75 76 77 78, en la derecha: 13
+    en la izquierda: 54, en la derecha: 55
+$@18 (77)
+    en la izquierda: 56, en la derecha: 57
+expresion (78)
+    en la izquierda: 58 59 60, en la derecha: 21 33 35 37 39 41 43
+    47 49 51 53 55 57 58 59 64 74 75
+termino (79)
+    en la izquierda: 61 62 63, en la derecha: 58 59 60 61 62
+factor (80)
+    en la izquierda: 64 65 66, en la derecha: 61 62 63
+constanteNumerica (81)
+    en la izquierda: 67 68, en la derecha: 66
+constanteString (82)
+    en la izquierda: 69, en la derecha: 23 25
+let (83)
+    en la izquierda: 71, en la derecha: 17
+$@19 (84)
+    en la izquierda: 70, en la derecha: 71
+cont_ids (85)
+    en la izquierda: 72 73, en la derecha: 71 72
+cont_exp (86)
+    en la izquierda: 74 75, en la derecha: 71 74
+asignacion_especial (87)
+    en la izquierda: 76 77 78 79, en la derecha: 13
 
 
 estado 0
@@ -315,8 +320,8 @@ estado 1
 
 estado 2
 
-   23 salida: DISPLAY . ID PUNTO_Y_COMA
-   24       | DISPLAY . constanteString PUNTO_Y_COMA
+   24 salida: DISPLAY . ID PUNTO_Y_COMA
+   25       | DISPLAY . constanteString PUNTO_Y_COMA
 
     CONST_STR  desplazar e ir al estado 20
     ID         desplazar e ir al estado 21
@@ -326,22 +331,22 @@ estado 2
 
 estado 3
 
-   25 entrada: GET . ID PUNTO_Y_COMA
+   26 entrada: GET . ID PUNTO_Y_COMA
 
     ID  desplazar e ir al estado 23
 
 
 estado 4
 
-   27 decision: IF . P_A condicion P_C L_A sentencia L_C
-   30         | IF . P_A condicion P_C L_A sentencia L_C $@3 ELSE $@4 L_A sentencia L_C
+   28 decision: IF . P_A condicion P_C L_A sentencia L_C
+   31         | IF . P_A condicion P_C L_A sentencia L_C $@4 ELSE $@5 L_A sentencia L_C
 
     P_A  desplazar e ir al estado 24
 
 
 estado 5
 
-   26 iteracion: WHILE . P_A condicion P_C L_A sentencia L_C
+   27 iteracion: WHILE . P_A condicion P_C L_A sentencia L_C
 
     P_A  desplazar e ir al estado 25
 
@@ -349,11 +354,11 @@ estado 5
 estado 6
 
    21 asignacion: ID . OP_ASIG $@2 expresion
-   22           | ID . OP_ASIG constanteString
-   75 asignacion_especial: ID . AE_MAIG ID
-   76                    | ID . AE_MEIG ID
-   77                    | ID . AE_MUIG ID
-   78                    | ID . AE_DIIG ID
+   23           | ID . OP_ASIG $@3 constanteString
+   76 asignacion_especial: ID . AE_MAIG ID
+   77                    | ID . AE_MEIG ID
+   78                    | ID . AE_MUIG ID
+   79                    | ID . AE_DIIG ID
 
     OP_ASIG  desplazar e ir al estado 26
     AE_MAIG  desplazar e ir al estado 27
@@ -364,11 +369,11 @@ estado 6
 
 estado 7
 
-   70 let: LET_SIM . $@18 cont_ids OP_IGUAL P_A cont_exp P_C
+   71 let: LET_SIM . $@19 cont_ids OP_IGUAL P_A cont_exp P_C
 
-    $default  reduce usando la regla 69 ($@18)
+    $default  reduce usando la regla 70 ($@19)
 
-    $@18  ir al estado 31
+    $@19  ir al estado 31
 
 
 estado 8
@@ -476,36 +481,36 @@ estado 19
 
 estado 20
 
-   68 constanteString: CONST_STR .
+   69 constanteString: CONST_STR .
 
-    $default  reduce usando la regla 68 (constanteString)
+    $default  reduce usando la regla 69 (constanteString)
 
 
 estado 21
 
-   23 salida: DISPLAY ID . PUNTO_Y_COMA
+   24 salida: DISPLAY ID . PUNTO_Y_COMA
 
     PUNTO_Y_COMA  desplazar e ir al estado 40
 
 
 estado 22
 
-   24 salida: DISPLAY constanteString . PUNTO_Y_COMA
+   25 salida: DISPLAY constanteString . PUNTO_Y_COMA
 
     PUNTO_Y_COMA  desplazar e ir al estado 41
 
 
 estado 23
 
-   25 entrada: GET ID . PUNTO_Y_COMA
+   26 entrada: GET ID . PUNTO_Y_COMA
 
     PUNTO_Y_COMA  desplazar e ir al estado 42
 
 
 estado 24
 
-   27 decision: IF P_A . condicion P_C L_A sentencia L_C
-   30         | IF P_A . condicion P_C L_A sentencia L_C $@3 ELSE $@4 L_A sentencia L_C
+   28 decision: IF P_A . condicion P_C L_A sentencia L_C
+   31         | IF P_A . condicion P_C L_A sentencia L_C $@4 ELSE $@5 L_A sentencia L_C
 
     CONST_REAL  desplazar e ir al estado 43
     CONST_INT   desplazar e ir al estado 44
@@ -522,7 +527,7 @@ estado 24
 
 estado 25
 
-   26 iteracion: WHILE P_A . condicion P_C L_A sentencia L_C
+   27 iteracion: WHILE P_A . condicion P_C L_A sentencia L_C
 
     CONST_REAL  desplazar e ir al estado 43
     CONST_INT   desplazar e ir al estado 44
@@ -540,47 +545,46 @@ estado 25
 estado 26
 
    21 asignacion: ID OP_ASIG . $@2 expresion
-   22           | ID OP_ASIG . constanteString
+   23           | ID OP_ASIG . $@3 constanteString
 
-    CONST_STR  desplazar e ir al estado 20
+    CONST_STR  reduce usando la regla 22 ($@3)
+    $default   reduce usando la regla 20 ($@2)
 
-    $default  reduce usando la regla 20 ($@2)
-
-    $@2              ir al estado 54
-    constanteString  ir al estado 55
+    $@2  ir al estado 54
+    $@3  ir al estado 55
 
 
 estado 27
 
-   75 asignacion_especial: ID AE_MAIG . ID
+   76 asignacion_especial: ID AE_MAIG . ID
 
     ID  desplazar e ir al estado 56
 
 
 estado 28
 
-   76 asignacion_especial: ID AE_MEIG . ID
+   77 asignacion_especial: ID AE_MEIG . ID
 
     ID  desplazar e ir al estado 57
 
 
 estado 29
 
-   77 asignacion_especial: ID AE_MUIG . ID
+   78 asignacion_especial: ID AE_MUIG . ID
 
     ID  desplazar e ir al estado 58
 
 
 estado 30
 
-   78 asignacion_especial: ID AE_DIIG . ID
+   79 asignacion_especial: ID AE_DIIG . ID
 
     ID  desplazar e ir al estado 59
 
 
 estado 31
 
-   70 let: LET_SIM $@18 . cont_ids OP_IGUAL P_A cont_exp P_C
+   71 let: LET_SIM $@19 . cont_ids OP_IGUAL P_A cont_exp P_C
 
     ID  desplazar e ir al estado 60
 
@@ -651,43 +655,43 @@ estado 39
 
 estado 40
 
-   23 salida: DISPLAY ID PUNTO_Y_COMA .
-
-    $default  reduce usando la regla 23 (salida)
-
-
-estado 41
-
-   24 salida: DISPLAY constanteString PUNTO_Y_COMA .
+   24 salida: DISPLAY ID PUNTO_Y_COMA .
 
     $default  reduce usando la regla 24 (salida)
 
 
+estado 41
+
+   25 salida: DISPLAY constanteString PUNTO_Y_COMA .
+
+    $default  reduce usando la regla 25 (salida)
+
+
 estado 42
 
-   25 entrada: GET ID PUNTO_Y_COMA .
+   26 entrada: GET ID PUNTO_Y_COMA .
 
-    $default  reduce usando la regla 25 (entrada)
+    $default  reduce usando la regla 26 (entrada)
 
 
 estado 43
 
-   67 constanteNumerica: CONST_REAL .
+   68 constanteNumerica: CONST_REAL .
 
-    $default  reduce usando la regla 67 (constanteNumerica)
+    $default  reduce usando la regla 68 (constanteNumerica)
 
 
 estado 44
 
-   66 constanteNumerica: CONST_INT .
+   67 constanteNumerica: CONST_INT .
 
-    $default  reduce usando la regla 66 (constanteNumerica)
+    $default  reduce usando la regla 67 (constanteNumerica)
 
 
 estado 45
 
-   44 condicion: P_A . condicion $@11 P_C AND P_A condicion P_C
-   63 factor: P_A . expresion P_C
+   45 condicion: P_A . condicion $@12 P_C AND P_A condicion P_C
+   64 factor: P_A . expresion P_C
 
     CONST_REAL  desplazar e ir al estado 43
     CONST_INT   desplazar e ir al estado 44
@@ -704,12 +708,12 @@ estado 45
 
 estado 46
 
-   46 condicion: NOT . expresion $@12 CMP_MAY expresion
-   48          | NOT . expresion $@13 CMP_MEN expresion
-   50          | NOT . expresion $@14 CMP_MAYI expresion
-   52          | NOT . expresion $@15 CMP_MENI expresion
-   54          | NOT . expresion $@16 CMP_DIST expresion
-   56          | NOT . expresion $@17 CMP_IGUAL expresion
+   47 condicion: NOT . expresion $@13 CMP_MAY expresion
+   49          | NOT . expresion $@14 CMP_MEN expresion
+   51          | NOT . expresion $@15 CMP_MAYI expresion
+   53          | NOT . expresion $@16 CMP_MENI expresion
+   55          | NOT . expresion $@17 CMP_DIST expresion
+   57          | NOT . expresion $@18 CMP_IGUAL expresion
 
     CONST_REAL  desplazar e ir al estado 43
     CONST_INT   desplazar e ir al estado 44
@@ -724,77 +728,77 @@ estado 46
 
 estado 47
 
-   64 factor: ID .
+   65 factor: ID .
 
-    $default  reduce usando la regla 64 (factor)
+    $default  reduce usando la regla 65 (factor)
 
 
 estado 48
 
-   27 decision: IF P_A condicion . P_C L_A sentencia L_C
-   30         | IF P_A condicion . P_C L_A sentencia L_C $@3 ELSE $@4 L_A sentencia L_C
+   28 decision: IF P_A condicion . P_C L_A sentencia L_C
+   31         | IF P_A condicion . P_C L_A sentencia L_C $@4 ELSE $@5 L_A sentencia L_C
 
     P_C  desplazar e ir al estado 71
 
 
 estado 49
 
-   32 condicion: expresion . $@5 CMP_MAY expresion
-   34          | expresion . $@6 CMP_MEN expresion
-   36          | expresion . $@7 CMP_MAYI expresion
-   38          | expresion . $@8 CMP_MENI expresion
-   40          | expresion . $@9 CMP_DIST expresion
-   42          | expresion . $@10 CMP_IGUAL expresion
-   57 expresion: expresion . OP_SUM termino
-   58          | expresion . OP_RES termino
+   33 condicion: expresion . $@6 CMP_MAY expresion
+   35          | expresion . $@7 CMP_MEN expresion
+   37          | expresion . $@8 CMP_MAYI expresion
+   39          | expresion . $@9 CMP_MENI expresion
+   41          | expresion . $@10 CMP_DIST expresion
+   43          | expresion . $@11 CMP_IGUAL expresion
+   58 expresion: expresion . OP_SUM termino
+   59          | expresion . OP_RES termino
 
     OP_SUM  desplazar e ir al estado 72
     OP_RES  desplazar e ir al estado 73
 
-    CMP_MEN    reduce usando la regla 33 ($@6)
-    CMP_MAYI   reduce usando la regla 35 ($@7)
-    CMP_MENI   reduce usando la regla 37 ($@8)
-    CMP_DIST   reduce usando la regla 39 ($@9)
-    CMP_IGUAL  reduce usando la regla 41 ($@10)
-    $default   reduce usando la regla 31 ($@5)
+    CMP_MEN    reduce usando la regla 34 ($@7)
+    CMP_MAYI   reduce usando la regla 36 ($@8)
+    CMP_MENI   reduce usando la regla 38 ($@9)
+    CMP_DIST   reduce usando la regla 40 ($@10)
+    CMP_IGUAL  reduce usando la regla 42 ($@11)
+    $default   reduce usando la regla 32 ($@6)
 
-    $@5   ir al estado 74
-    $@6   ir al estado 75
-    $@7   ir al estado 76
-    $@8   ir al estado 77
-    $@9   ir al estado 78
-    $@10  ir al estado 79
+    $@6   ir al estado 74
+    $@7   ir al estado 75
+    $@8   ir al estado 76
+    $@9   ir al estado 77
+    $@10  ir al estado 78
+    $@11  ir al estado 79
 
 
 estado 50
 
-   59 expresion: termino .
-   60 termino: termino . OP_MUL factor
-   61        | termino . OP_DIV factor
+   60 expresion: termino .
+   61 termino: termino . OP_MUL factor
+   62        | termino . OP_DIV factor
 
     OP_DIV  desplazar e ir al estado 80
     OP_MUL  desplazar e ir al estado 81
 
-    $default  reduce usando la regla 59 (expresion)
+    $default  reduce usando la regla 60 (expresion)
 
 
 estado 51
 
-   62 termino: factor .
+   63 termino: factor .
 
-    $default  reduce usando la regla 62 (termino)
+    $default  reduce usando la regla 63 (termino)
 
 
 estado 52
 
-   65 factor: constanteNumerica .
+   66 factor: constanteNumerica .
 
-    $default  reduce usando la regla 65 (factor)
+    $default  reduce usando la regla 66 (factor)
 
 
 estado 53
 
-   26 iteracion: WHILE P_A condicion . P_C L_A sentencia L_C
+   27 iteracion: WHILE P_A condicion . P_C L_A sentencia L_C
 
     P_C  desplazar e ir al estado 82
 
@@ -816,80 +820,82 @@ estado 54
 
 estado 55
 
-   22 asignacion: ID OP_ASIG constanteString .
+   23 asignacion: ID OP_ASIG $@3 . constanteString
 
-    $default  reduce usando la regla 22 (asignacion)
+    CONST_STR  desplazar e ir al estado 20
+
+    constanteString  ir al estado 84
 
 
 estado 56
 
-   75 asignacion_especial: ID AE_MAIG ID .
-
-    $default  reduce usando la regla 75 (asignacion_especial)
-
-
-estado 57
-
-   76 asignacion_especial: ID AE_MEIG ID .
+   76 asignacion_especial: ID AE_MAIG ID .
 
     $default  reduce usando la regla 76 (asignacion_especial)
 
 
-estado 58
+estado 57
 
-   77 asignacion_especial: ID AE_MUIG ID .
+   77 asignacion_especial: ID AE_MEIG ID .
 
     $default  reduce usando la regla 77 (asignacion_especial)
 
 
-estado 59
+estado 58
 
-   78 asignacion_especial: ID AE_DIIG ID .
+   78 asignacion_especial: ID AE_MUIG ID .
 
     $default  reduce usando la regla 78 (asignacion_especial)
 
 
+estado 59
+
+   79 asignacion_especial: ID AE_DIIG ID .
+
+    $default  reduce usando la regla 79 (asignacion_especial)
+
+
 estado 60
 
-   72 cont_ids: ID .
+   73 cont_ids: ID .
 
-    $default  reduce usando la regla 72 (cont_ids)
+    $default  reduce usando la regla 73 (cont_ids)
 
 
 estado 61
 
-   70 let: LET_SIM $@18 cont_ids . OP_IGUAL P_A cont_exp P_C
-   71 cont_ids: cont_ids . COMA ID
+   71 let: LET_SIM $@19 cont_ids . OP_IGUAL P_A cont_exp P_C
+   72 cont_ids: cont_ids . COMA ID
 
-    COMA      desplazar e ir al estado 84
-    OP_IGUAL  desplazar e ir al estado 85
+    COMA      desplazar e ir al estado 85
+    OP_IGUAL  desplazar e ir al estado 86
 
 
 estado 62
 
     8 declaracion: INT DOSPUNTOS . lista_ids
 
-    ID  desplazar e ir al estado 86
+    ID  desplazar e ir al estado 87
 
-    lista_ids  ir al estado 87
+    lista_ids  ir al estado 88
 
 
 estado 63
 
     9 declaracion: FLOAT DOSPUNTOS . lista_ids
 
-    ID  desplazar e ir al estado 86
+    ID  desplazar e ir al estado 87
 
-    lista_ids  ir al estado 88
+    lista_ids  ir al estado 89
 
 
 estado 64
 
    10 declaracion: STRING DOSPUNTOS . lista_ids
 
-    ID  desplazar e ir al estado 86
+    ID  desplazar e ir al estado 87
 
-    lista_ids  ir al estado 89
+    lista_ids  ir al estado 90
 
 
 estado 65
@@ -908,54 +914,54 @@ estado 66
 
 estado 67
 
-   44 condicion: P_A condicion . $@11 P_C AND P_A condicion P_C
+   45 condicion: P_A condicion . $@12 P_C AND P_A condicion P_C
 
-    $default  reduce usando la regla 43 ($@11)
+    $default  reduce usando la regla 44 ($@12)
 
-    $@11  ir al estado 90
+    $@12  ir al estado 91
 
 
 estado 68
 
-   32 condicion: expresion . $@5 CMP_MAY expresion
-   34          | expresion . $@6 CMP_MEN expresion
-   36          | expresion . $@7 CMP_MAYI expresion
-   38          | expresion . $@8 CMP_MENI expresion
-   40          | expresion . $@9 CMP_DIST expresion
-   42          | expresion . $@10 CMP_IGUAL expresion
-   57 expresion: expresion . OP_SUM termino
-   58          | expresion . OP_RES termino
-   63 factor: P_A expresion . P_C
+   33 condicion: expresion . $@6 CMP_MAY expresion
+   35          | expresion . $@7 CMP_MEN expresion
+   37          | expresion . $@8 CMP_MAYI expresion
+   39          | expresion . $@9 CMP_MENI expresion
+   41          | expresion . $@10 CMP_DIST expresion
+   43          | expresion . $@11 CMP_IGUAL expresion
+   58 expresion: expresion . OP_SUM termino
+   59          | expresion . OP_RES termino
+   64 factor: P_A expresion . P_C
 
-    P_C     desplazar e ir al estado 91
+    P_C     desplazar e ir al estado 92
     OP_SUM  desplazar e ir al estado 72
     OP_RES  desplazar e ir al estado 73
 
-    CMP_MEN    reduce usando la regla 33 ($@6)
-    CMP_MAYI   reduce usando la regla 35 ($@7)
-    CMP_MENI   reduce usando la regla 37 ($@8)
-    CMP_DIST   reduce usando la regla 39 ($@9)
-    CMP_IGUAL  reduce usando la regla 41 ($@10)
-    $default   reduce usando la regla 31 ($@5)
+    CMP_MEN    reduce usando la regla 34 ($@7)
+    CMP_MAYI   reduce usando la regla 36 ($@8)
+    CMP_MENI   reduce usando la regla 38 ($@9)
+    CMP_DIST   reduce usando la regla 40 ($@10)
+    CMP_IGUAL  reduce usando la regla 42 ($@11)
+    $default   reduce usando la regla 32 ($@6)
 
-    $@5   ir al estado 74
-    $@6   ir al estado 75
-    $@7   ir al estado 76
-    $@8   ir al estado 77
-    $@9   ir al estado 78
-    $@10  ir al estado 79
+    $@6   ir al estado 74
+    $@7   ir al estado 75
+    $@8   ir al estado 76
+    $@9   ir al estado 77
+    $@10  ir al estado 78
+    $@11  ir al estado 79
 
 
 estado 69
 
-   63 factor: P_A . expresion P_C
+   64 factor: P_A . expresion P_C
 
     CONST_REAL  desplazar e ir al estado 43
     CONST_INT   desplazar e ir al estado 44
     P_A         desplazar e ir al estado 69
     ID          desplazar e ir al estado 47
 
-    expresion          ir al estado 92
+    expresion          ir al estado 93
     termino            ir al estado 50
     factor             ir al estado 51
     constanteNumerica  ir al estado 52
@@ -963,58 +969,44 @@ estado 69
 
 estado 70
 
-   46 condicion: NOT expresion . $@12 CMP_MAY expresion
-   48          | NOT expresion . $@13 CMP_MEN expresion
-   50          | NOT expresion . $@14 CMP_MAYI expresion
-   52          | NOT expresion . $@15 CMP_MENI expresion
-   54          | NOT expresion . $@16 CMP_DIST expresion
-   56          | NOT expresion . $@17 CMP_IGUAL expresion
-   57 expresion: expresion . OP_SUM termino
-   58          | expresion . OP_RES termino
+   47 condicion: NOT expresion . $@13 CMP_MAY expresion
+   49          | NOT expresion . $@14 CMP_MEN expresion
+   51          | NOT expresion . $@15 CMP_MAYI expresion
+   53          | NOT expresion . $@16 CMP_MENI expresion
+   55          | NOT expresion . $@17 CMP_DIST expresion
+   57          | NOT expresion . $@18 CMP_IGUAL expresion
+   58 expresion: expresion . OP_SUM termino
+   59          | expresion . OP_RES termino
 
     OP_SUM  desplazar e ir al estado 72
     OP_RES  desplazar e ir al estado 73
 
-    CMP_MEN    reduce usando la regla 47 ($@13)
-    CMP_MAYI   reduce usando la regla 49 ($@14)
-    CMP_MENI   reduce usando la regla 51 ($@15)
-    CMP_DIST   reduce usando la regla 53 ($@16)
-    CMP_IGUAL  reduce usando la regla 55 ($@17)
-    $default   reduce usando la regla 45 ($@12)
+    CMP_MEN    reduce usando la regla 48 ($@14)
+    CMP_MAYI   reduce usando la regla 50 ($@15)
+    CMP_MENI   reduce usando la regla 52 ($@16)
+    CMP_DIST   reduce usando la regla 54 ($@17)
+    CMP_IGUAL  reduce usando la regla 56 ($@18)
+    $default   reduce usando la regla 46 ($@13)
 
-    $@12  ir al estado 93
     $@13  ir al estado 94
     $@14  ir al estado 95
     $@15  ir al estado 96
     $@16  ir al estado 97
     $@17  ir al estado 98
+    $@18  ir al estado 99
 
 
 estado 71
 
-   27 decision: IF P_A condicion P_C . L_A sentencia L_C
-   30         | IF P_A condicion P_C . L_A sentencia L_C $@3 ELSE $@4 L_A sentencia L_C
+   28 decision: IF P_A condicion P_C . L_A sentencia L_C
+   31         | IF P_A condicion P_C . L_A sentencia L_C $@4 ELSE $@5 L_A sentencia L_C
 
-    L_A  desplazar e ir al estado 99
+    L_A  desplazar e ir al estado 100
 
 
 estado 72
 
-   57 expresion: expresion OP_SUM . termino
-
-    CONST_REAL  desplazar e ir al estado 43
-    CONST_INT   desplazar e ir al estado 44
-    P_A         desplazar e ir al estado 69
-    ID          desplazar e ir al estado 47
-
-    termino            ir al estado 100
-    factor             ir al estado 51
-    constanteNumerica  ir al estado 52
-
-
-estado 73
-
-   58 expresion: expresion OP_RES . termino
+   58 expresion: expresion OP_SUM . termino
 
     CONST_REAL  desplazar e ir al estado 43
     CONST_INT   desplazar e ir al estado 44
@@ -1026,64 +1018,65 @@ estado 73
     constanteNumerica  ir al estado 52
 
 
-estado 74
+estado 73
 
-   32 condicion: expresion $@5 . CMP_MAY expresion
-
-    CMP_MAY  desplazar e ir al estado 102
-
-
-estado 75
-
-   34 condicion: expresion $@6 . CMP_MEN expresion
-
-    CMP_MEN  desplazar e ir al estado 103
-
-
-estado 76
-
-   36 condicion: expresion $@7 . CMP_MAYI expresion
-
-    CMP_MAYI  desplazar e ir al estado 104
-
-
-estado 77
-
-   38 condicion: expresion $@8 . CMP_MENI expresion
-
-    CMP_MENI  desplazar e ir al estado 105
-
-
-estado 78
-
-   40 condicion: expresion $@9 . CMP_DIST expresion
-
-    CMP_DIST  desplazar e ir al estado 106
-
-
-estado 79
-
-   42 condicion: expresion $@10 . CMP_IGUAL expresion
-
-    CMP_IGUAL  desplazar e ir al estado 107
-
-
-estado 80
-
-   61 termino: termino OP_DIV . factor
+   59 expresion: expresion OP_RES . termino
 
     CONST_REAL  desplazar e ir al estado 43
     CONST_INT   desplazar e ir al estado 44
     P_A         desplazar e ir al estado 69
     ID          desplazar e ir al estado 47
 
-    factor             ir al estado 108
+    termino            ir al estado 102
+    factor             ir al estado 51
     constanteNumerica  ir al estado 52
 
 
-estado 81
+estado 74
 
-   60 termino: termino OP_MUL . factor
+   33 condicion: expresion $@6 . CMP_MAY expresion
+
+    CMP_MAY  desplazar e ir al estado 103
+
+
+estado 75
+
+   35 condicion: expresion $@7 . CMP_MEN expresion
+
+    CMP_MEN  desplazar e ir al estado 104
+
+
+estado 76
+
+   37 condicion: expresion $@8 . CMP_MAYI expresion
+
+    CMP_MAYI  desplazar e ir al estado 105
+
+
+estado 77
+
+   39 condicion: expresion $@9 . CMP_MENI expresion
+
+    CMP_MENI  desplazar e ir al estado 106
+
+
+estado 78
+
+   41 condicion: expresion $@10 . CMP_DIST expresion
+
+    CMP_DIST  desplazar e ir al estado 107
+
+
+estado 79
+
+   43 condicion: expresion $@11 . CMP_IGUAL expresion
+
+    CMP_IGUAL  desplazar e ir al estado 108
+
+
+estado 80
+
+   62 termino: termino OP_DIV . factor
 
     CONST_REAL  desplazar e ir al estado 43
     CONST_INT   desplazar e ir al estado 44
@@ -1094,18 +1087,31 @@ estado 81
     constanteNumerica  ir al estado 52
 
 
+estado 81
+
+   61 termino: termino OP_MUL . factor
+
+    CONST_REAL  desplazar e ir al estado 43
+    CONST_INT   desplazar e ir al estado 44
+    P_A         desplazar e ir al estado 69
+    ID          desplazar e ir al estado 47
+
+    factor             ir al estado 110
+    constanteNumerica  ir al estado 52
+
+
 estado 82
 
-   26 iteracion: WHILE P_A condicion P_C . L_A sentencia L_C
+   27 iteracion: WHILE P_A condicion P_C . L_A sentencia L_C
 
-    L_A  desplazar e ir al estado 110
+    L_A  desplazar e ir al estado 111
 
 
 estado 83
 
    21 asignacion: ID OP_ASIG $@2 expresion .
-   57 expresion: expresion . OP_SUM termino
-   58          | expresion . OP_RES termino
+   58 expresion: expresion . OP_SUM termino
+   59          | expresion . OP_RES termino
 
     OP_SUM  desplazar e ir al estado 72
     OP_RES  desplazar e ir al estado 73
@@ -1115,126 +1121,133 @@ estado 83
 
 estado 84
 
-   71 cont_ids: cont_ids COMA . ID
+   23 asignacion: ID OP_ASIG $@3 constanteString .
 
-    ID  desplazar e ir al estado 111
+    $default  reduce usando la regla 23 (asignacion)
 
 
 estado 85
 
-   70 let: LET_SIM $@18 cont_ids OP_IGUAL . P_A cont_exp P_C
+   72 cont_ids: cont_ids COMA . ID
 
-    P_A  desplazar e ir al estado 112
+    ID  desplazar e ir al estado 112
 
 
 estado 86
+
+   71 let: LET_SIM $@19 cont_ids OP_IGUAL . P_A cont_exp P_C
+
+    P_A  desplazar e ir al estado 113
+
+
+estado 87
 
    11 lista_ids: ID .
 
     $default  reduce usando la regla 11 (lista_ids)
 
 
-estado 87
+estado 88
 
     8 declaracion: INT DOSPUNTOS lista_ids .
    12 lista_ids: lista_ids . PUNTO_Y_COMA ID
 
-    PUNTO_Y_COMA  desplazar e ir al estado 113
+    PUNTO_Y_COMA  desplazar e ir al estado 114
 
     $default  reduce usando la regla 8 (declaracion)
 
 
-estado 88
+estado 89
 
     9 declaracion: FLOAT DOSPUNTOS lista_ids .
    12 lista_ids: lista_ids . PUNTO_Y_COMA ID
 
-    PUNTO_Y_COMA  desplazar e ir al estado 113
+    PUNTO_Y_COMA  desplazar e ir al estado 114
 
     $default  reduce usando la regla 9 (declaracion)
 
 
-estado 89
+estado 90
 
    10 declaracion: STRING DOSPUNTOS lista_ids .
    12 lista_ids: lista_ids . PUNTO_Y_COMA ID
 
-    PUNTO_Y_COMA  desplazar e ir al estado 113
+    PUNTO_Y_COMA  desplazar e ir al estado 114
 
     $default  reduce usando la regla 10 (declaracion)
 
 
-estado 90
-
-   44 condicion: P_A condicion $@11 . P_C AND P_A condicion P_C
-
-    P_C  desplazar e ir al estado 114
-
-
 estado 91
 
-   63 factor: P_A expresion P_C .
+   45 condicion: P_A condicion $@12 . P_C AND P_A condicion P_C
 
-    $default  reduce usando la regla 63 (factor)
+    P_C  desplazar e ir al estado 115
 
 
 estado 92
 
-   57 expresion: expresion . OP_SUM termino
-   58          | expresion . OP_RES termino
-   63 factor: P_A expresion . P_C
+   64 factor: P_A expresion P_C .
 
-    P_C     desplazar e ir al estado 91
-    OP_SUM  desplazar e ir al estado 72
-    OP_RES  desplazar e ir al estado 73
+    $default  reduce usando la regla 64 (factor)
 
 
 estado 93
 
-   46 condicion: NOT expresion $@12 . CMP_MAY expresion
+   58 expresion: expresion . OP_SUM termino
+   59          | expresion . OP_RES termino
+   64 factor: P_A expresion . P_C
 
-    CMP_MAY  desplazar e ir al estado 115
+    P_C     desplazar e ir al estado 92
+    OP_SUM  desplazar e ir al estado 72
+    OP_RES  desplazar e ir al estado 73
 
 
 estado 94
 
-   48 condicion: NOT expresion $@13 . CMP_MEN expresion
+   47 condicion: NOT expresion $@13 . CMP_MAY expresion
 
-    CMP_MEN  desplazar e ir al estado 116
+    CMP_MAY  desplazar e ir al estado 116
 
 
 estado 95
 
-   50 condicion: NOT expresion $@14 . CMP_MAYI expresion
+   49 condicion: NOT expresion $@14 . CMP_MEN expresion
 
-    CMP_MAYI  desplazar e ir al estado 117
+    CMP_MEN  desplazar e ir al estado 117
 
 
 estado 96
 
-   52 condicion: NOT expresion $@15 . CMP_MENI expresion
+   51 condicion: NOT expresion $@15 . CMP_MAYI expresion
 
-    CMP_MENI  desplazar e ir al estado 118
+    CMP_MAYI  desplazar e ir al estado 118
 
 
 estado 97
 
-   54 condicion: NOT expresion $@16 . CMP_DIST expresion
+   53 condicion: NOT expresion $@16 . CMP_MENI expresion
 
-    CMP_DIST  desplazar e ir al estado 119
+    CMP_MENI  desplazar e ir al estado 119
 
 
 estado 98
 
-   56 condicion: NOT expresion $@17 . CMP_IGUAL expresion
+   55 condicion: NOT expresion $@17 . CMP_DIST expresion
 
-    CMP_IGUAL  desplazar e ir al estado 120
+    CMP_DIST  desplazar e ir al estado 120
 
 
 estado 99
 
-   27 decision: IF P_A condicion P_C L_A . sentencia L_C
-   30         | IF P_A condicion P_C L_A . sentencia L_C $@3 ELSE $@4 L_A sentencia L_C
+   57 condicion: NOT expresion $@18 . CMP_IGUAL expresion
+
+    CMP_IGUAL  desplazar e ir al estado 121
+
+
+estado 100
+
+   28 decision: IF P_A condicion P_C L_A . sentencia L_C
+   31         | IF P_A condicion P_C L_A . sentencia L_C $@4 ELSE $@5 L_A sentencia L_C
 
     DISPLAY  desplazar e ir al estado 2
     GET      desplazar e ir al estado 3
@@ -1243,7 +1256,7 @@ estado 99
     ID       desplazar e ir al estado 6
     LET_SIM  desplazar e ir al estado 7
 
-    sentencia            ir al estado 121
+    sentencia            ir al estado 122
     asignacion           ir al estado 12
     salida               ir al estado 13
     entrada              ir al estado 14
@@ -1253,23 +1266,11 @@ estado 99
     asignacion_especial  ir al estado 18
 
 
-estado 100
-
-   57 expresion: expresion OP_SUM termino .
-   60 termino: termino . OP_MUL factor
-   61        | termino . OP_DIV factor
-
-    OP_DIV  desplazar e ir al estado 80
-    OP_MUL  desplazar e ir al estado 81
-
-    $default  reduce usando la regla 57 (expresion)
-
-
 estado 101
 
-   58 expresion: expresion OP_RES termino .
-   60 termino: termino . OP_MUL factor
-   61        | termino . OP_DIV factor
+   58 expresion: expresion OP_SUM termino .
+   61 termino: termino . OP_MUL factor
+   62        | termino . OP_DIV factor
 
     OP_DIV  desplazar e ir al estado 80
     OP_MUL  desplazar e ir al estado 81
@@ -1279,22 +1280,19 @@ estado 101
 
 estado 102
 
-   32 condicion: expresion $@5 CMP_MAY . expresion
+   59 expresion: expresion OP_RES termino .
+   61 termino: termino . OP_MUL factor
+   62        | termino . OP_DIV factor
 
-    CONST_REAL  desplazar e ir al estado 43
-    CONST_INT   desplazar e ir al estado 44
-    P_A         desplazar e ir al estado 69
-    ID          desplazar e ir al estado 47
+    OP_DIV  desplazar e ir al estado 80
+    OP_MUL  desplazar e ir al estado 81
 
-    expresion          ir al estado 122
-    termino            ir al estado 50
-    factor             ir al estado 51
-    constanteNumerica  ir al estado 52
+    $default  reduce usando la regla 59 (expresion)
 
 
 estado 103
 
-   34 condicion: expresion $@6 CMP_MEN . expresion
+   33 condicion: expresion $@6 CMP_MAY . expresion
 
     CONST_REAL  desplazar e ir al estado 43
     CONST_INT   desplazar e ir al estado 44
@@ -1309,7 +1307,7 @@ estado 103
 
 estado 104
 
-   36 condicion: expresion $@7 CMP_MAYI . expresion
+   35 condicion: expresion $@7 CMP_MEN . expresion
 
     CONST_REAL  desplazar e ir al estado 43
     CONST_INT   desplazar e ir al estado 44
@@ -1324,7 +1322,7 @@ estado 104
 
 estado 105
 
-   38 condicion: expresion $@8 CMP_MENI . expresion
+   37 condicion: expresion $@8 CMP_MAYI . expresion
 
     CONST_REAL  desplazar e ir al estado 43
     CONST_INT   desplazar e ir al estado 44
@@ -1339,7 +1337,7 @@ estado 105
 
 estado 106
 
-   40 condicion: expresion $@9 CMP_DIST . expresion
+   39 condicion: expresion $@9 CMP_MENI . expresion
 
     CONST_REAL  desplazar e ir al estado 43
     CONST_INT   desplazar e ir al estado 44
@@ -1354,7 +1352,7 @@ estado 106
 
 estado 107
 
-   42 condicion: expresion $@10 CMP_IGUAL . expresion
+   41 condicion: expresion $@10 CMP_DIST . expresion
 
     CONST_REAL  desplazar e ir al estado 43
     CONST_INT   desplazar e ir al estado 44
@@ -1369,21 +1367,36 @@ estado 107
 
 estado 108
 
-   61 termino: termino OP_DIV factor .
+   43 condicion: expresion $@11 CMP_IGUAL . expresion
 
-    $default  reduce usando la regla 61 (termino)
+    CONST_REAL  desplazar e ir al estado 43
+    CONST_INT   desplazar e ir al estado 44
+    P_A         desplazar e ir al estado 69
+    ID          desplazar e ir al estado 47
+
+    expresion          ir al estado 128
+    termino            ir al estado 50
+    factor             ir al estado 51
+    constanteNumerica  ir al estado 52
 
 
 estado 109
 
-   60 termino: termino OP_MUL factor .
+   62 termino: termino OP_DIV factor .
 
-    $default  reduce usando la regla 60 (termino)
+    $default  reduce usando la regla 62 (termino)
 
 
 estado 110
 
-   26 iteracion: WHILE P_A condicion P_C L_A . sentencia L_C
+   61 termino: termino OP_MUL factor .
+
+    $default  reduce usando la regla 61 (termino)
+
+
+estado 111
+
+   27 iteracion: WHILE P_A condicion P_C L_A . sentencia L_C
 
     DISPLAY  desplazar e ir al estado 2
     GET      desplazar e ir al estado 3
@@ -1392,7 +1405,7 @@ estado 110
     ID       desplazar e ir al estado 6
     LET_SIM  desplazar e ir al estado 7
 
-    sentencia            ir al estado 128
+    sentencia            ir al estado 129
     asignacion           ir al estado 12
     salida               ir al estado 13
     entrada              ir al estado 14
@@ -1402,61 +1415,46 @@ estado 110
     asignacion_especial  ir al estado 18
 
 
-estado 111
-
-   71 cont_ids: cont_ids COMA ID .
-
-    $default  reduce usando la regla 71 (cont_ids)
-
-
 estado 112
 
-   70 let: LET_SIM $@18 cont_ids OP_IGUAL P_A . cont_exp P_C
+   72 cont_ids: cont_ids COMA ID .
 
-    CONST_REAL  desplazar e ir al estado 43
-    CONST_INT   desplazar e ir al estado 44
-    P_A         desplazar e ir al estado 69
-    ID          desplazar e ir al estado 47
-
-    expresion          ir al estado 129
-    termino            ir al estado 50
-    factor             ir al estado 51
-    constanteNumerica  ir al estado 52
-    cont_exp           ir al estado 130
+    $default  reduce usando la regla 72 (cont_ids)
 
 
 estado 113
 
-   12 lista_ids: lista_ids PUNTO_Y_COMA . ID
-
-    ID  desplazar e ir al estado 131
-
-
-estado 114
-
-   44 condicion: P_A condicion $@11 P_C . AND P_A condicion P_C
-
-    AND  desplazar e ir al estado 132
-
-
-estado 115
-
-   46 condicion: NOT expresion $@12 CMP_MAY . expresion
+   71 let: LET_SIM $@19 cont_ids OP_IGUAL P_A . cont_exp P_C
 
     CONST_REAL  desplazar e ir al estado 43
     CONST_INT   desplazar e ir al estado 44
     P_A         desplazar e ir al estado 69
     ID          desplazar e ir al estado 47
 
-    expresion          ir al estado 133
+    expresion          ir al estado 130
     termino            ir al estado 50
     factor             ir al estado 51
     constanteNumerica  ir al estado 52
+    cont_exp           ir al estado 131
+
+
+estado 114
+
+   12 lista_ids: lista_ids PUNTO_Y_COMA . ID
+
+    ID  desplazar e ir al estado 132
+
+
+estado 115
+
+   45 condicion: P_A condicion $@12 P_C . AND P_A condicion P_C
+
+    AND  desplazar e ir al estado 133
 
 
 estado 116
 
-   48 condicion: NOT expresion $@13 CMP_MEN . expresion
+   47 condicion: NOT expresion $@13 CMP_MAY . expresion
 
     CONST_REAL  desplazar e ir al estado 43
     CONST_INT   desplazar e ir al estado 44
@@ -1471,7 +1469,7 @@ estado 116
 
 estado 117
 
-   50 condicion: NOT expresion $@14 CMP_MAYI . expresion
+   49 condicion: NOT expresion $@14 CMP_MEN . expresion
 
     CONST_REAL  desplazar e ir al estado 43
     CONST_INT   desplazar e ir al estado 44
@@ -1486,7 +1484,7 @@ estado 117
 
 estado 118
 
-   52 condicion: NOT expresion $@15 CMP_MENI . expresion
+   51 condicion: NOT expresion $@15 CMP_MAYI . expresion
 
     CONST_REAL  desplazar e ir al estado 43
     CONST_INT   desplazar e ir al estado 44
@@ -1501,7 +1499,7 @@ estado 118
 
 estado 119
 
-   54 condicion: NOT expresion $@16 CMP_DIST . expresion
+   53 condicion: NOT expresion $@16 CMP_MENI . expresion
 
     CONST_REAL  desplazar e ir al estado 43
     CONST_INT   desplazar e ir al estado 44
@@ -1516,7 +1514,7 @@ estado 119
 
 estado 120
 
-   56 condicion: NOT expresion $@17 CMP_IGUAL . expresion
+   55 condicion: NOT expresion $@17 CMP_DIST . expresion
 
     CONST_REAL  desplazar e ir al estado 43
     CONST_INT   desplazar e ir al estado 44
@@ -1531,250 +1529,248 @@ estado 120
 
 estado 121
 
-   27 decision: IF P_A condicion P_C L_A sentencia . L_C
-   30         | IF P_A condicion P_C L_A sentencia . L_C $@3 ELSE $@4 L_A sentencia L_C
-
-    L_C  desplazar e ir al estado 139
-
-
-estado 122
-
-   32 condicion: expresion $@5 CMP_MAY expresion .
-   57 expresion: expresion . OP_SUM termino
-   58          | expresion . OP_RES termino
-
-    OP_SUM  desplazar e ir al estado 72
-    OP_RES  desplazar e ir al estado 73
-
-    $default  reduce usando la regla 32 (condicion)
-
-
-estado 123
-
-   34 condicion: expresion $@6 CMP_MEN expresion .
-   57 expresion: expresion . OP_SUM termino
-   58          | expresion . OP_RES termino
-
-    OP_SUM  desplazar e ir al estado 72
-    OP_RES  desplazar e ir al estado 73
-
-    $default  reduce usando la regla 34 (condicion)
-
-
-estado 124
-
-   36 condicion: expresion $@7 CMP_MAYI expresion .
-   57 expresion: expresion . OP_SUM termino
-   58          | expresion . OP_RES termino
-
-    OP_SUM  desplazar e ir al estado 72
-    OP_RES  desplazar e ir al estado 73
-
-    $default  reduce usando la regla 36 (condicion)
-
-
-estado 125
-
-   38 condicion: expresion $@8 CMP_MENI expresion .
-   57 expresion: expresion . OP_SUM termino
-   58          | expresion . OP_RES termino
-
-    OP_SUM  desplazar e ir al estado 72
-    OP_RES  desplazar e ir al estado 73
-
-    $default  reduce usando la regla 38 (condicion)
-
-
-estado 126
-
-   40 condicion: expresion $@9 CMP_DIST expresion .
-   57 expresion: expresion . OP_SUM termino
-   58          | expresion . OP_RES termino
-
-    OP_SUM  desplazar e ir al estado 72
-    OP_RES  desplazar e ir al estado 73
-
-    $default  reduce usando la regla 40 (condicion)
-
-
-estado 127
-
-   42 condicion: expresion $@10 CMP_IGUAL expresion .
-   57 expresion: expresion . OP_SUM termino
-   58          | expresion . OP_RES termino
-
-    OP_SUM  desplazar e ir al estado 72
-    OP_RES  desplazar e ir al estado 73
-
-    $default  reduce usando la regla 42 (condicion)
-
-
-estado 128
-
-   26 iteracion: WHILE P_A condicion P_C L_A sentencia . L_C
-
-    L_C  desplazar e ir al estado 140
-
-
-estado 129
-
-   57 expresion: expresion . OP_SUM termino
-   58          | expresion . OP_RES termino
-   74 cont_exp: expresion .
-
-    OP_SUM  desplazar e ir al estado 72
-    OP_RES  desplazar e ir al estado 73
-
-    $default  reduce usando la regla 74 (cont_exp)
-
-
-estado 130
-
-   70 let: LET_SIM $@18 cont_ids OP_IGUAL P_A cont_exp . P_C
-   73 cont_exp: cont_exp . PUNTO_Y_COMA expresion
-
-    P_C           desplazar e ir al estado 141
-    PUNTO_Y_COMA  desplazar e ir al estado 142
-
-
-estado 131
-
-   12 lista_ids: lista_ids PUNTO_Y_COMA ID .
-
-    $default  reduce usando la regla 12 (lista_ids)
-
-
-estado 132
-
-   44 condicion: P_A condicion $@11 P_C AND . P_A condicion P_C
-
-    P_A  desplazar e ir al estado 143
-
-
-estado 133
-
-   46 condicion: NOT expresion $@12 CMP_MAY expresion .
-   57 expresion: expresion . OP_SUM termino
-   58          | expresion . OP_RES termino
-
-    OP_SUM  desplazar e ir al estado 72
-    OP_RES  desplazar e ir al estado 73
-
-    $default  reduce usando la regla 46 (condicion)
-
-
-estado 134
-
-   48 condicion: NOT expresion $@13 CMP_MEN expresion .
-   57 expresion: expresion . OP_SUM termino
-   58          | expresion . OP_RES termino
-
-    OP_SUM  desplazar e ir al estado 72
-    OP_RES  desplazar e ir al estado 73
-
-    $default  reduce usando la regla 48 (condicion)
-
-
-estado 135
-
-   50 condicion: NOT expresion $@14 CMP_MAYI expresion .
-   57 expresion: expresion . OP_SUM termino
-   58          | expresion . OP_RES termino
-
-    OP_SUM  desplazar e ir al estado 72
-    OP_RES  desplazar e ir al estado 73
-
-    $default  reduce usando la regla 50 (condicion)
-
-
-estado 136
-
-   52 condicion: NOT expresion $@15 CMP_MENI expresion .
-   57 expresion: expresion . OP_SUM termino
-   58          | expresion . OP_RES termino
-
-    OP_SUM  desplazar e ir al estado 72
-    OP_RES  desplazar e ir al estado 73
-
-    $default  reduce usando la regla 52 (condicion)
-
-
-estado 137
-
-   54 condicion: NOT expresion $@16 CMP_DIST expresion .
-   57 expresion: expresion . OP_SUM termino
-   58          | expresion . OP_RES termino
-
-    OP_SUM  desplazar e ir al estado 72
-    OP_RES  desplazar e ir al estado 73
-
-    $default  reduce usando la regla 54 (condicion)
-
-
-estado 138
-
-   56 condicion: NOT expresion $@17 CMP_IGUAL expresion .
-   57 expresion: expresion . OP_SUM termino
-   58          | expresion . OP_RES termino
-
-    OP_SUM  desplazar e ir al estado 72
-    OP_RES  desplazar e ir al estado 73
-
-    $default  reduce usando la regla 56 (condicion)
-
-
-estado 139
-
-   27 decision: IF P_A condicion P_C L_A sentencia L_C .
-   30         | IF P_A condicion P_C L_A sentencia L_C . $@3 ELSE $@4 L_A sentencia L_C
-
-    ELSE      reduce usando la regla 28 ($@3)
-    $default  reduce usando la regla 27 (decision)
-
-    $@3  ir al estado 144
-
-
-estado 140
-
-   26 iteracion: WHILE P_A condicion P_C L_A sentencia L_C .
-
-    $default  reduce usando la regla 26 (iteracion)
-
-
-estado 141
-
-   70 let: LET_SIM $@18 cont_ids OP_IGUAL P_A cont_exp P_C .
-
-    $default  reduce usando la regla 70 (let)
-
-
-estado 142
-
-   73 cont_exp: cont_exp PUNTO_Y_COMA . expresion
+   57 condicion: NOT expresion $@18 CMP_IGUAL . expresion
 
     CONST_REAL  desplazar e ir al estado 43
     CONST_INT   desplazar e ir al estado 44
     P_A         desplazar e ir al estado 69
     ID          desplazar e ir al estado 47
 
-    expresion          ir al estado 145
+    expresion          ir al estado 139
     termino            ir al estado 50
     factor             ir al estado 51
     constanteNumerica  ir al estado 52
 
 
+estado 122
+
+   28 decision: IF P_A condicion P_C L_A sentencia . L_C
+   31         | IF P_A condicion P_C L_A sentencia . L_C $@4 ELSE $@5 L_A sentencia L_C
+
+    L_C  desplazar e ir al estado 140
+
+
+estado 123
+
+   33 condicion: expresion $@6 CMP_MAY expresion .
+   58 expresion: expresion . OP_SUM termino
+   59          | expresion . OP_RES termino
+
+    OP_SUM  desplazar e ir al estado 72
+    OP_RES  desplazar e ir al estado 73
+
+    $default  reduce usando la regla 33 (condicion)
+
+
+estado 124
+
+   35 condicion: expresion $@7 CMP_MEN expresion .
+   58 expresion: expresion . OP_SUM termino
+   59          | expresion . OP_RES termino
+
+    OP_SUM  desplazar e ir al estado 72
+    OP_RES  desplazar e ir al estado 73
+
+    $default  reduce usando la regla 35 (condicion)
+
+
+estado 125
+
+   37 condicion: expresion $@8 CMP_MAYI expresion .
+   58 expresion: expresion . OP_SUM termino
+   59          | expresion . OP_RES termino
+
+    OP_SUM  desplazar e ir al estado 72
+    OP_RES  desplazar e ir al estado 73
+
+    $default  reduce usando la regla 37 (condicion)
+
+
+estado 126
+
+   39 condicion: expresion $@9 CMP_MENI expresion .
+   58 expresion: expresion . OP_SUM termino
+   59          | expresion . OP_RES termino
+
+    OP_SUM  desplazar e ir al estado 72
+    OP_RES  desplazar e ir al estado 73
+
+    $default  reduce usando la regla 39 (condicion)
+
+
+estado 127
+
+   41 condicion: expresion $@10 CMP_DIST expresion .
+   58 expresion: expresion . OP_SUM termino
+   59          | expresion . OP_RES termino
+
+    OP_SUM  desplazar e ir al estado 72
+    OP_RES  desplazar e ir al estado 73
+
+    $default  reduce usando la regla 41 (condicion)
+
+
+estado 128
+
+   43 condicion: expresion $@11 CMP_IGUAL expresion .
+   58 expresion: expresion . OP_SUM termino
+   59          | expresion . OP_RES termino
+
+    OP_SUM  desplazar e ir al estado 72
+    OP_RES  desplazar e ir al estado 73
+
+    $default  reduce usando la regla 43 (condicion)
+
+
+estado 129
+
+   27 iteracion: WHILE P_A condicion P_C L_A sentencia . L_C
+
+    L_C  desplazar e ir al estado 141
+
+
+estado 130
+
+   58 expresion: expresion . OP_SUM termino
+   59          | expresion . OP_RES termino
+   75 cont_exp: expresion .
+
+    OP_SUM  desplazar e ir al estado 72
+    OP_RES  desplazar e ir al estado 73
+
+    $default  reduce usando la regla 75 (cont_exp)
+
+
+estado 131
+
+   71 let: LET_SIM $@19 cont_ids OP_IGUAL P_A cont_exp . P_C
+   74 cont_exp: cont_exp . PUNTO_Y_COMA expresion
+
+    P_C           desplazar e ir al estado 142
+    PUNTO_Y_COMA  desplazar e ir al estado 143
+
+
+estado 132
+
+   12 lista_ids: lista_ids PUNTO_Y_COMA ID .
+
+    $default  reduce usando la regla 12 (lista_ids)
+
+
+estado 133
+
+   45 condicion: P_A condicion $@12 P_C AND . P_A condicion P_C
+
+    P_A  desplazar e ir al estado 144
+
+
+estado 134
+
+   47 condicion: NOT expresion $@13 CMP_MAY expresion .
+   58 expresion: expresion . OP_SUM termino
+   59          | expresion . OP_RES termino
+
+    OP_SUM  desplazar e ir al estado 72
+    OP_RES  desplazar e ir al estado 73
+
+    $default  reduce usando la regla 47 (condicion)
+
+
+estado 135
+
+   49 condicion: NOT expresion $@14 CMP_MEN expresion .
+   58 expresion: expresion . OP_SUM termino
+   59          | expresion . OP_RES termino
+
+    OP_SUM  desplazar e ir al estado 72
+    OP_RES  desplazar e ir al estado 73
+
+    $default  reduce usando la regla 49 (condicion)
+
+
+estado 136
+
+   51 condicion: NOT expresion $@15 CMP_MAYI expresion .
+   58 expresion: expresion . OP_SUM termino
+   59          | expresion . OP_RES termino
+
+    OP_SUM  desplazar e ir al estado 72
+    OP_RES  desplazar e ir al estado 73
+
+    $default  reduce usando la regla 51 (condicion)
+
+
+estado 137
+
+   53 condicion: NOT expresion $@16 CMP_MENI expresion .
+   58 expresion: expresion . OP_SUM termino
+   59          | expresion . OP_RES termino
+
+    OP_SUM  desplazar e ir al estado 72
+    OP_RES  desplazar e ir al estado 73
+
+    $default  reduce usando la regla 53 (condicion)
+
+
+estado 138
+
+   55 condicion: NOT expresion $@17 CMP_DIST expresion .
+   58 expresion: expresion . OP_SUM termino
+   59          | expresion . OP_RES termino
+
+    OP_SUM  desplazar e ir al estado 72
+    OP_RES  desplazar e ir al estado 73
+
+    $default  reduce usando la regla 55 (condicion)
+
+
+estado 139
+
+   57 condicion: NOT expresion $@18 CMP_IGUAL expresion .
+   58 expresion: expresion . OP_SUM termino
+   59          | expresion . OP_RES termino
+
+    OP_SUM  desplazar e ir al estado 72
+    OP_RES  desplazar e ir al estado 73
+
+    $default  reduce usando la regla 57 (condicion)
+
+
+estado 140
+
+   28 decision: IF P_A condicion P_C L_A sentencia L_C .
+   31         | IF P_A condicion P_C L_A sentencia L_C . $@4 ELSE $@5 L_A sentencia L_C
+
+    ELSE      reduce usando la regla 29 ($@4)
+    $default  reduce usando la regla 28 (decision)
+
+    $@4  ir al estado 145
+
+
+estado 141
+
+   27 iteracion: WHILE P_A condicion P_C L_A sentencia L_C .
+
+    $default  reduce usando la regla 27 (iteracion)
+
+
+estado 142
+
+   71 let: LET_SIM $@19 cont_ids OP_IGUAL P_A cont_exp P_C .
+
+    $default  reduce usando la regla 71 (let)
+
+
 estado 143
 
-   44 condicion: P_A condicion $@11 P_C AND P_A . condicion P_C
+   74 cont_exp: cont_exp PUNTO_Y_COMA . expresion
 
     CONST_REAL  desplazar e ir al estado 43
     CONST_INT   desplazar e ir al estado 44
-    P_A         desplazar e ir al estado 45
-    NOT         desplazar e ir al estado 46
+    P_A         desplazar e ir al estado 69
     ID          desplazar e ir al estado 47
 
-    condicion          ir al estado 146
-    expresion          ir al estado 49
+    expresion          ir al estado 146
     termino            ir al estado 50
     factor             ir al estado 51
     constanteNumerica  ir al estado 52
@@ -1782,56 +1778,73 @@ estado 143
 
 estado 144
 
-   30 decision: IF P_A condicion P_C L_A sentencia L_C $@3 . ELSE $@4 L_A sentencia L_C
+   45 condicion: P_A condicion $@12 P_C AND P_A . condicion P_C
 
-    ELSE  desplazar e ir al estado 147
+    CONST_REAL  desplazar e ir al estado 43
+    CONST_INT   desplazar e ir al estado 44
+    P_A         desplazar e ir al estado 45
+    NOT         desplazar e ir al estado 46
+    ID          desplazar e ir al estado 47
+
+    condicion          ir al estado 147
+    expresion          ir al estado 49
+    termino            ir al estado 50
+    factor             ir al estado 51
+    constanteNumerica  ir al estado 52
 
 
 estado 145
 
-   57 expresion: expresion . OP_SUM termino
-   58          | expresion . OP_RES termino
-   73 cont_exp: cont_exp PUNTO_Y_COMA expresion .
+   31 decision: IF P_A condicion P_C L_A sentencia L_C $@4 . ELSE $@5 L_A sentencia L_C
 
-    OP_SUM  desplazar e ir al estado 72
-    OP_RES  desplazar e ir al estado 73
-
-    $default  reduce usando la regla 73 (cont_exp)
+    ELSE  desplazar e ir al estado 148
 
 
 estado 146
 
-   44 condicion: P_A condicion $@11 P_C AND P_A condicion . P_C
+   58 expresion: expresion . OP_SUM termino
+   59          | expresion . OP_RES termino
+   74 cont_exp: cont_exp PUNTO_Y_COMA expresion .
 
-    P_C  desplazar e ir al estado 148
+    OP_SUM  desplazar e ir al estado 72
+    OP_RES  desplazar e ir al estado 73
+
+    $default  reduce usando la regla 74 (cont_exp)
 
 
 estado 147
 
-   30 decision: IF P_A condicion P_C L_A sentencia L_C $@3 ELSE . $@4 L_A sentencia L_C
+   45 condicion: P_A condicion $@12 P_C AND P_A condicion . P_C
 
-    $default  reduce usando la regla 29 ($@4)
-
-    $@4  ir al estado 149
+    P_C  desplazar e ir al estado 149
 
 
 estado 148
 
-   44 condicion: P_A condicion $@11 P_C AND P_A condicion P_C .
+   31 decision: IF P_A condicion P_C L_A sentencia L_C $@4 ELSE . $@5 L_A sentencia L_C
 
-    $default  reduce usando la regla 44 (condicion)
+    $default  reduce usando la regla 30 ($@5)
+
+    $@5  ir al estado 150
 
 
 estado 149
 
-   30 decision: IF P_A condicion P_C L_A sentencia L_C $@3 ELSE $@4 . L_A sentencia L_C
+   45 condicion: P_A condicion $@12 P_C AND P_A condicion P_C .
 
-    L_A  desplazar e ir al estado 150
+    $default  reduce usando la regla 45 (condicion)
 
 
 estado 150
 
-   30 decision: IF P_A condicion P_C L_A sentencia L_C $@3 ELSE $@4 L_A . sentencia L_C
+   31 decision: IF P_A condicion P_C L_A sentencia L_C $@4 ELSE $@5 . L_A sentencia L_C
+
+    L_A  desplazar e ir al estado 151
+
+
+estado 151
+
+   31 decision: IF P_A condicion P_C L_A sentencia L_C $@4 ELSE $@5 L_A . sentencia L_C
 
     DISPLAY  desplazar e ir al estado 2
     GET      desplazar e ir al estado 3
@@ -1840,7 +1853,7 @@ estado 150
     ID       desplazar e ir al estado 6
     LET_SIM  desplazar e ir al estado 7
 
-    sentencia            ir al estado 151
+    sentencia            ir al estado 152
     asignacion           ir al estado 12
     salida               ir al estado 13
     entrada              ir al estado 14
@@ -1850,15 +1863,15 @@ estado 150
     asignacion_especial  ir al estado 18
 
 
-estado 151
-
-   30 decision: IF P_A condicion P_C L_A sentencia L_C $@3 ELSE $@4 L_A sentencia . L_C
-
-    L_C  desplazar e ir al estado 152
-
-
 estado 152
 
-   30 decision: IF P_A condicion P_C L_A sentencia L_C $@3 ELSE $@4 L_A sentencia L_C .
+   31 decision: IF P_A condicion P_C L_A sentencia L_C $@4 ELSE $@5 L_A sentencia . L_C
 
-    $default  reduce usando la regla 30 (decision)
+    L_C  desplazar e ir al estado 153
+
+
+estado 153
+
+   31 decision: IF P_A condicion P_C L_A sentencia L_C $@4 ELSE $@5 L_A sentencia L_C .
+
+    $default  reduce usando la regla 31 (decision)

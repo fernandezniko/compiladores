@@ -182,27 +182,38 @@ asignacion:
                     reiniciarTipoDato();
                 }
                 
-                expresion {  
-                            
-        
-                            
-      
-                           /*if(getType($1) != tipoDatoActual){
+                expresion {                             
+                           if(getType($1) != tipoDatoActual){
                             yyerror("No se pueden asignar variables de distintos tipos");
                             exit(0);
-                           }*/
+                           }
                           sprintf(str_aux, "%s",$1);
                           Auxptr=crearHoja(str_aux);
                           Aptr = crearNodo(":=",*Auxptr,*Eptr) ;
                           printf("\nasignacion ID - OP_ASIG - expresion");
                           }
 
-    | ID OP_ASIG constanteString {
-                           
+    | ID OP_ASIG {
+                    if(getType($1) == 0)
+                    {
+                            yyerror("La variable no fue declarada");
+                            exit(2);
+                    }
+
+                    reiniciarTipoDato();
+                }
+
+                constanteString {
+                            
+                            if(getType($1) != tipoDatoActual){
+                            yyerror("No se pueden asignar variables de distintos tipos");
+                            exit(0);
+                            }
                             sprintf(str_aux, "%s",$1);
                             Auxptr=crearHoja(str_aux);
                             Aptr = crearNodo(":=",*Auxptr,*cteStringptr) ;
-                            printf("\nasignacion ID - OP_ASIG - CTE_STRING");}
+                            printf("\nasignacion ID - OP_ASIG - CTE_STRING");
+                            }
 
 ;
 
@@ -399,6 +410,7 @@ constanteString:
     CONST_STR        {      sprintf(str_aux, "%s", yylval.strval);
                             cteStringptr = crearHoja(str_aux);
                             printf("\nconstante - STRING %s" , yylval.strval);
+                            verificarTipoDato(3);
                         }
     ;
 

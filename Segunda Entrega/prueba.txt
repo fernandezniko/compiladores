@@ -1,7 +1,7 @@
 DEFVAR
 	INT: a1
-	FLOAT: b1
-	STRING: c1
+	STRING: b1
 ENDDEF
 
-z1 := 5 ;
+a1 := "hola";
+

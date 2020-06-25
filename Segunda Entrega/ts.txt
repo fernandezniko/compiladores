@@ -1,6 +1,0 @@
-NAME                                TYPE                 VALUE                                         LENGTH              
-a1                                  INT                                                                                    
-_5                                  CONST_INT            5                                                                 
-b1                                  FLOAT                                                                                  
-c1                                  STRING                                                                                 
-z1                                                                                                                         
