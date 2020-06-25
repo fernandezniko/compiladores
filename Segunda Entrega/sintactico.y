@@ -8,11 +8,14 @@
 #include "arbol.c"
 #include "cola.c"
 
+void verificarTipoDato(int tipo);
+void reiniciarTipoDato();
 int yystopparser=0;
 FILE  *yyin;
 extern int yylineno;
 int cont_1 = 0;
 int cont_2 = 0;
+int tipoDatoActual = -1;
 
 t_arbol arbol;
 char str_aux[50];
@@ -63,10 +66,11 @@ t_cola colaLet;
 
 
 %%
-
+/*
 programa: program {
     arbol=*ProgPtr;
     printf("\nprogram - program\nCompilacion OK\n");};
+
 program:
 	sentencia 				{
                         sprintf(str_aux,"_Cuerpo_%d",c++);
@@ -79,32 +83,28 @@ program:
                         printf("\nprogram - program sentencia");
                         }
 	;
+*/
+programa: program {
+    arbol=*ProgPtr;
+    printf("\nprogram - program\nCompilacion OK\n");};
 
-sentencia: DEFVAR {crearPilaS(&pilaDeclares); } declaraciones ENDDEF {printf("\nsentencia - DEFVAR declaraciones ENDDEF");}
-			| asignacion_especial 	{	
-									SentPtr = AEPtr;
-									printf("\nsentencia - asignacion_especial");
-								}
-            | asignacion PUNTO_Y_COMA {
-                                        SentPtr = Aptr ;
-                                        printf("\nsentencia - asignacion");
-                                        }
-            | decision              {
-                                        SentPtr = Decptr ;
-                                        printf("\nsentencia - decision");
+program: bloq_declaracion sentencia {
+                                    sprintf(str_aux,"_Cuerpo_%d",c++);
+                                    ProgPtr=crearNodo(str_aux,*SentPtr,NULL);
+                                    printf("\nprograma: bloq_declaracion sentencia");
                                     }
-            | iteracion             {
-                                        SentPtr = IteraPtr;
-                                        printf("\nsentencia - iteracion");}
-			| let					{
-										SentPtr = LetPtr;
-										printf("\nsentencia - let");
-									}
-            | entrada               {   SentPtr = getPtr ;
-                                        printf("\nsentencia - entrada");}
-            | salida                {  SentPtr = displayPtr;
-							 			printf("\nsentencia - salida");}
-	        ;
+        | sentencia {
+
+                                    sprintf(str_aux,"_Cuerpo_%d",c++);
+                                    ProgPtr=crearNodo(str_aux,*SentPtr,NULL);
+                                    printf("\nprograma: sentencia");
+        }
+
+        ;
+
+bloq_declaracion:
+        DEFVAR {crearPilaS(&pilaDeclares); } declaraciones ENDDEF {printf("\nbloq_declaracion - DEFVAR declaraciones ENDDEF");}
+        ;
 
 declaraciones:
              declaracion					{ printf("\ndeclaraciones - declaracion");}
@@ -115,7 +115,7 @@ declaracion: INT DOSPUNTOS lista_ids {
 
                                         while(!pilaVaciaS(&pilaDeclares)){
                                             char *id = sacarDePilaS(&pilaDeclares);
-                                            char *type = "INTEGER";
+                                            char *type = "INT";
                                             modifyTypeTs(id, type);
                                         }
                                         printf("\ndeclaracion - INT DOSPUNTOS lista_ids");
@@ -142,20 +142,78 @@ lista_ids:  	ID 	{ ponerEnPilaS(&pilaDeclares, $1); printf("\nlista_ids - ID '%s
 			| lista_ids PUNTO_Y_COMA ID	{ponerEnPilaS(&pilaDeclares, $3), printf("\nlista_ids - lista_ids PUNTO_Y_COMA ID '%s'",yylval.strval);}
 			;
 
+sentencia: 
+			asignacion_especial 	{	
+									SentPtr = AEPtr;
+									printf("\nsentencia - asignacion_especial");
+								}
+            | asignacion PUNTO_Y_COMA {
+                                        SentPtr = Aptr ;
+                                        printf("\nsentencia - asignacion");
+                                        }
+            | decision              {
+                                        SentPtr = Decptr ;
+                                        printf("\nsentencia - decision");
+                                    }
+            | iteracion             {
+                                        SentPtr = IteraPtr;
+                                        printf("\nsentencia - iteracion");}
+			| let					{
+										SentPtr = LetPtr;
+										printf("\nsentencia - let");
+									}
+            | entrada               {   SentPtr = getPtr ;
+                                        printf("\nsentencia - entrada");}
+            | salida                {  SentPtr = displayPtr;
+							 			printf("\nsentencia - salida");}
+	        ;
+
+
+
 asignacion:
 
-    ID OP_ASIG expresion {
+    ID OP_ASIG {
+                    if(getType($1) == 0)
+                    {
+                            yyerror("La variable no fue declarada");
+                            exit(2);
+                    }
+
+                    reiniciarTipoDato();
+                }
+                
+                expresion {                             
+                           if(getType($1) != tipoDatoActual){
+                            yyerror("No se pueden asignar variables de distintos tipos");
+                            exit(0);
+                           }
                           sprintf(str_aux, "%s",$1);
                           Auxptr=crearHoja(str_aux);
                           Aptr = crearNodo(":=",*Auxptr,*Eptr) ;
                           printf("\nasignacion ID - OP_ASIG - expresion");
                           }
-    | ID OP_ASIG constanteString {
 
+    | ID OP_ASIG {
+                    if(getType($1) == 0)
+                    {
+                            yyerror("La variable no fue declarada");
+                            exit(2);
+                    }
+
+                    reiniciarTipoDato();
+                }
+
+                constanteString {
+                            
+                            if(getType($1) != tipoDatoActual){
+                            yyerror("No se pueden asignar variables de distintos tipos");
+                            exit(0);
+                            }
                             sprintf(str_aux, "%s",$1);
                             Auxptr=crearHoja(str_aux);
                             Aptr = crearNodo(":=",*Auxptr,*cteStringptr) ;
-                            printf("\nasignacion ID - OP_ASIG - CTE_STRING");}
+                            printf("\nasignacion ID - OP_ASIG - CTE_STRING");
+                            }
 
 ;
 
@@ -240,15 +298,9 @@ condicion:
                                         CondPtr = crearNodo("AND", *CondIzqPtr, *CondPtr);
                                         printf("\ncondicion - AND");
 
-    }
+                                        }
 
-    | P_A condicion {CondIzqPtr = CondPtr;} P_C OR P_A condicion P_C    {
-                                        CondPtr = crearNodo("OR", *CondIzqPtr, *CondPtr);
-                                        printf("\ncondicion - OR");
-    }
-
-
-    |NOT expresion {E1ptr = Eptr;} CMP_MAY expresion     {
+    | NOT expresion {E1ptr = Eptr;} CMP_MAY expresion     {
 
                                         CondPtr = crearNodo("<=",*E1ptr,*Eptr);
                                         printf("\ncondicion - NOT expresion CMP_MAY expresion");
@@ -318,9 +370,16 @@ factor:
     P_A expresion P_C           {   printf("\nfactor - P_A expresion P_C");
                                     }
     | ID                        {
+                                    if(getType($1) == 0)
+                                    {
+                                        yyerror("La variable no fue declarada");
+                                        exit(0);
+                                    }
+                                    verificarTipoDato(getType($1));
                                     sprintf(str_aux, "%s", yylval.strval);
                                     Fptr = crearHoja(str_aux);
                                     printf("\nfactor - ID", *str_aux);
+                                    
 
                                     }
     | constanteNumerica         {
@@ -336,12 +395,14 @@ constanteNumerica:
                                 sprintf(str_aux, "%s", yylval.strval);
                                 constNumPtr = crearHoja(str_aux);
                                 printf("\nconstante - ENTERO: %s", yylval.strval);
-
+                                verificarTipoDato(1);
                             }
+
     | CONST_REAL            {
                                 sprintf(str_aux, "%s", yylval.strval);
                                 constNumPtr = crearHoja(str_aux);
                                 printf("\nconstante - REAL: %s" , yylval.strval);
+                                verificarTipoDato(2);
 
                             };
 
@@ -349,6 +410,7 @@ constanteString:
     CONST_STR        {      sprintf(str_aux, "%s", yylval.strval);
                             cteStringptr = crearHoja(str_aux);
                             printf("\nconstante - STRING %s" , yylval.strval);
+                            verificarTipoDato(3);
                         }
     ;
 
@@ -457,9 +519,29 @@ int main(int argc,char *argv[])
 	}
   return 0;
 }
-int yyerror(void)
-     {
-    printf("Syntax Error en la linea: %d\n", yylineno);
-	 system ("Pause");
-	 exit (1);
-     }
+
+int yyerror(char *errMessage)
+{
+   printf("\n(!)ERROR en la linea %d: \n%s\n",yylineno,errMessage);
+   fprintf(stderr, "Fin de ejecucion.\n");
+   system ("Pause");
+   exit (1);
+}
+
+void verificarTipoDato(int tipo) {
+
+	if(tipoDatoActual == -1) {
+		tipoDatoActual = tipo;
+	}
+	
+	if(tipoDatoActual != tipo) {
+		yyerror("No se admiten operaciones aritmeticas con tipo de datos distintos");
+		
+        exit(0);
+	}
+	
+}
+
+void reiniciarTipoDato() {
+	tipoDatoActual = -1;
+}
