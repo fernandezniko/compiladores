@@ -1,0 +1,7 @@
+LET uno = (3)
+LET uno,dos = (3; 4)
+
+LET uno,dos = (3;a*b)
+
+LET uno, dos, tres = (3; 5; a*b)
+LET uno = (v*c)

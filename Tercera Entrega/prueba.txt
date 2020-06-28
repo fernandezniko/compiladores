@@ -1,0 +1,7 @@
+DEFVAR
+	INT: a1
+	STRING: b1
+ENDDEF
+
+a1 := "hola";
+
