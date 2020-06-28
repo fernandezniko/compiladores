@@ -7,6 +7,7 @@
 #include "ts.h"
 #include "arbol.c"
 #include "cola.c"
+#include "assembler.h"
 
 void verificarTipoDato(int tipo);
 void reiniciarTipoDato();
@@ -516,6 +517,7 @@ int main(int argc,char *argv[])
 	else
 	{
 		enOrden(&arbol); //recorre en orden y lo graba en el archivo intermedia.txt
+        generarAssembler(&arbol);
 	}
   return 0;
 }

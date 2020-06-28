@@ -1,7 +1,6 @@
 DEFVAR
-	INT: a1
-	STRING: b1
+	INT: a1;b2
 ENDDEF
 
-a1 := "hola";
+a1 := 2;
 
