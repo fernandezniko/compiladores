@@ -13,6 +13,8 @@ void escribirDesdeArbol(t_arbol *p);
 void escribirDatosDeTS();
 void generateCodeAsignationSimple(t_arbol *p);
 char* getCodOp(char* token);
+void generateCode();
+
 FILE *file;
 
 void generarAssembler(t_arbol *p){
@@ -56,19 +58,32 @@ void generarCodigoFinal(){
 
 void escribirDesdeArbol(t_arbol *p){
 
-    printf("ENTRE A ESCRIBIR DESDE ARBOL INFO : %s", (*p)->info);
-    t_arbol *NodoMasIzq;
-    NodoMasIzq = hijoMasIzq(&(*p));
-    printf("NODO MAS IZQ : %s", (*NodoMasIzq)->info);
-    //ANDA MAL hijoMasIzq tiene que ser el de mas a la izq con dos hijos hoja
-    if(strcmp((*NodoMasIzq)->info,":=")==0){
+    //postorden hasta encontrar el nodo con dos hijos hoja
+    if ( (*p)->izq != NULL ) {
+        escribirDesdeArbol (&(*p)->izq);
+    }
+
+    if( (*p)->der != NULL ) {
+        escribirDesdeArbol (&(*p)->der);
+    }
+
+    generateCode(p);
+}
+
+void generateCode(t_arbol *p){
+
+    if(strcmp((*p)->info , ":=") == 0){
+        printf("ENCONTRE UN := ");
         generateCodeAsignationSimple(p);
     }
+
 }
 
 void generateCodeAsignationSimple(t_arbol *p){
 
-    fprintf(file, "\tFSTP %s\n\n", &(*p)->izq->info); 
+    fprintf(file, "\t; Simple Asignation\n");
+    fprintf(file, "\tFLD %s\n", &(*p)->der->info);
+    fprintf(file, "\tFSTP %s\n", &(*p)->izq->info); 
 }
 
 void escribirDatosDeTS(){

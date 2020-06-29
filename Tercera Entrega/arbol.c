@@ -114,7 +114,21 @@ t_arbol * hijoMasIzq(t_arbol *p)
         if((*p)->izq)
             return hijoMasIzq(&(*p)->izq);
         else
-            return break;
+            return p;
     }
     return NULL;
 }
+
+t_arbol * postOrden2(t_arbol *p)
+{
+    if(*p)
+    {
+            postOrden2(&(*p)->izq);
+
+            postOrden2(&(*p)->der);
+
+            return p ;
+    }
+    return NULL;
+}
+
