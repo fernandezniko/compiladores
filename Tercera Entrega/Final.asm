@@ -15,3 +15,7 @@ MAXTEXTSIZE equ 50
 
 
 .CODE
+
+ mov AX, 4C00h 
+int 21h ; Genera la interrupcion 21h 
+ END ; fin. 

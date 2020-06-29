@@ -11,6 +11,8 @@ void generarCodigoInicial();
 void generarCodigoFinal();
 void escribirDesdeArbol(t_arbol *p);
 void escribirDatosDeTS();
+void generateCodeAsignationSimple(t_arbol *p);
+char* getCodOp(char* token);
 FILE *file;
 
 void generarAssembler(t_arbol *p){
@@ -22,8 +24,8 @@ void generarAssembler(t_arbol *p){
     }
    
     generarCodigoInicial();
-    //escribirDesdeArbol(p);
-    //generarCodigoFinal();
+    escribirDesdeArbol(p);
+    generarCodigoFinal();
     fclose(file);
 }
 
@@ -43,6 +45,30 @@ void generarCodigoInicial(){
     fprintf(file, "\n\n.CODE\n");
 
 
+}
+
+void generarCodigoFinal(){
+
+    fprintf(file, "\n mov AX, 4C00h \n");
+	fprintf(file, "int 21h ; Genera la interrupcion 21h \n ");
+    fprintf(file, "END ; fin. \n");
+}
+
+void escribirDesdeArbol(t_arbol *p){
+
+    printf("ENTRE A ESCRIBIR DESDE ARBOL INFO : %s", (*p)->info);
+    t_arbol *NodoMasIzq;
+    NodoMasIzq = hijoMasIzq(&(*p));
+    printf("NODO MAS IZQ : %s", (*NodoMasIzq)->info);
+    //ANDA MAL hijoMasIzq tiene que ser el de mas a la izq con dos hijos hoja
+    if(strcmp((*NodoMasIzq)->info,":=")==0){
+        generateCodeAsignationSimple(p);
+    }
+}
+
+void generateCodeAsignationSimple(t_arbol *p){
+
+    fprintf(file, "\tFSTP %s\n\n", &(*p)->izq->info); 
 }
 
 void escribirDatosDeTS(){
@@ -83,5 +109,56 @@ void escribirDatosDeTS(){
                 }
             }
 		}
+	}
+}
+
+char* getCodOp(char* token)
+{
+	if(!strcmp(token, "+"))
+	{
+		return "FADD";
+	}
+	else if(!strcmp(token, "="))
+	{
+		return "MOV";
+	}
+	else if(!strcmp(token, "-"))
+	{
+		return "FSUB";
+	}
+	else if(!strcmp(token, "*"))
+	{
+		return "FMUL";
+	}
+	else if(!strcmp(token, "/"))
+	{
+		return "FDIV";
+	}
+	else if(!strcmp(token, "BNE"))
+	{
+		return "JNE";
+	}
+	else if(!strcmp(token, "BEQ"))
+	{
+		return "JE";
+	}
+	else if(!strcmp(token, "BGE"))
+	{
+		return "JNA";
+	}
+	else if(!strcmp(token, "BGT"))
+	{
+		return "JNAE";
+	}
+	else if(!strcmp(token, "BLE"))
+	{
+		return "JNB";
+	}
+	else if(!strcmp(token, "BLT"))
+	{
+		return "JNBE";
+	}
+	else if (!strcmp(token, "BI")) {
+		return "JMP";
 	}
 }

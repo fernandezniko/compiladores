@@ -107,14 +107,14 @@ void vaciarArbol(t_arbol *p)
     }
 }
 
-t_arbol *hijoMasIzq(t_arbol *p)
+t_arbol * hijoMasIzq(t_arbol *p)
 {
-    if (*p)
+    if(*p)
     {
-        if ((*p)->izq)
+        if((*p)->izq)
             return hijoMasIzq(&(*p)->izq);
         else
-            return p;
+            return break;
     }
     return NULL;
 }
