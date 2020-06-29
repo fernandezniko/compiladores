@@ -81,8 +81,15 @@ void generateCode(t_arbol *p){
 
 void generateCodeAsignationSimple(t_arbol *p){
 
+    if(strchr((*p)->der->info, '.') != NULL){
+            char * aux = (*p)->der->info;
+            while(*aux != '.'){
+                aux ++;
+            }
+            *aux = '_';
+        }
     fprintf(file, "\t; Simple Asignation\n");
-    fprintf(file, "\tFLD %s\n", &(*p)->der->info);
+    fprintf(file, "\tFILD _%s\n", &(*p)->der->info);
     fprintf(file, "\tFSTP %s\n", &(*p)->izq->info); 
 }
 

@@ -16,7 +16,7 @@ MAXTEXTSIZE equ 50
 
 .CODE
 	; Simple Asignation
-	FLD 2
+	FILD _2
 	FSTP a1
 
  mov AX, 4C00h 
