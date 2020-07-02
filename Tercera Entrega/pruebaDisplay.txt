@@ -1,3 +1,6 @@
+DEFVAR
+	INT: x
+ENDDEF
+
 x:= 2 ;
-DISPLAY x ;
-DISPLAY "Corrupbol" ;
+x:= 3 ;

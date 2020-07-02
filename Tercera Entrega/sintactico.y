@@ -89,19 +89,21 @@ programa: program {
     arbol=*ProgPtr;
     printf("\nprogram - program\nCompilacion OK\n");};
 
-program: bloq_declaracion sentencia {
-                                    sprintf(str_aux,"_Cuerpo_%d",c++);
-                                    ProgPtr=crearNodo(str_aux,*SentPtr,NULL);
-                                    printf("\nprograma: bloq_declaracion sentencia");
-                                    }
-        | sentencia {
+program: bloq_declaracion sentencias 
+        | sentencias 
+        ;
 
-                                    sprintf(str_aux,"_Cuerpo_%d",c++);
+ sentencias : 
+        sentencia {
+                                   sprintf(str_aux,"_Cuerpo_%d",c++);
                                     ProgPtr=crearNodo(str_aux,*SentPtr,NULL);
                                     printf("\nprograma: sentencia");
-        }
-
-        ;
+                    }
+        | sentencias sentencia     {
+                                    sprintf(str_aux,"_Cuerpo_%d",c++);
+                                    ProgPtr=crearNodo(str_aux, *ProgPtr,*SentPtr);
+                                    printf("\nprograma: sentencias sentencia");
+        } ;
 
 bloq_declaracion:
         DEFVAR {crearPilaS(&pilaDeclares); } declaraciones ENDDEF {printf("\nbloq_declaracion - DEFVAR declaraciones ENDDEF");}
