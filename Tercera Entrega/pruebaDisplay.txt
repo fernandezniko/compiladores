@@ -3,6 +3,6 @@ DEFVAR
     STRING: j
 ENDDEF
 
-x:= 2 ;
+x:= 2 + 4 * 5;
 
 DISPLAY x;

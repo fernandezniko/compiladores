@@ -46,11 +46,16 @@ void generarCodigoInicial(){
 
     escribirDatosDeTS();
 
-    fprintf(file, "\n\n.CODE\n");
-    fprintf(file, "\n\nSTART:\n");
-    fprintf(file, "\n\nmov AX,@DATA");
-    fprintf(file, "\n\nmov DS,AX");
-     fprintf(file, "\n\n mov es,ax");   
+    fprintf(file, "\t_ADD\tdd\t?\n");
+    fprintf(file, "\t_SUB\tdd\t?\n");
+    fprintf(file, "\t_MUL\tdd\t?\n");
+    fprintf(file, "\t_DIV\tdd\t?\n");
+
+    fprintf(file, "\n\n.CODE");
+    fprintf(file, "\nSTART:");
+    fprintf(file, "\n\tmov AX,@DATA");
+    fprintf(file, "\n\tmov DS,AX");
+     fprintf(file, "\n\tmov es,ax\n");   
 
 
 }
@@ -82,31 +87,29 @@ void generateCode(t_arbol *p){
     if((*p)->der != NULL && (*p)->izq  != NULL) {
         printf("\tLEFT=[%s]\t[%s]\tRIGHT[%s]\n", (*p)->izq->info, (*p)->info, (*p)->der->info);
         
-        /*if (verifyIsCondition((*p)->info)) {
-            generateCondition(p);
-        }*/
-         }else if (strcmp((*p)->info,"+") == 0) {
+        if (strcmp((*p)->info,"+") == 0) {
             strcpy(operation, "ADD");
             generateCodeOperation(p, operation);
+            fprintf(file, "\tFSTP _%s\n", operation); 
         } else if (strcmp((*p)->info,"*") == 0) {        
             strcpy(operation, "MUL");
             generateCodeOperation(p, operation);
+            fprintf(file, "\tFSTP _%s\n", operation); 
         } else if (strcmp((*p)->info,"/") == 0) {        
             strcpy(operation, "DIV");
             generateCodeOperation(p, operation);
+            fprintf(file, "\tFSTP _%s\n", operation); 
         } else if (strcmp((*p)->info,"-") == 0) {     
             strcpy(operation, "SUB"); 
             generateCodeOperation(p, operation);
+            fprintf(file, "\tFSTP _%s\n",operation); 
         } else if (strcmp((*p)->info,":=") == 0) {       
-            //if (strcmp((*p)->der->info,"_SUM") == 0 || strcmp((*p)->der->info,"_SUB") == 0 || strcmp((*p)->der->info,"_MUL") == 0 || strcmp((*p)->der->info,"_DIV") == 0) {
-                //generateCodeAsignation(p);
-            //} else {
                 generateCodeAsignationSimple(p);
-            //}
+            }
         }
+    }
     
     if (strcmp((*p)->info,"DISPLAY") == 0) {
-
         char* nodoizq = eliminar_comillas((*p)->izq->info);
         int type = getType(nodoizq);
         if(type == 3){
@@ -192,48 +195,23 @@ void escribirDatosDeTS(){
 }
 
 void generateCodeOperation(t_arbol *p, char * operation) {
+    fprintf(file, "\tFLD _%s\n", (*p)->izq->info);
+    fprintf(file, "\tFLD _%s\n", (*p)->der->info);
 
-/*    if(strchr(root->left->value, '.') != NULL){
-        char * aux = root->left->value;
-        while(*aux != '.'){
-            aux ++;
-        }
-        *aux = '_';
-    }
-    if(strchr(root->right->value, '.') != NULL){
-        char * aux = root->right->value;
-        while(*aux != '.'){
-            aux ++;
-        }
-        *aux = '_';
-    }
-
-    if(strcmp(auxString,"*010101*") != 0) {
-        fprintf(file, "%s", auxString);
-        strcpy(auxString,"*010101*"); // Código para que no printee FSTP
-    }
-
-    fprintf(file, "\t; %s\n", operation);
-
-    fprintf(file, "\tFLD %s\n", root->left->value);
-    fprintf(file, "\tFLD %s\n", root->right->value);
-    
-    // Check if + - / * and print in .asm
-    if(strcmp(operation,"ADD") == 0) {
-        fprintf(file, "\tFADD\n", root->value);
-        root->value = "_SUM";
+     if(strcmp(operation,"ADD") == 0) {
+        fprintf(file, "\tFADD\n",  (*p)->info);
+        strcpy((*p)->info, "ADD"); 
     } else if (strcmp(operation,"SUB") == 0) {
-        fprintf(file, "\tFSUB\n", root->value);
-        root->value = "_SUB";
+        fprintf(file, "\tFSUB\n",  (*p)->info);
+        strcpy((*p)->info, "SUB"); 
     } else if (strcmp(operation,"MUL") == 0) {
-        fprintf(file, "\tFMUL\n", root->value);
-        root->value = "_MUL";  
+        fprintf(file, "\tFMUL\n", (*p)->info);
+        strcpy((*p)->info, "MUL"); 
     } else if (strcmp(operation,"DIV") == 0) {
-        fprintf(file, "\tFDIV\n", root->value);
-        root->value = "_DIV";  
+        fprintf(file, "\tFDIV\n",  (*p)->info);
+        strcpy((*p)->info, "DIV"); 
     }
-    sprintf(auxString, "\tFSTP %s\n\n", root->value);
-*/
+
 }
 
 int verifyIsCondition(char* value) {

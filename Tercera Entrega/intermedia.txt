@@ -1,1 +1,1 @@
-x := 2 _Cuerpo_1 _Cuerpo_2 x DISPLAY 
+x := 2 + 4 * 5 _Cuerpo_1 _Cuerpo_2 x DISPLAY 
