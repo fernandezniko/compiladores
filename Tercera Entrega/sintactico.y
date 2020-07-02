@@ -227,7 +227,7 @@ salida:
                                                 printf("\nentrada DISPLAY - CONST_STR");
                                                 }
     |
-		DISPLAY constanteString PUNTO_Y_COMA {
+		DISPLAY constanteStringShow PUNTO_Y_COMA {
 												displayPtr = crearNodo("DISPLAY",*cteStringptr,NULL) ;
 												printf("\nentrada DISPLAY - CONST_STR");
 												}
@@ -408,12 +408,18 @@ constanteNumerica:
                                 verificarTipoDato(2);
 
                             };
-
 constanteString:
     CONST_STR        {      sprintf(str_aux, "%s", yylval.strval);
                             cteStringptr = crearHoja(str_aux);
                             printf("\nconstante - STRING %s" , yylval.strval);
                             verificarTipoDato(3);
+                        }
+    ;
+
+constanteStringShow:
+    CONST_STR        {      sprintf(str_aux, "%s", yylval.strval);
+                            cteStringptr = crearHoja(str_aux);
+                            printf("\nconstanteShow - STRING %s" , yylval.strval);
                         }
     ;
 

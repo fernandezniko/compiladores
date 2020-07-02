@@ -72,7 +72,10 @@ void escribirDesdeArbol(t_arbol *p){
 
 void generateCode(t_arbol *p){
 
-
+    if(strcmp((*p)->info , "DISPLAY") == 0){
+        printf("\nENCONTRE UN DISPLAY ");
+         fprintf(file,"\tDisplayInteger %s\n", &(*p)->izq->info);
+    }
 
     if(strcmp((*p)->info , ":=") == 0){
         printf("\nENCONTRE UN := ");

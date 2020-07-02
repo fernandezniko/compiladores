@@ -1,1 +1,1 @@
-x := 2 _Cuerpo_1 _Cuerpo_2 x := 3 
+x := 2 _Cuerpo_1 _Cuerpo_2 "hola" DISPLAY 
