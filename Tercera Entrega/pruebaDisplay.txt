@@ -3,4 +3,6 @@ DEFVAR
 ENDDEF
 
 x:= 2 ;
-x:= 3 ;
+
+
+DISPLAY "hola";

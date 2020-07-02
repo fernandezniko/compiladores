@@ -1,0 +1,4 @@
+NAME                                TYPE                 VALUE                                         LENGTH              
+x                                   INT                                                                                    
+_2                                  CONST_INT            2                                                                 
+_"hola"                             CONST_STRING         "hola"                                        6                   
