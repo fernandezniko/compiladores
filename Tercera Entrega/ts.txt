@@ -1,4 +1,5 @@
 NAME                                TYPE                 VALUE                                         LENGTH              
 x                                   INT                                                                                    
+j                                   STRING                                                                                 
 _2                                  CONST_INT            2                                                                 
-_"hola"                             CONST_STRING         "hola"                                        6                   
+_"drgidrg"                          CONST_STRING         "drgidrg"                                     9                   

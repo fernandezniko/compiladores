@@ -1,8 +1,9 @@
 DEFVAR
 	INT: x
+    STRING: j
 ENDDEF
 
 x:= 2 ;
+j:= "drgidrg";
 
-
-DISPLAY "hola";
+DISPLAY j;

@@ -2661,6 +2661,8 @@ int main(int argc,char *argv[])
 	else
 	{
 		enOrden(&arbol); //recorre en orden y lo graba en el archivo intermedia.txt
+        //printf("EN POST-ORDEN\n\n");
+        //postOrden(&arbol);
         generarAssembler(&arbol);
 	}
   return 0;

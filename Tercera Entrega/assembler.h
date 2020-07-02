@@ -5,7 +5,7 @@
 #include "ts.h"
 #include "arbol.h"
 
-
+char *eliminar_comillas(char *cadena);
 void generarAssembler(t_arbol * p);
 void generarCodigoInicial();
 void generarCodigoFinal();
@@ -113,16 +113,25 @@ void generateCode(t_arbol *p){
 
 void generateCodeAsignationSimple(t_arbol *p){
 
-    if(strchr((*p)->der->info, '.') != NULL){
-            char * aux = (*p)->der->info;
-            while(*aux != '.'){
-                aux ++;
+    char* derecho =  eliminar_comillas((*p)->der->info);
+    char* izquierdo =  eliminar_comillas((*p)->izq->info);
+
+    if((*p)->der->info[0] == '"') {
+        ////fprintf(file, "\tLEA SI, %s\n\tLEA DI,%s\n\tCALL COPY\n", root->right->value, root->left->value);
+        fprintf(file, "\tLEA SI, _%s\n\tLEA DI,%s\n", derecho,izquierdo);
+        fprintf(file,"cpy_nxt:mov bl, [si]\n\tmov [di], bl\n\tinc si\n\tinc di\n\tdec cx\n\tjnz cpy_nxt\n");
+    }else{
+        if(strchr((*p)->der->info, '.') != NULL){
+                char * aux = (*p)->der->info;
+                while(*aux != '.'){
+                    aux ++;
+                }
+                *aux = '_';
             }
-            *aux = '_';
-        }
-    fprintf(file, "\t; Simple Asignation\n");
-    fprintf(file, "\tFILD _%s\n", &(*p)->der->info);
-    fprintf(file, "\tFSTP %s\n", &(*p)->izq->info); 
+        fprintf(file, "\t; Simple Asignation\n");
+        fprintf(file, "\tFILD _%s\n", &(*p)->der->info);
+        fprintf(file, "\tFSTP %s\n", &(*p)->izq->info); 
+    }
 }
 
 void escribirDatosDeTS(){
@@ -156,10 +165,13 @@ void escribirDatosDeTS(){
                      fprintf(file, "\t%s\tdd\t%s\n", word, value);   
                 }
                 if(strcmp(type,TYPE_STRING_TS)==0){ 
-                    fprintf(file, "\t%s\tdb\tMAXTEXTSIZE dup (?),'$'\n", word);
+                    char *wordSinComillas = eliminar_comillas(word);
+                    fprintf(file, "\t%s\tdb\tMAXTEXTSIZE dup (?),'$'\n", wordSinComillas);
                 }
                 if(strcmp(type,TYPE_CONST_STRING_TS)==0){
-                    fprintf(file, "\t%s\tdb\t'%s','$', %s dup (?)\n", word, value, length);
+                    char* wordSinComillas = eliminar_comillas(word);
+                    char* valueSinComillas = eliminar_comillas(value);
+                    fprintf(file, "\t%s\tdb\t'%s','$', %s dup (?)\n", wordSinComillas, valueSinComillas, length);
                 }
             }
 		}
@@ -273,4 +285,20 @@ char* getCodOp(char* token)
 	else if (!strcmp(token, "BI")) {
 		return "JMP";
 	}
+}
+
+
+char *eliminar_comillas(char *cadena) {
+    char *cadena_temporal = malloc(strlen(cadena)+1);
+    int j = 0;
+        for (int i=0; i<strlen(cadena); i++) {
+            switch (cadena[i]) {
+                case '"': break;
+                default:
+                cadena_temporal[j] = cadena[i];
+                j++;
+            }
+        }
+    cadena_temporal[j] = '\0';
+    return cadena_temporal;
 }
