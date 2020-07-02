@@ -4,6 +4,5 @@ DEFVAR
 ENDDEF
 
 x:= 2 ;
-j:= "drgidrg";
 
-DISPLAY j;
+DISPLAY x;

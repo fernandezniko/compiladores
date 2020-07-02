@@ -1,1 +1,1 @@
-x := 2 _Cuerpo_1 _Cuerpo_2 j := "drgidrg" _Cuerpo_3 j DISPLAY 
+x := 2 _Cuerpo_1 _Cuerpo_2 x DISPLAY 

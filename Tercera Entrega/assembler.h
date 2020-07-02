@@ -106,11 +106,14 @@ void generateCode(t_arbol *p){
         }
     
     if (strcmp((*p)->info,"DISPLAY") == 0) {
-        printf("ENTRO A DISPLAY");
-        char* nodoizq = eliminar_comillas((*p)->izq->info);
-        printf("NODO IZQ %s", nodoizq);
 
-        fprintf(file,"\tDisplayString %s\n", nodoizq);
+        char* nodoizq = eliminar_comillas((*p)->izq->info);
+        int type = getType(nodoizq);
+        if(type == 3){
+            fprintf(file,"\tDisplayString %s\n", nodoizq);
+        }else{
+            fprintf(file,"\tDisplayFloat %s,2\n", nodoizq);
+        }
 
     } 
 
@@ -139,7 +142,7 @@ void generateCodeAsignationSimple(t_arbol *p){
                 *aux = '_';
             }
         fprintf(file, "\t; Simple Asignation\n");
-        fprintf(file, "\tFILD _%s\n", &(*p)->der->info);
+        fprintf(file, "\tFLD _%s\n", &(*p)->der->info);
         fprintf(file, "\tFSTP %s\n", &(*p)->izq->info); 
     }
 }
