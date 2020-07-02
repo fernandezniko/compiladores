@@ -74,14 +74,14 @@ void escribirDesdeArbol(t_arbol *p){
 
 void generateCode(t_arbol *p){
 
-
+    char operation[200];
     if((*p)->der != NULL && (*p)->izq  != NULL) {
         printf("\tLEFT=[%s]\t[%s]\tRIGHT[%s]\n", (*p)->izq->info, (*p)->info, (*p)->der->info);
-        char operation[200];
-        if (verifyIsCondition((*p)->info)) {
+        
+        /*if (verifyIsCondition((*p)->info)) {
             generateCondition(p);
-        }
-         else if (strcmp((*p)->info,"+") == 0) {
+        }*/
+         }else if (strcmp((*p)->info,"+") == 0) {
             strcpy(operation, "ADD");
             generateCodeOperation(p, operation);
         } else if (strcmp((*p)->info,"*") == 0) {        
@@ -94,13 +94,13 @@ void generateCode(t_arbol *p){
             strcpy(operation, "SUB"); 
             generateCodeOperation(p, operation);
         } else if (strcmp((*p)->info,":=") == 0) {       
-            if (strcmp((*p)->der->info,"_SUM") == 0 || strcmp((*p)->der->info,"_SUB") == 0 || strcmp((*p)->der->info,"_MUL") == 0 || strcmp((*p)->der->info,"_DIV") == 0) {
-                generateCodeAsignation(p);
-            } else {
+            //if (strcmp((*p)->der->info,"_SUM") == 0 || strcmp((*p)->der->info,"_SUB") == 0 || strcmp((*p)->der->info,"_MUL") == 0 || strcmp((*p)->der->info,"_DIV") == 0) {
+                //generateCodeAsignation(p);
+            //} else {
                 generateCodeAsignationSimple(p);
-            }
+            //}
         }
-    }
+    
     
  
 
@@ -168,7 +168,7 @@ void escribirDatosDeTS(){
 
 void generateCodeOperation(t_arbol *p, char * operation) {
 
-    if(strchr(root->left->value, '.') != NULL){
+/*    if(strchr(root->left->value, '.') != NULL){
         char * aux = root->left->value;
         while(*aux != '.'){
             aux ++;
@@ -208,6 +208,7 @@ void generateCodeOperation(t_arbol *p, char * operation) {
         root->value = "_DIV";  
     }
     sprintf(auxString, "\tFSTP %s\n\n", root->value);
+*/
 }
 
 int verifyIsCondition(char* value) {

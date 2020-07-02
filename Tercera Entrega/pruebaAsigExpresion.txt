@@ -1,0 +1,6 @@
+DEFVAR
+	INT: a1
+ENDDEF
+
+a1 := 5 * 5 + 8;
+
