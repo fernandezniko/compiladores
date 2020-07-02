@@ -13,7 +13,9 @@ void escribirDesdeArbol(t_arbol *p);
 void escribirDatosDeTS();
 void generateCodeAsignationSimple(t_arbol *p);
 char* getCodOp(char* token);
-void generateCode();
+void generateCode(t_arbol *p);
+void generateCodeOperation(t_arbol * p, char * operation);
+int verifyIsCondition(char* value);
 
 FILE *file;
 
@@ -81,7 +83,7 @@ void generateCode(t_arbol *p){
         printf("\nENCONTRE UN := ");
         generateCodeAsignationSimple(p);
     }
-
+    
 }
 
 void generateCodeAsignationSimple(t_arbol *p){
@@ -137,6 +139,63 @@ void escribirDatosDeTS(){
             }
 		}
 	}
+}
+
+void generateCodeOperation(t_arbol *p, char * operation) {
+
+    if(strchr(root->left->value, '.') != NULL){
+        char * aux = root->left->value;
+        while(*aux != '.'){
+            aux ++;
+        }
+        *aux = '_';
+    }
+    if(strchr(root->right->value, '.') != NULL){
+        char * aux = root->right->value;
+        while(*aux != '.'){
+            aux ++;
+        }
+        *aux = '_';
+    }
+
+    if(strcmp(auxString,"*010101*") != 0) {
+        fprintf(file, "%s", auxString);
+        strcpy(auxString,"*010101*"); // Código para que no printee FSTP
+    }
+
+    fprintf(file, "\t; %s\n", operation);
+
+    fprintf(file, "\tFLD %s\n", root->left->value);
+    fprintf(file, "\tFLD %s\n", root->right->value);
+    
+    // Check if + - / * and print in .asm
+    if(strcmp(operation,"ADD") == 0) {
+        fprintf(file, "\tFADD\n", root->value);
+        root->value = "_SUM";
+    } else if (strcmp(operation,"SUB") == 0) {
+        fprintf(file, "\tFSUB\n", root->value);
+        root->value = "_SUB";
+    } else if (strcmp(operation,"MUL") == 0) {
+        fprintf(file, "\tFMUL\n", root->value);
+        root->value = "_MUL";  
+    } else if (strcmp(operation,"DIV") == 0) {
+        fprintf(file, "\tFDIV\n", root->value);
+        root->value = "_DIV";  
+    }
+    sprintf(auxString, "\tFSTP %s\n\n", root->value);
+}
+
+int verifyIsCondition(char* value) {
+    if (
+        strcmp(value,">=") == 0 ||
+        strcmp(value,">") == 0 || 
+        strcmp(value,"<=") == 0 || 
+        strcmp(value,"<") == 0 ||
+        strcmp(value,"!=") == 0 ||
+        strcmp(value,"==") == 0) {
+            return 1; // is an operand
+    }
+    return 0; // not an operand
 }
 
 char* getCodOp(char* token)

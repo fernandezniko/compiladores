@@ -79,7 +79,7 @@ void postOrden(t_arbol *p)
     {
         postOrden(&(*p)->izq);
         postOrden(&(*p)->der);
-        grabar((*p)->info);
+        //grabar((*p)->info);
         verNodo((*p)->info);
     }
 }
