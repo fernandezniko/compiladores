@@ -47,6 +47,10 @@ void generarCodigoInicial(){
     escribirDatosDeTS();
 
     fprintf(file, "\n\n.CODE\n");
+    fprintf(file, "\n\nSTART:\n");
+    fprintf(file, "\n\nmov AX,@DATA");
+    fprintf(file, "\n\nmov DS,AX");
+     fprintf(file, "\n\n mov es,ax");   
 
 
 }
@@ -55,7 +59,7 @@ void generarCodigoFinal(){
 
     fprintf(file, "\n mov AX, 4C00h \n");
 	fprintf(file, "int 21h ; Genera la interrupcion 21h \n ");
-    fprintf(file, "END ; fin. \n");
+    fprintf(file, "END START ; fin. \n");
 }
 
 void escribirDesdeArbol(t_arbol *p){
@@ -101,8 +105,14 @@ void generateCode(t_arbol *p){
             //}
         }
     
-    
- 
+    if (strcmp((*p)->info,"DISPLAY") == 0) {
+        printf("ENTRO A DISPLAY");
+        char* nodoizq = eliminar_comillas((*p)->izq->info);
+        printf("NODO IZQ %s", nodoizq);
+
+        fprintf(file,"\tDisplayString %s\n", nodoizq);
+
+    } 
 
     if(strcmp((*p)->info , ":=") == 0){
         printf("\nENCONTRE UN := ");
@@ -299,6 +309,7 @@ char *eliminar_comillas(char *cadena) {
                 j++;
             }
         }
+    
     cadena_temporal[j] = '\0';
     return cadena_temporal;
 }

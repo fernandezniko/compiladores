@@ -16,7 +16,16 @@ MAXTEXTSIZE equ 50
 
 
 .CODE
-    ; Simple Asignation
+
+
+START:
+
+
+mov AX,@DATA
+
+mov DS,AX
+
+ mov es,ax  ; Simple Asignation
     FILD _2
     FSTP x
     LEA SI, _drgidrg
@@ -27,7 +36,8 @@ cpy_nxt:mov bl, [si]
     inc di
     dec cx
     jnz cpy_nxt
+    DisplayString j
 
  mov AX, 4C00h 
 int 21h ; Genera la interrupcion 21h 
- END ; fin. 
+ END START ; fin. 
