@@ -1,1 +1,1 @@
-a := 2 _Cuerpo_1 _Cuerpo_2 b := 3 _Cuerpo_3 uno := 3 _Cuerpo_4 uno DISPLAY _Cuerpo_5 uno := 4 ; dos := 5 _Cuerpo_6 uno DISPLAY _Cuerpo_7 dos DISPLAY 
+a := 2 _Cuerpo_1 _Cuerpo_2 b := 3 _Cuerpo_3 uno := 3 _Cuerpo_4 uno DISPLAY _Cuerpo_5 uno := 4 ; dos := 5 _Cuerpo_6 uno DISPLAY _Cuerpo_7 dos DISPLAY _Cuerpo_8 uno := a * b _Cuerpo_9 uno DISPLAY _Cuerpo_10 uno := 3 ; dos := 5 ; tres := a * b _Cuerpo_11 uno DISPLAY _Cuerpo_12 dos DISPLAY _Cuerpo_13 tres DISPLAY 

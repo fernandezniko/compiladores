@@ -13,3 +13,13 @@ LET uno,dos = (4;5)
 
 DISPLAY uno;
 DISPLAY dos;
+
+LET uno = (a*b)
+
+DISPLAY uno;
+
+LET uno, dos, tres = (3; 5; a*b)
+
+DISPLAY uno;
+DISPLAY dos;
+DISPLAY tres;

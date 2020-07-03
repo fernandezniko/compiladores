@@ -273,8 +273,18 @@ void escribirDatosDeTS(){
 }
 
 void generateCodeOperation(t_arbol *p, char * operation) {
-    fprintf(file, "\tFLD _%s\n", (*p)->izq->info);
-    fprintf(file, "\tFLD _%s\n", (*p)->der->info);
+	
+	int auxx = getType((*p)->izq->info);
+	
+	if(auxx==1 || auxx==2 || auxx==3 ){
+		printf("\tFLD %s\n .... es tipo 3 el getType", (*p)->izq->info);
+		fprintf(file, "\tFLD %s\n", (*p)->izq->info);
+		fprintf(file, "\tFLD %s\n", (*p)->der->info);
+	}else{
+		printf("\tFLD %s\n .... NO es tipo 3 el getType", (*p)->izq->info);
+		fprintf(file, "\tFLD _%s\n", (*p)->izq->info);
+		fprintf(file, "\tFLD _%s\n", (*p)->der->info);
+	}
 
      if(strcmp(operation,"ADD") == 0) {
         fprintf(file, "\tFADD\n",  (*p)->info);

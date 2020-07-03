@@ -45,6 +45,30 @@ START:
 	newLine 1
 	DisplayFloat dos,2
 	newLine 1
+	FLD a
+	FLD b
+	FMUL
+	FSTP _MUL
+	FLD _MUL
+	FSTP uno
+	DisplayFloat uno,2
+	newLine 1
+	FLD _3
+	FSTP uno
+	FLD _5
+	FSTP dos
+	FLD a
+	FLD b
+	FMUL
+	FSTP _MUL
+	FLD _MUL
+	FSTP tres
+	DisplayFloat uno,2
+	newLine 1
+	DisplayFloat dos,2
+	newLine 1
+	DisplayFloat tres,2
+	newLine 1
 
  mov AX, 4C00h 
 int 21h ; Genera la interrupcion 21h 
