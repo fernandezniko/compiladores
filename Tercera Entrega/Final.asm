@@ -9,34 +9,40 @@ include number.asm
 MAXTEXTSIZE equ 50
 
 .DATA
-    x   dd  ?
-    j   db  MAXTEXTSIZE dup (?),'$'
-    _2  dd  2.0
-    _4  dd  4.0
-    _5  dd  5.0
-    _ADD    dd  ?
-    _SUB    dd  ?
-    _MUL    dd  ?
-    _DIV    dd  ?
+	b	dd	?
+	j	dd	?
+	c	dd	?
+	_1	dd	1.0
+	_2	dd	2.0
+	_3	dd	3.0
+	_ADD	dd	?
+	_SUB	dd	?
+	_MUL	dd	?
+	_DIV	dd	?
 
 
 .CODE
 START:
-    mov AX,@DATA
-    mov DS,AX
-    mov es,ax
-    FLD _4
-    FLD _5
-    FMUL
-    FSTP _MUL
-    FLD _2
-    FLD _MUL
-    FADD
-    FSTP _ADD
-    ; Simple Asignation
-    FLD _ADD
-    FSTP x
-    DisplayFloat x,2
+	mov AX,@DATA
+	mov DS,AX
+	mov es,ax
+	FLD _1
+	FSTP b
+	FLD _2
+	FSTP j
+	FLD _3
+	FSTP c
+	; Condition
+	FLD b
+	FCOMP j
+	FSTSW AX
+	SAHF
+	JNE ELSE_1
+	JMP ELSE_1
+	DisplayFloat j,2
+	newLine 1
+	DisplayFloat c,2
+	newLine 1
 
  mov AX, 4C00h 
 int 21h ; Genera la interrupcion 21h 

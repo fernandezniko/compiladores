@@ -66,8 +66,6 @@ int getType(char *text){
 			strcpy(type,"");
 			strcpy(word,"");
 			sscanf(linea, "%s %s", word, type);
-			
-			printf("\n\n ASDAWOID %c", text[0]);
 
 			if(strcmp(word,text)==0){
 				

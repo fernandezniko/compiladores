@@ -1,1 +1,1 @@
-x := 2 + 4 * 5 _Cuerpo_1 _Cuerpo_2 x DISPLAY 
+b := 1 _Cuerpo_1 _Cuerpo_2 j := 2 _Cuerpo_3 c := 3 _Cuerpo_4 b == j IF j DISPLAY _Cuerpo_5 c DISPLAY 

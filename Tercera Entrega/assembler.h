@@ -5,6 +5,8 @@
 #include "ts.h"
 #include "arbol.h"
 
+
+void generateCondition(t_arbol *p);
 char *eliminar_comillas(char *cadena);
 void generarAssembler(t_arbol * p);
 void generarCodigoInicial();
@@ -18,6 +20,12 @@ void generateCodeOperation(t_arbol * p, char * operation);
 int verifyIsCondition(char* value);
 
 FILE *file;
+pila_s pilaSaltos;
+int contadorSaltos = 0;
+int escribirEtiquetaSalto = 0;
+int escribirSaltoAFin = 0;
+int vengoDeIf = 0;
+char cuerpoAuxIf[1000];
 
 void generarAssembler(t_arbol *p){
 
@@ -26,7 +34,8 @@ void generarAssembler(t_arbol *p){
         printf("Error opening file!\n");
         exit(1);
     }
-   
+    crearPilaS(&pilaSaltos);
+
     generarCodigoInicial();
     escribirDesdeArbol(p);
     generarCodigoFinal();
@@ -69,13 +78,74 @@ void generarCodigoFinal(){
 
 void escribirDesdeArbol(t_arbol *p){
 
+    //Recorriendo el arbol me encuentro con un if?
+    if(strcmp((*p)->info,"IF") == 0){
+        contadorSaltos++;
+        //ponerEnPilaS(&pilaSaltos,(*p)->der->info);
+        strcpy(cuerpoAuxIf, (*p)->der->info);
+    }else
+    {
+        if(escribirEtiquetaSalto = 1){
+            escribirSaltoAFin = 1;
+            escribirEtiquetaSalto = 0;
+        }
+    }
+
     //postorden hasta encontrar el nodo con dos hijos hoja
     if ( (*p)->izq != NULL ) {
         escribirDesdeArbol (&(*p)->izq);
     }
 
+    //cuando veo la parte derecha , antes de escribir pregunto si es if y escribo salto condicional a else
+    // HASTA ACA TODO BIEN, ESCRIBE EL CONDICIONAL DONDE TIENE QUE IR
+    //EL TEMA ES CUANDO TENGO QUE IMPRIMIR LA ETIQUETA
+    if(strcmp((*p)->info,"IF") == 0){
+
+        if (strcmp((*p)->izq->info,">=") == 0) {    
+            fprintf(file,"\tJB ELSE_%d\n", contadorSaltos);
+        }else if (strcmp((*p)->izq->info,">") == 0) {      
+            fprintf(file,"\tJBE ELSE_%d\n", contadorSaltos);
+        }else if (strcmp((*p)->izq->info,"<=") == 0) {      
+            fprintf(file,"\tJA ELSE_%d\n", contadorSaltos);
+        }else if (strcmp((*p)->izq->info,"<") == 0) {      
+            fprintf(file,"\tJAE ELSE_%d\n", contadorSaltos);
+        }else if (strcmp((*p)->izq->info,"!=") == 0) {      
+            fprintf(file,"\tJE ELSE_%d\n", contadorSaltos);
+        }else if (strcmp((*p)->izq->info,"==") == 0) {      
+            fprintf(file,"\tJNE ELSE_%d\n", contadorSaltos);
+        }
+        vengoDeIf = 1;
+        escribirEtiquetaSalto = 1;
+    }
+    
+    //char * aux;//sacarDePilaS(&pilaSaltos);
+    
+    // if(strcmp((*p)->info, aux) == 0){
+    //     fprintf(file,"\tJMP FINIF_%d\n", contadorSaltos);
+    //     escribirEtiquetaSalto = 0;
+    //     escribirSaltoAFin = 0;
+    // }
+    // }else{
+    //     //ponerEnPilaS(&pilaSaltos,aux);
+    // }
+
+    // if(escribirEtiquetaSalto == 1){
+    //     fprintf(file,"\tJMP FINIF_%d\n", contadorSaltos);
+    //     fprintf(file,"\tELSE_%d:\n", contadorSaltos);
+    // }
+
     if( (*p)->der != NULL ) {
         escribirDesdeArbol (&(*p)->der);
+    }
+
+
+    //printf("asdasd %s", &cuerpoAuxIf);
+     if(vengoDeIf == 1 & strcmp((*p)->info, cuerpoAuxIf) == 0 ){
+        printf("ENTRO ACAAAA");
+        fprintf(file,"\tELSE_%d:\n", contadorSaltos);
+        escribirEtiquetaSalto = 0;
+        escribirSaltoAFin = 0;
+        vengoDeIf = 0;
     }
 
     generateCode(p);
@@ -87,7 +157,9 @@ void generateCode(t_arbol *p){
     if((*p)->der != NULL && (*p)->izq  != NULL) {
         printf("\tLEFT=[%s]\t[%s]\tRIGHT[%s]\n", (*p)->izq->info, (*p)->info, (*p)->der->info);
         
-        if (strcmp((*p)->info,"+") == 0) {
+        if (verifyIsCondition((*p)->info)) {
+            generateCondition(p);
+        }else if (strcmp((*p)->info,"+") == 0) {
             strcpy(operation, "ADD");
             generateCodeOperation(p, operation);
             fprintf(file, "\tFSTP _%s\n", operation); 
@@ -103,10 +175,7 @@ void generateCode(t_arbol *p){
             strcpy(operation, "SUB"); 
             generateCodeOperation(p, operation);
             fprintf(file, "\tFSTP _%s\n",operation); 
-        } else if (strcmp((*p)->info,":=") == 0) {       
-                generateCodeAsignationSimple(p);
-            }
-        }
+        } 
     }
     
     if (strcmp((*p)->info,"DISPLAY") == 0) {
@@ -114,8 +183,10 @@ void generateCode(t_arbol *p){
         int type = getType(nodoizq);
         if(type == 3){
             fprintf(file,"\tDisplayString %s\n", nodoizq);
+             fprintf(file,"\tnewLine 1\n");
         }else{
             fprintf(file,"\tDisplayFloat %s,2\n", nodoizq);
+            fprintf(file,"\tnewLine 1\n");
         }
 
     } 
@@ -144,7 +215,6 @@ void generateCodeAsignationSimple(t_arbol *p){
                 }
                 *aux = '_';
             }
-        fprintf(file, "\t; Simple Asignation\n");
         fprintf(file, "\tFLD _%s\n", &(*p)->der->info);
         fprintf(file, "\tFSTP %s\n", &(*p)->izq->info); 
     }
@@ -293,4 +363,12 @@ char *eliminar_comillas(char *cadena) {
     
     cadena_temporal[j] = '\0';
     return cadena_temporal;
+}
+
+
+
+void generateCondition(t_arbol *p) {    
+    if (contadorSaltos > 0) {
+        fprintf(file, "\t; Condition\n\tFLD %s\n\tFCOMP %s\n\tFSTSW AX\n\tSAHF\n",  (*p)->izq->info,  (*p)->der->info);
+    } 
 }

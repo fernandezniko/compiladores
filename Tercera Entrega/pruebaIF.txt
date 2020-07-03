@@ -1,14 +1,17 @@
+DEFVAR
+	INT: b;j;c
+
+ENDDEF
 
 
 b:= 1;
 j:=2;
-***/IF SIMPLE CON ELSE /***
-if((b==1) AND (j==2))
+c:=3;
+
+if(b==j)
 {
-   c := 3;
-}
-else
-{
-   d := 3;
+   DISPLAY j;
 }
 
+
+DISPLAY c;
