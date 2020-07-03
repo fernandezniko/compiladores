@@ -107,7 +107,6 @@ void generateCode(t_arbol *p){
                 generateCodeAsignationSimple(p);
             }
         }
-    }
     
     if (strcmp((*p)->info,"DISPLAY") == 0) {
         char* nodoizq = eliminar_comillas((*p)->izq->info);
@@ -118,7 +117,15 @@ void generateCode(t_arbol *p){
             fprintf(file,"\tDisplayFloat %s,2\n", nodoizq);
         }
 
-    } 
+    }
+
+    if (strcmp((*p)->info,"GET") == 0) {
+		char* nodoizq = eliminar_comillas((*p)->izq->info);
+		int type = getType(nodoizq);
+		if(type == 1){
+            fprintf(file,"\tGetInteger %s\n", nodoizq);
+        }
+	} 
 
     if(strcmp((*p)->info , ":=") == 0){
         printf("\nENCONTRE UN := ");
