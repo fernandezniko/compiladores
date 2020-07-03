@@ -1,1 +1,5 @@
-GET x ;
+DEFVAR
+	INT: x
+ENDDEF
+
+GET x;
