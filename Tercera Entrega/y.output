@@ -5,7 +5,7 @@ Terminals unused in grammar
    OR
 
 
-Gramática
+Grammar
 
     0 $accept: programa $end
 
@@ -17,7 +17,7 @@ Gramática
     4 sentencias: sentencia
     5           | sentencias sentencia
 
-    6 $@1: /* vacío */
+    6 $@1: /* empty */
 
     7 bloq_declaracion: DEFVAR $@1 declaraciones ENDDEF
 
@@ -39,11 +39,11 @@ Gramática
    20          | entrada
    21          | salida
 
-   22 $@2: /* vacío */
+   22 $@2: /* empty */
 
    23 asignacion: ID OP_ASIG $@2 expresion
 
-   24 $@3: /* vacío */
+   24 $@3: /* empty */
 
    25 asignacion: ID OP_ASIG $@3 constanteString
 
@@ -56,61 +56,61 @@ Gramática
 
    30 decision: IF P_A condicion P_C L_A sentencia L_C
 
-   31 $@4: /* vacío */
+   31 $@4: /* empty */
 
-   32 $@5: /* vacío */
+   32 $@5: /* empty */
 
    33 decision: IF P_A condicion P_C L_A sentencia L_C $@4 ELSE $@5 L_A sentencia L_C
 
-   34 $@6: /* vacío */
+   34 $@6: /* empty */
 
    35 condicion: expresion $@6 CMP_MAY expresion
 
-   36 $@7: /* vacío */
+   36 $@7: /* empty */
 
    37 condicion: expresion $@7 CMP_MEN expresion
 
-   38 $@8: /* vacío */
+   38 $@8: /* empty */
 
    39 condicion: expresion $@8 CMP_MAYI expresion
 
-   40 $@9: /* vacío */
+   40 $@9: /* empty */
 
    41 condicion: expresion $@9 CMP_MENI expresion
 
-   42 $@10: /* vacío */
+   42 $@10: /* empty */
 
    43 condicion: expresion $@10 CMP_DIST expresion
 
-   44 $@11: /* vacío */
+   44 $@11: /* empty */
 
    45 condicion: expresion $@11 CMP_IGUAL expresion
 
-   46 $@12: /* vacío */
+   46 $@12: /* empty */
 
    47 condicion: P_A condicion $@12 P_C AND P_A condicion P_C
 
-   48 $@13: /* vacío */
+   48 $@13: /* empty */
 
    49 condicion: NOT expresion $@13 CMP_MAY expresion
 
-   50 $@14: /* vacío */
+   50 $@14: /* empty */
 
    51 condicion: NOT expresion $@14 CMP_MEN expresion
 
-   52 $@15: /* vacío */
+   52 $@15: /* empty */
 
    53 condicion: NOT expresion $@15 CMP_MAYI expresion
 
-   54 $@16: /* vacío */
+   54 $@16: /* empty */
 
    55 condicion: NOT expresion $@16 CMP_MENI expresion
 
-   56 $@17: /* vacío */
+   56 $@17: /* empty */
 
    57 condicion: NOT expresion $@17 CMP_DIST expresion
 
-   58 $@18: /* vacío */
+   58 $@18: /* empty */
 
    59 condicion: NOT expresion $@18 CMP_IGUAL expresion
 
@@ -133,7 +133,7 @@ Gramática
 
    72 constanteStringShow: CONST_STR
 
-   73 $@19: /* vacío */
+   73 $@19: /* empty */
 
    74 let: LET_SIM $@19 cont_ids OP_IGUAL P_A cont_exp P_C
 
@@ -149,7 +149,7 @@ Gramática
    82                    | ID AE_DIIG ID
 
 
-Terminales con las reglas donde aparecen
+Terminals, with rules where they appear
 
 $end (0) 0
 error (256)
@@ -198,170 +198,169 @@ AE_MUIG (299) 81
 AE_DIIG (300) 82
 
 
-No terminales con las reglas donde aparecen
+Nonterminals, with rules where they appear
 
 $accept (46)
-    en la izquierda: 0
+    on left: 0
 programa (47)
-    en la izquierda: 1, en la derecha: 0
+    on left: 1, on right: 0
 program (48)
-    en la izquierda: 2 3, en la derecha: 1
+    on left: 2 3, on right: 1
 sentencias (49)
-    en la izquierda: 4 5, en la derecha: 2 3 5
+    on left: 4 5, on right: 2 3 5
 bloq_declaracion (50)
-    en la izquierda: 7, en la derecha: 2
+    on left: 7, on right: 2
 $@1 (51)
-    en la izquierda: 6, en la derecha: 7
+    on left: 6, on right: 7
 declaraciones (52)
-    en la izquierda: 8 9, en la derecha: 7 9
+    on left: 8 9, on right: 7 9
 declaracion (53)
-    en la izquierda: 10 11 12, en la derecha: 8 9
+    on left: 10 11 12, on right: 8 9
 lista_ids (54)
-    en la izquierda: 13 14, en la derecha: 10 11 12 14
+    on left: 13 14, on right: 10 11 12 14
 sentencia (55)
-    en la izquierda: 15 16 17 18 19 20 21, en la derecha: 4 5 29 30
-    33
+    on left: 15 16 17 18 19 20 21, on right: 4 5 29 30 33
 asignacion (56)
-    en la izquierda: 23 25, en la derecha: 16
+    on left: 23 25, on right: 16
 $@2 (57)
-    en la izquierda: 22, en la derecha: 23
+    on left: 22, on right: 23
 $@3 (58)
-    en la izquierda: 24, en la derecha: 25
+    on left: 24, on right: 25
 salida (59)
-    en la izquierda: 26 27, en la derecha: 21
+    on left: 26 27, on right: 21
 entrada (60)
-    en la izquierda: 28, en la derecha: 20
+    on left: 28, on right: 20
 iteracion (61)
-    en la izquierda: 29, en la derecha: 18
+    on left: 29, on right: 18
 decision (62)
-    en la izquierda: 30 33, en la derecha: 17
+    on left: 30 33, on right: 17
 $@4 (63)
-    en la izquierda: 31, en la derecha: 33
+    on left: 31, on right: 33
 $@5 (64)
-    en la izquierda: 32, en la derecha: 33
+    on left: 32, on right: 33
 condicion (65)
-    en la izquierda: 35 37 39 41 43 45 47 49 51 53 55 57 59, en la derecha:
-    29 30 33 47
+    on left: 35 37 39 41 43 45 47 49 51 53 55 57 59, on right: 29 30
+    33 47
 $@6 (66)
-    en la izquierda: 34, en la derecha: 35
+    on left: 34, on right: 35
 $@7 (67)
-    en la izquierda: 36, en la derecha: 37
+    on left: 36, on right: 37
 $@8 (68)
-    en la izquierda: 38, en la derecha: 39
+    on left: 38, on right: 39
 $@9 (69)
-    en la izquierda: 40, en la derecha: 41
+    on left: 40, on right: 41
 $@10 (70)
-    en la izquierda: 42, en la derecha: 43
+    on left: 42, on right: 43
 $@11 (71)
-    en la izquierda: 44, en la derecha: 45
+    on left: 44, on right: 45
 $@12 (72)
-    en la izquierda: 46, en la derecha: 47
+    on left: 46, on right: 47
 $@13 (73)
-    en la izquierda: 48, en la derecha: 49
+    on left: 48, on right: 49
 $@14 (74)
-    en la izquierda: 50, en la derecha: 51
+    on left: 50, on right: 51
 $@15 (75)
-    en la izquierda: 52, en la derecha: 53
+    on left: 52, on right: 53
 $@16 (76)
-    en la izquierda: 54, en la derecha: 55
+    on left: 54, on right: 55
 $@17 (77)
-    en la izquierda: 56, en la derecha: 57
+    on left: 56, on right: 57
 $@18 (78)
-    en la izquierda: 58, en la derecha: 59
+    on left: 58, on right: 59
 expresion (79)
-    en la izquierda: 60 61 62, en la derecha: 23 35 37 39 41 43 45
-    49 51 53 55 57 59 60 61 66 77 78
+    on left: 60 61 62, on right: 23 35 37 39 41 43 45 49 51 53 55 57
+    59 60 61 66 77 78
 termino (80)
-    en la izquierda: 63 64 65, en la derecha: 60 61 62 63 64
+    on left: 63 64 65, on right: 60 61 62 63 64
 factor (81)
-    en la izquierda: 66 67 68, en la derecha: 63 64 65
+    on left: 66 67 68, on right: 63 64 65
 constanteNumerica (82)
-    en la izquierda: 69 70, en la derecha: 68
+    on left: 69 70, on right: 68
 constanteString (83)
-    en la izquierda: 71, en la derecha: 25
+    on left: 71, on right: 25
 constanteStringShow (84)
-    en la izquierda: 72, en la derecha: 27
+    on left: 72, on right: 27
 let (85)
-    en la izquierda: 74, en la derecha: 19
+    on left: 74, on right: 19
 $@19 (86)
-    en la izquierda: 73, en la derecha: 74
+    on left: 73, on right: 74
 cont_ids (87)
-    en la izquierda: 75 76, en la derecha: 74 75
+    on left: 75 76, on right: 74 75
 cont_exp (88)
-    en la izquierda: 77 78, en la derecha: 74 77
+    on left: 77 78, on right: 74 77
 asignacion_especial (89)
-    en la izquierda: 79 80 81 82, en la derecha: 15
+    on left: 79 80 81 82, on right: 15
 
 
-estado 0
+state 0
 
     0 $accept: . programa $end
 
-    DEFVAR   desplazar e ir al estado 1
-    DISPLAY  desplazar e ir al estado 2
-    GET      desplazar e ir al estado 3
-    IF       desplazar e ir al estado 4
-    WHILE    desplazar e ir al estado 5
-    ID       desplazar e ir al estado 6
-    LET_SIM  desplazar e ir al estado 7
+    DEFVAR   shift, and go to state 1
+    DISPLAY  shift, and go to state 2
+    GET      shift, and go to state 3
+    IF       shift, and go to state 4
+    WHILE    shift, and go to state 5
+    ID       shift, and go to state 6
+    LET_SIM  shift, and go to state 7
 
-    programa             ir al estado 8
-    program              ir al estado 9
-    sentencias           ir al estado 10
-    bloq_declaracion     ir al estado 11
-    sentencia            ir al estado 12
-    asignacion           ir al estado 13
-    salida               ir al estado 14
-    entrada              ir al estado 15
-    iteracion            ir al estado 16
-    decision             ir al estado 17
-    let                  ir al estado 18
-    asignacion_especial  ir al estado 19
+    programa             go to state 8
+    program              go to state 9
+    sentencias           go to state 10
+    bloq_declaracion     go to state 11
+    sentencia            go to state 12
+    asignacion           go to state 13
+    salida               go to state 14
+    entrada              go to state 15
+    iteracion            go to state 16
+    decision             go to state 17
+    let                  go to state 18
+    asignacion_especial  go to state 19
 
 
-estado 1
+state 1
 
     7 bloq_declaracion: DEFVAR . $@1 declaraciones ENDDEF
 
-    $default  reduce usando la regla 6 ($@1)
+    $default  reduce using rule 6 ($@1)
 
-    $@1  ir al estado 20
+    $@1  go to state 20
 
 
-estado 2
+state 2
 
    26 salida: DISPLAY . ID PUNTO_Y_COMA
    27       | DISPLAY . constanteStringShow PUNTO_Y_COMA
 
-    CONST_STR  desplazar e ir al estado 21
-    ID         desplazar e ir al estado 22
+    CONST_STR  shift, and go to state 21
+    ID         shift, and go to state 22
 
-    constanteStringShow  ir al estado 23
+    constanteStringShow  go to state 23
 
 
-estado 3
+state 3
 
    28 entrada: GET . ID PUNTO_Y_COMA
 
-    ID  desplazar e ir al estado 24
+    ID  shift, and go to state 24
 
 
-estado 4
+state 4
 
    30 decision: IF . P_A condicion P_C L_A sentencia L_C
    33         | IF . P_A condicion P_C L_A sentencia L_C $@4 ELSE $@5 L_A sentencia L_C
 
-    P_A  desplazar e ir al estado 25
+    P_A  shift, and go to state 25
 
 
-estado 5
+state 5
 
    29 iteracion: WHILE . P_A condicion P_C L_A sentencia L_C
 
-    P_A  desplazar e ir al estado 26
+    P_A  shift, and go to state 26
 
 
-estado 6
+state 6
 
    23 asignacion: ID . OP_ASIG $@2 expresion
    25           | ID . OP_ASIG $@3 constanteString
@@ -370,402 +369,402 @@ estado 6
    81                    | ID . AE_MUIG ID
    82                    | ID . AE_DIIG ID
 
-    OP_ASIG  desplazar e ir al estado 27
-    AE_MAIG  desplazar e ir al estado 28
-    AE_MEIG  desplazar e ir al estado 29
-    AE_MUIG  desplazar e ir al estado 30
-    AE_DIIG  desplazar e ir al estado 31
+    OP_ASIG  shift, and go to state 27
+    AE_MAIG  shift, and go to state 28
+    AE_MEIG  shift, and go to state 29
+    AE_MUIG  shift, and go to state 30
+    AE_DIIG  shift, and go to state 31
 
 
-estado 7
+state 7
 
    74 let: LET_SIM . $@19 cont_ids OP_IGUAL P_A cont_exp P_C
 
-    $default  reduce usando la regla 73 ($@19)
+    $default  reduce using rule 73 ($@19)
 
-    $@19  ir al estado 32
+    $@19  go to state 32
 
 
-estado 8
+state 8
 
     0 $accept: programa . $end
 
-    $end  desplazar e ir al estado 33
+    $end  shift, and go to state 33
 
 
-estado 9
+state 9
 
     1 programa: program .
 
-    $default  reduce usando la regla 1 (programa)
+    $default  reduce using rule 1 (programa)
 
 
-estado 10
+state 10
 
     3 program: sentencias .
     5 sentencias: sentencias . sentencia
 
-    DISPLAY  desplazar e ir al estado 2
-    GET      desplazar e ir al estado 3
-    IF       desplazar e ir al estado 4
-    WHILE    desplazar e ir al estado 5
-    ID       desplazar e ir al estado 6
-    LET_SIM  desplazar e ir al estado 7
+    DISPLAY  shift, and go to state 2
+    GET      shift, and go to state 3
+    IF       shift, and go to state 4
+    WHILE    shift, and go to state 5
+    ID       shift, and go to state 6
+    LET_SIM  shift, and go to state 7
 
-    $default  reduce usando la regla 3 (program)
+    $default  reduce using rule 3 (program)
 
-    sentencia            ir al estado 34
-    asignacion           ir al estado 13
-    salida               ir al estado 14
-    entrada              ir al estado 15
-    iteracion            ir al estado 16
-    decision             ir al estado 17
-    let                  ir al estado 18
-    asignacion_especial  ir al estado 19
+    sentencia            go to state 34
+    asignacion           go to state 13
+    salida               go to state 14
+    entrada              go to state 15
+    iteracion            go to state 16
+    decision             go to state 17
+    let                  go to state 18
+    asignacion_especial  go to state 19
 
 
-estado 11
+state 11
 
     2 program: bloq_declaracion . sentencias
 
-    DISPLAY  desplazar e ir al estado 2
-    GET      desplazar e ir al estado 3
-    IF       desplazar e ir al estado 4
-    WHILE    desplazar e ir al estado 5
-    ID       desplazar e ir al estado 6
-    LET_SIM  desplazar e ir al estado 7
+    DISPLAY  shift, and go to state 2
+    GET      shift, and go to state 3
+    IF       shift, and go to state 4
+    WHILE    shift, and go to state 5
+    ID       shift, and go to state 6
+    LET_SIM  shift, and go to state 7
 
-    sentencias           ir al estado 35
-    sentencia            ir al estado 12
-    asignacion           ir al estado 13
-    salida               ir al estado 14
-    entrada              ir al estado 15
-    iteracion            ir al estado 16
-    decision             ir al estado 17
-    let                  ir al estado 18
-    asignacion_especial  ir al estado 19
+    sentencias           go to state 35
+    sentencia            go to state 12
+    asignacion           go to state 13
+    salida               go to state 14
+    entrada              go to state 15
+    iteracion            go to state 16
+    decision             go to state 17
+    let                  go to state 18
+    asignacion_especial  go to state 19
 
 
-estado 12
+state 12
 
     4 sentencias: sentencia .
 
-    $default  reduce usando la regla 4 (sentencias)
+    $default  reduce using rule 4 (sentencias)
 
 
-estado 13
+state 13
 
    16 sentencia: asignacion . PUNTO_Y_COMA
 
-    PUNTO_Y_COMA  desplazar e ir al estado 36
+    PUNTO_Y_COMA  shift, and go to state 36
 
 
-estado 14
+state 14
 
    21 sentencia: salida .
 
-    $default  reduce usando la regla 21 (sentencia)
+    $default  reduce using rule 21 (sentencia)
 
 
-estado 15
+state 15
 
    20 sentencia: entrada .
 
-    $default  reduce usando la regla 20 (sentencia)
+    $default  reduce using rule 20 (sentencia)
 
 
-estado 16
+state 16
 
    18 sentencia: iteracion .
 
-    $default  reduce usando la regla 18 (sentencia)
+    $default  reduce using rule 18 (sentencia)
 
 
-estado 17
+state 17
 
    17 sentencia: decision .
 
-    $default  reduce usando la regla 17 (sentencia)
+    $default  reduce using rule 17 (sentencia)
 
 
-estado 18
+state 18
 
    19 sentencia: let .
 
-    $default  reduce usando la regla 19 (sentencia)
+    $default  reduce using rule 19 (sentencia)
 
 
-estado 19
+state 19
 
    15 sentencia: asignacion_especial .
 
-    $default  reduce usando la regla 15 (sentencia)
+    $default  reduce using rule 15 (sentencia)
 
 
-estado 20
+state 20
 
     7 bloq_declaracion: DEFVAR $@1 . declaraciones ENDDEF
 
-    INT     desplazar e ir al estado 37
-    FLOAT   desplazar e ir al estado 38
-    STRING  desplazar e ir al estado 39
+    INT     shift, and go to state 37
+    FLOAT   shift, and go to state 38
+    STRING  shift, and go to state 39
 
-    declaraciones  ir al estado 40
-    declaracion    ir al estado 41
+    declaraciones  go to state 40
+    declaracion    go to state 41
 
 
-estado 21
+state 21
 
    72 constanteStringShow: CONST_STR .
 
-    $default  reduce usando la regla 72 (constanteStringShow)
+    $default  reduce using rule 72 (constanteStringShow)
 
 
-estado 22
+state 22
 
    26 salida: DISPLAY ID . PUNTO_Y_COMA
 
-    PUNTO_Y_COMA  desplazar e ir al estado 42
+    PUNTO_Y_COMA  shift, and go to state 42
 
 
-estado 23
+state 23
 
    27 salida: DISPLAY constanteStringShow . PUNTO_Y_COMA
 
-    PUNTO_Y_COMA  desplazar e ir al estado 43
+    PUNTO_Y_COMA  shift, and go to state 43
 
 
-estado 24
+state 24
 
    28 entrada: GET ID . PUNTO_Y_COMA
 
-    PUNTO_Y_COMA  desplazar e ir al estado 44
+    PUNTO_Y_COMA  shift, and go to state 44
 
 
-estado 25
+state 25
 
    30 decision: IF P_A . condicion P_C L_A sentencia L_C
    33         | IF P_A . condicion P_C L_A sentencia L_C $@4 ELSE $@5 L_A sentencia L_C
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 47
-    NOT         desplazar e ir al estado 48
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 47
+    NOT         shift, and go to state 48
+    ID          shift, and go to state 49
 
-    condicion          ir al estado 50
-    expresion          ir al estado 51
-    termino            ir al estado 52
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    condicion          go to state 50
+    expresion          go to state 51
+    termino            go to state 52
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 26
+state 26
 
    29 iteracion: WHILE P_A . condicion P_C L_A sentencia L_C
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 47
-    NOT         desplazar e ir al estado 48
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 47
+    NOT         shift, and go to state 48
+    ID          shift, and go to state 49
 
-    condicion          ir al estado 55
-    expresion          ir al estado 51
-    termino            ir al estado 52
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    condicion          go to state 55
+    expresion          go to state 51
+    termino            go to state 52
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 27
+state 27
 
    23 asignacion: ID OP_ASIG . $@2 expresion
    25           | ID OP_ASIG . $@3 constanteString
 
-    CONST_STR  reduce usando la regla 24 ($@3)
-    $default   reduce usando la regla 22 ($@2)
+    CONST_STR  reduce using rule 24 ($@3)
+    $default   reduce using rule 22 ($@2)
 
-    $@2  ir al estado 56
-    $@3  ir al estado 57
+    $@2  go to state 56
+    $@3  go to state 57
 
 
-estado 28
+state 28
 
    79 asignacion_especial: ID AE_MAIG . ID
 
-    ID  desplazar e ir al estado 58
+    ID  shift, and go to state 58
 
 
-estado 29
+state 29
 
    80 asignacion_especial: ID AE_MEIG . ID
 
-    ID  desplazar e ir al estado 59
+    ID  shift, and go to state 59
 
 
-estado 30
+state 30
 
    81 asignacion_especial: ID AE_MUIG . ID
 
-    ID  desplazar e ir al estado 60
+    ID  shift, and go to state 60
 
 
-estado 31
+state 31
 
    82 asignacion_especial: ID AE_DIIG . ID
 
-    ID  desplazar e ir al estado 61
+    ID  shift, and go to state 61
 
 
-estado 32
+state 32
 
    74 let: LET_SIM $@19 . cont_ids OP_IGUAL P_A cont_exp P_C
 
-    ID  desplazar e ir al estado 62
+    ID  shift, and go to state 62
 
-    cont_ids  ir al estado 63
+    cont_ids  go to state 63
 
 
-estado 33
+state 33
 
     0 $accept: programa $end .
 
-    $default  aceptar
+    $default  accept
 
 
-estado 34
+state 34
 
     5 sentencias: sentencias sentencia .
 
-    $default  reduce usando la regla 5 (sentencias)
+    $default  reduce using rule 5 (sentencias)
 
 
-estado 35
+state 35
 
     2 program: bloq_declaracion sentencias .
     5 sentencias: sentencias . sentencia
 
-    DISPLAY  desplazar e ir al estado 2
-    GET      desplazar e ir al estado 3
-    IF       desplazar e ir al estado 4
-    WHILE    desplazar e ir al estado 5
-    ID       desplazar e ir al estado 6
-    LET_SIM  desplazar e ir al estado 7
+    DISPLAY  shift, and go to state 2
+    GET      shift, and go to state 3
+    IF       shift, and go to state 4
+    WHILE    shift, and go to state 5
+    ID       shift, and go to state 6
+    LET_SIM  shift, and go to state 7
 
-    $default  reduce usando la regla 2 (program)
+    $default  reduce using rule 2 (program)
 
-    sentencia            ir al estado 34
-    asignacion           ir al estado 13
-    salida               ir al estado 14
-    entrada              ir al estado 15
-    iteracion            ir al estado 16
-    decision             ir al estado 17
-    let                  ir al estado 18
-    asignacion_especial  ir al estado 19
+    sentencia            go to state 34
+    asignacion           go to state 13
+    salida               go to state 14
+    entrada              go to state 15
+    iteracion            go to state 16
+    decision             go to state 17
+    let                  go to state 18
+    asignacion_especial  go to state 19
 
 
-estado 36
+state 36
 
    16 sentencia: asignacion PUNTO_Y_COMA .
 
-    $default  reduce usando la regla 16 (sentencia)
+    $default  reduce using rule 16 (sentencia)
 
 
-estado 37
+state 37
 
    10 declaracion: INT . DOSPUNTOS lista_ids
 
-    DOSPUNTOS  desplazar e ir al estado 64
+    DOSPUNTOS  shift, and go to state 64
 
 
-estado 38
+state 38
 
    11 declaracion: FLOAT . DOSPUNTOS lista_ids
 
-    DOSPUNTOS  desplazar e ir al estado 65
+    DOSPUNTOS  shift, and go to state 65
 
 
-estado 39
+state 39
 
    12 declaracion: STRING . DOSPUNTOS lista_ids
 
-    DOSPUNTOS  desplazar e ir al estado 66
+    DOSPUNTOS  shift, and go to state 66
 
 
-estado 40
+state 40
 
     7 bloq_declaracion: DEFVAR $@1 declaraciones . ENDDEF
     9 declaraciones: declaraciones . declaracion
 
-    ENDDEF  desplazar e ir al estado 67
-    INT     desplazar e ir al estado 37
-    FLOAT   desplazar e ir al estado 38
-    STRING  desplazar e ir al estado 39
+    ENDDEF  shift, and go to state 67
+    INT     shift, and go to state 37
+    FLOAT   shift, and go to state 38
+    STRING  shift, and go to state 39
 
-    declaracion  ir al estado 68
+    declaracion  go to state 68
 
 
-estado 41
+state 41
 
     8 declaraciones: declaracion .
 
-    $default  reduce usando la regla 8 (declaraciones)
+    $default  reduce using rule 8 (declaraciones)
 
 
-estado 42
+state 42
 
    26 salida: DISPLAY ID PUNTO_Y_COMA .
 
-    $default  reduce usando la regla 26 (salida)
+    $default  reduce using rule 26 (salida)
 
 
-estado 43
+state 43
 
    27 salida: DISPLAY constanteStringShow PUNTO_Y_COMA .
 
-    $default  reduce usando la regla 27 (salida)
+    $default  reduce using rule 27 (salida)
 
 
-estado 44
+state 44
 
    28 entrada: GET ID PUNTO_Y_COMA .
 
-    $default  reduce usando la regla 28 (entrada)
+    $default  reduce using rule 28 (entrada)
 
 
-estado 45
+state 45
 
    70 constanteNumerica: CONST_REAL .
 
-    $default  reduce usando la regla 70 (constanteNumerica)
+    $default  reduce using rule 70 (constanteNumerica)
 
 
-estado 46
+state 46
 
    69 constanteNumerica: CONST_INT .
 
-    $default  reduce usando la regla 69 (constanteNumerica)
+    $default  reduce using rule 69 (constanteNumerica)
 
 
-estado 47
+state 47
 
    47 condicion: P_A . condicion $@12 P_C AND P_A condicion P_C
    66 factor: P_A . expresion P_C
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 47
-    NOT         desplazar e ir al estado 48
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 47
+    NOT         shift, and go to state 48
+    ID          shift, and go to state 49
 
-    condicion          ir al estado 69
-    expresion          ir al estado 70
-    termino            ir al estado 52
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    condicion          go to state 69
+    expresion          go to state 70
+    termino            go to state 52
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 48
+state 48
 
    49 condicion: NOT . expresion $@13 CMP_MAY expresion
    51          | NOT . expresion $@14 CMP_MEN expresion
@@ -774,33 +773,33 @@ estado 48
    57          | NOT . expresion $@17 CMP_DIST expresion
    59          | NOT . expresion $@18 CMP_IGUAL expresion
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 71
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 71
+    ID          shift, and go to state 49
 
-    expresion          ir al estado 72
-    termino            ir al estado 52
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    expresion          go to state 72
+    termino            go to state 52
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 49
+state 49
 
    67 factor: ID .
 
-    $default  reduce usando la regla 67 (factor)
+    $default  reduce using rule 67 (factor)
 
 
-estado 50
+state 50
 
    30 decision: IF P_A condicion . P_C L_A sentencia L_C
    33         | IF P_A condicion . P_C L_A sentencia L_C $@4 ELSE $@5 L_A sentencia L_C
 
-    P_C  desplazar e ir al estado 73
+    P_C  shift, and go to state 73
 
 
-estado 51
+state 51
 
    35 condicion: expresion . $@6 CMP_MAY expresion
    37          | expresion . $@7 CMP_MEN expresion
@@ -811,176 +810,176 @@ estado 51
    60 expresion: expresion . OP_SUM termino
    61          | expresion . OP_RES termino
 
-    OP_SUM  desplazar e ir al estado 74
-    OP_RES  desplazar e ir al estado 75
+    OP_SUM  shift, and go to state 74
+    OP_RES  shift, and go to state 75
 
-    CMP_MEN    reduce usando la regla 36 ($@7)
-    CMP_MAYI   reduce usando la regla 38 ($@8)
-    CMP_MENI   reduce usando la regla 40 ($@9)
-    CMP_DIST   reduce usando la regla 42 ($@10)
-    CMP_IGUAL  reduce usando la regla 44 ($@11)
-    $default   reduce usando la regla 34 ($@6)
+    CMP_MEN    reduce using rule 36 ($@7)
+    CMP_MAYI   reduce using rule 38 ($@8)
+    CMP_MENI   reduce using rule 40 ($@9)
+    CMP_DIST   reduce using rule 42 ($@10)
+    CMP_IGUAL  reduce using rule 44 ($@11)
+    $default   reduce using rule 34 ($@6)
 
-    $@6   ir al estado 76
-    $@7   ir al estado 77
-    $@8   ir al estado 78
-    $@9   ir al estado 79
-    $@10  ir al estado 80
-    $@11  ir al estado 81
+    $@6   go to state 76
+    $@7   go to state 77
+    $@8   go to state 78
+    $@9   go to state 79
+    $@10  go to state 80
+    $@11  go to state 81
 
 
-estado 52
+state 52
 
    62 expresion: termino .
    63 termino: termino . OP_MUL factor
    64        | termino . OP_DIV factor
 
-    OP_DIV  desplazar e ir al estado 82
-    OP_MUL  desplazar e ir al estado 83
+    OP_DIV  shift, and go to state 82
+    OP_MUL  shift, and go to state 83
 
-    $default  reduce usando la regla 62 (expresion)
+    $default  reduce using rule 62 (expresion)
 
 
-estado 53
+state 53
 
    65 termino: factor .
 
-    $default  reduce usando la regla 65 (termino)
+    $default  reduce using rule 65 (termino)
 
 
-estado 54
+state 54
 
    68 factor: constanteNumerica .
 
-    $default  reduce usando la regla 68 (factor)
+    $default  reduce using rule 68 (factor)
 
 
-estado 55
+state 55
 
    29 iteracion: WHILE P_A condicion . P_C L_A sentencia L_C
 
-    P_C  desplazar e ir al estado 84
+    P_C  shift, and go to state 84
 
 
-estado 56
+state 56
 
    23 asignacion: ID OP_ASIG $@2 . expresion
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 71
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 71
+    ID          shift, and go to state 49
 
-    expresion          ir al estado 85
-    termino            ir al estado 52
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    expresion          go to state 85
+    termino            go to state 52
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 57
+state 57
 
    25 asignacion: ID OP_ASIG $@3 . constanteString
 
-    CONST_STR  desplazar e ir al estado 86
+    CONST_STR  shift, and go to state 86
 
-    constanteString  ir al estado 87
+    constanteString  go to state 87
 
 
-estado 58
+state 58
 
    79 asignacion_especial: ID AE_MAIG ID .
 
-    $default  reduce usando la regla 79 (asignacion_especial)
+    $default  reduce using rule 79 (asignacion_especial)
 
 
-estado 59
+state 59
 
    80 asignacion_especial: ID AE_MEIG ID .
 
-    $default  reduce usando la regla 80 (asignacion_especial)
+    $default  reduce using rule 80 (asignacion_especial)
 
 
-estado 60
+state 60
 
    81 asignacion_especial: ID AE_MUIG ID .
 
-    $default  reduce usando la regla 81 (asignacion_especial)
+    $default  reduce using rule 81 (asignacion_especial)
 
 
-estado 61
+state 61
 
    82 asignacion_especial: ID AE_DIIG ID .
 
-    $default  reduce usando la regla 82 (asignacion_especial)
+    $default  reduce using rule 82 (asignacion_especial)
 
 
-estado 62
+state 62
 
    76 cont_ids: ID .
 
-    $default  reduce usando la regla 76 (cont_ids)
+    $default  reduce using rule 76 (cont_ids)
 
 
-estado 63
+state 63
 
    74 let: LET_SIM $@19 cont_ids . OP_IGUAL P_A cont_exp P_C
    75 cont_ids: cont_ids . COMA ID
 
-    COMA      desplazar e ir al estado 88
-    OP_IGUAL  desplazar e ir al estado 89
+    COMA      shift, and go to state 88
+    OP_IGUAL  shift, and go to state 89
 
 
-estado 64
+state 64
 
    10 declaracion: INT DOSPUNTOS . lista_ids
 
-    ID  desplazar e ir al estado 90
+    ID  shift, and go to state 90
 
-    lista_ids  ir al estado 91
+    lista_ids  go to state 91
 
 
-estado 65
+state 65
 
    11 declaracion: FLOAT DOSPUNTOS . lista_ids
 
-    ID  desplazar e ir al estado 90
+    ID  shift, and go to state 90
 
-    lista_ids  ir al estado 92
+    lista_ids  go to state 92
 
 
-estado 66
+state 66
 
    12 declaracion: STRING DOSPUNTOS . lista_ids
 
-    ID  desplazar e ir al estado 90
+    ID  shift, and go to state 90
 
-    lista_ids  ir al estado 93
+    lista_ids  go to state 93
 
 
-estado 67
+state 67
 
     7 bloq_declaracion: DEFVAR $@1 declaraciones ENDDEF .
 
-    $default  reduce usando la regla 7 (bloq_declaracion)
+    $default  reduce using rule 7 (bloq_declaracion)
 
 
-estado 68
+state 68
 
     9 declaraciones: declaraciones declaracion .
 
-    $default  reduce usando la regla 9 (declaraciones)
+    $default  reduce using rule 9 (declaraciones)
 
 
-estado 69
+state 69
 
    47 condicion: P_A condicion . $@12 P_C AND P_A condicion P_C
 
-    $default  reduce usando la regla 46 ($@12)
+    $default  reduce using rule 46 ($@12)
 
-    $@12  ir al estado 94
+    $@12  go to state 94
 
 
-estado 70
+state 70
 
    35 condicion: expresion . $@6 CMP_MAY expresion
    37          | expresion . $@7 CMP_MEN expresion
@@ -992,41 +991,41 @@ estado 70
    61          | expresion . OP_RES termino
    66 factor: P_A expresion . P_C
 
-    P_C     desplazar e ir al estado 95
-    OP_SUM  desplazar e ir al estado 74
-    OP_RES  desplazar e ir al estado 75
+    P_C     shift, and go to state 95
+    OP_SUM  shift, and go to state 74
+    OP_RES  shift, and go to state 75
 
-    CMP_MEN    reduce usando la regla 36 ($@7)
-    CMP_MAYI   reduce usando la regla 38 ($@8)
-    CMP_MENI   reduce usando la regla 40 ($@9)
-    CMP_DIST   reduce usando la regla 42 ($@10)
-    CMP_IGUAL  reduce usando la regla 44 ($@11)
-    $default   reduce usando la regla 34 ($@6)
+    CMP_MEN    reduce using rule 36 ($@7)
+    CMP_MAYI   reduce using rule 38 ($@8)
+    CMP_MENI   reduce using rule 40 ($@9)
+    CMP_DIST   reduce using rule 42 ($@10)
+    CMP_IGUAL  reduce using rule 44 ($@11)
+    $default   reduce using rule 34 ($@6)
 
-    $@6   ir al estado 76
-    $@7   ir al estado 77
-    $@8   ir al estado 78
-    $@9   ir al estado 79
-    $@10  ir al estado 80
-    $@11  ir al estado 81
+    $@6   go to state 76
+    $@7   go to state 77
+    $@8   go to state 78
+    $@9   go to state 79
+    $@10  go to state 80
+    $@11  go to state 81
 
 
-estado 71
+state 71
 
    66 factor: P_A . expresion P_C
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 71
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 71
+    ID          shift, and go to state 49
 
-    expresion          ir al estado 96
-    termino            ir al estado 52
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    expresion          go to state 96
+    termino            go to state 52
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 72
+state 72
 
    49 condicion: NOT expresion . $@13 CMP_MAY expresion
    51          | NOT expresion . $@14 CMP_MEN expresion
@@ -1037,907 +1036,907 @@ estado 72
    60 expresion: expresion . OP_SUM termino
    61          | expresion . OP_RES termino
 
-    OP_SUM  desplazar e ir al estado 74
-    OP_RES  desplazar e ir al estado 75
+    OP_SUM  shift, and go to state 74
+    OP_RES  shift, and go to state 75
 
-    CMP_MEN    reduce usando la regla 50 ($@14)
-    CMP_MAYI   reduce usando la regla 52 ($@15)
-    CMP_MENI   reduce usando la regla 54 ($@16)
-    CMP_DIST   reduce usando la regla 56 ($@17)
-    CMP_IGUAL  reduce usando la regla 58 ($@18)
-    $default   reduce usando la regla 48 ($@13)
+    CMP_MEN    reduce using rule 50 ($@14)
+    CMP_MAYI   reduce using rule 52 ($@15)
+    CMP_MENI   reduce using rule 54 ($@16)
+    CMP_DIST   reduce using rule 56 ($@17)
+    CMP_IGUAL  reduce using rule 58 ($@18)
+    $default   reduce using rule 48 ($@13)
 
-    $@13  ir al estado 97
-    $@14  ir al estado 98
-    $@15  ir al estado 99
-    $@16  ir al estado 100
-    $@17  ir al estado 101
-    $@18  ir al estado 102
+    $@13  go to state 97
+    $@14  go to state 98
+    $@15  go to state 99
+    $@16  go to state 100
+    $@17  go to state 101
+    $@18  go to state 102
 
 
-estado 73
+state 73
 
    30 decision: IF P_A condicion P_C . L_A sentencia L_C
    33         | IF P_A condicion P_C . L_A sentencia L_C $@4 ELSE $@5 L_A sentencia L_C
 
-    L_A  desplazar e ir al estado 103
+    L_A  shift, and go to state 103
 
 
-estado 74
+state 74
 
    60 expresion: expresion OP_SUM . termino
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 71
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 71
+    ID          shift, and go to state 49
 
-    termino            ir al estado 104
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    termino            go to state 104
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 75
+state 75
 
    61 expresion: expresion OP_RES . termino
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 71
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 71
+    ID          shift, and go to state 49
 
-    termino            ir al estado 105
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    termino            go to state 105
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 76
+state 76
 
    35 condicion: expresion $@6 . CMP_MAY expresion
 
-    CMP_MAY  desplazar e ir al estado 106
+    CMP_MAY  shift, and go to state 106
 
 
-estado 77
+state 77
 
    37 condicion: expresion $@7 . CMP_MEN expresion
 
-    CMP_MEN  desplazar e ir al estado 107
+    CMP_MEN  shift, and go to state 107
 
 
-estado 78
+state 78
 
    39 condicion: expresion $@8 . CMP_MAYI expresion
 
-    CMP_MAYI  desplazar e ir al estado 108
+    CMP_MAYI  shift, and go to state 108
 
 
-estado 79
+state 79
 
    41 condicion: expresion $@9 . CMP_MENI expresion
 
-    CMP_MENI  desplazar e ir al estado 109
+    CMP_MENI  shift, and go to state 109
 
 
-estado 80
+state 80
 
    43 condicion: expresion $@10 . CMP_DIST expresion
 
-    CMP_DIST  desplazar e ir al estado 110
+    CMP_DIST  shift, and go to state 110
 
 
-estado 81
+state 81
 
    45 condicion: expresion $@11 . CMP_IGUAL expresion
 
-    CMP_IGUAL  desplazar e ir al estado 111
+    CMP_IGUAL  shift, and go to state 111
 
 
-estado 82
+state 82
 
    64 termino: termino OP_DIV . factor
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 71
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 71
+    ID          shift, and go to state 49
 
-    factor             ir al estado 112
-    constanteNumerica  ir al estado 54
+    factor             go to state 112
+    constanteNumerica  go to state 54
 
 
-estado 83
+state 83
 
    63 termino: termino OP_MUL . factor
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 71
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 71
+    ID          shift, and go to state 49
 
-    factor             ir al estado 113
-    constanteNumerica  ir al estado 54
+    factor             go to state 113
+    constanteNumerica  go to state 54
 
 
-estado 84
+state 84
 
    29 iteracion: WHILE P_A condicion P_C . L_A sentencia L_C
 
-    L_A  desplazar e ir al estado 114
+    L_A  shift, and go to state 114
 
 
-estado 85
+state 85
 
    23 asignacion: ID OP_ASIG $@2 expresion .
    60 expresion: expresion . OP_SUM termino
    61          | expresion . OP_RES termino
 
-    OP_SUM  desplazar e ir al estado 74
-    OP_RES  desplazar e ir al estado 75
+    OP_SUM  shift, and go to state 74
+    OP_RES  shift, and go to state 75
 
-    $default  reduce usando la regla 23 (asignacion)
+    $default  reduce using rule 23 (asignacion)
 
 
-estado 86
+state 86
 
    71 constanteString: CONST_STR .
 
-    $default  reduce usando la regla 71 (constanteString)
+    $default  reduce using rule 71 (constanteString)
 
 
-estado 87
+state 87
 
    25 asignacion: ID OP_ASIG $@3 constanteString .
 
-    $default  reduce usando la regla 25 (asignacion)
+    $default  reduce using rule 25 (asignacion)
 
 
-estado 88
+state 88
 
    75 cont_ids: cont_ids COMA . ID
 
-    ID  desplazar e ir al estado 115
+    ID  shift, and go to state 115
 
 
-estado 89
+state 89
 
    74 let: LET_SIM $@19 cont_ids OP_IGUAL . P_A cont_exp P_C
 
-    P_A  desplazar e ir al estado 116
+    P_A  shift, and go to state 116
 
 
-estado 90
+state 90
 
    13 lista_ids: ID .
 
-    $default  reduce usando la regla 13 (lista_ids)
+    $default  reduce using rule 13 (lista_ids)
 
 
-estado 91
+state 91
 
    10 declaracion: INT DOSPUNTOS lista_ids .
    14 lista_ids: lista_ids . PUNTO_Y_COMA ID
 
-    PUNTO_Y_COMA  desplazar e ir al estado 117
+    PUNTO_Y_COMA  shift, and go to state 117
 
-    $default  reduce usando la regla 10 (declaracion)
+    $default  reduce using rule 10 (declaracion)
 
 
-estado 92
+state 92
 
    11 declaracion: FLOAT DOSPUNTOS lista_ids .
    14 lista_ids: lista_ids . PUNTO_Y_COMA ID
 
-    PUNTO_Y_COMA  desplazar e ir al estado 117
+    PUNTO_Y_COMA  shift, and go to state 117
 
-    $default  reduce usando la regla 11 (declaracion)
+    $default  reduce using rule 11 (declaracion)
 
 
-estado 93
+state 93
 
    12 declaracion: STRING DOSPUNTOS lista_ids .
    14 lista_ids: lista_ids . PUNTO_Y_COMA ID
 
-    PUNTO_Y_COMA  desplazar e ir al estado 117
+    PUNTO_Y_COMA  shift, and go to state 117
 
-    $default  reduce usando la regla 12 (declaracion)
+    $default  reduce using rule 12 (declaracion)
 
 
-estado 94
+state 94
 
    47 condicion: P_A condicion $@12 . P_C AND P_A condicion P_C
 
-    P_C  desplazar e ir al estado 118
+    P_C  shift, and go to state 118
 
 
-estado 95
+state 95
 
    66 factor: P_A expresion P_C .
 
-    $default  reduce usando la regla 66 (factor)
+    $default  reduce using rule 66 (factor)
 
 
-estado 96
+state 96
 
    60 expresion: expresion . OP_SUM termino
    61          | expresion . OP_RES termino
    66 factor: P_A expresion . P_C
 
-    P_C     desplazar e ir al estado 95
-    OP_SUM  desplazar e ir al estado 74
-    OP_RES  desplazar e ir al estado 75
+    P_C     shift, and go to state 95
+    OP_SUM  shift, and go to state 74
+    OP_RES  shift, and go to state 75
 
 
-estado 97
+state 97
 
    49 condicion: NOT expresion $@13 . CMP_MAY expresion
 
-    CMP_MAY  desplazar e ir al estado 119
+    CMP_MAY  shift, and go to state 119
 
 
-estado 98
+state 98
 
    51 condicion: NOT expresion $@14 . CMP_MEN expresion
 
-    CMP_MEN  desplazar e ir al estado 120
+    CMP_MEN  shift, and go to state 120
 
 
-estado 99
+state 99
 
    53 condicion: NOT expresion $@15 . CMP_MAYI expresion
 
-    CMP_MAYI  desplazar e ir al estado 121
+    CMP_MAYI  shift, and go to state 121
 
 
-estado 100
+state 100
 
    55 condicion: NOT expresion $@16 . CMP_MENI expresion
 
-    CMP_MENI  desplazar e ir al estado 122
+    CMP_MENI  shift, and go to state 122
 
 
-estado 101
+state 101
 
    57 condicion: NOT expresion $@17 . CMP_DIST expresion
 
-    CMP_DIST  desplazar e ir al estado 123
+    CMP_DIST  shift, and go to state 123
 
 
-estado 102
+state 102
 
    59 condicion: NOT expresion $@18 . CMP_IGUAL expresion
 
-    CMP_IGUAL  desplazar e ir al estado 124
+    CMP_IGUAL  shift, and go to state 124
 
 
-estado 103
+state 103
 
    30 decision: IF P_A condicion P_C L_A . sentencia L_C
    33         | IF P_A condicion P_C L_A . sentencia L_C $@4 ELSE $@5 L_A sentencia L_C
 
-    DISPLAY  desplazar e ir al estado 2
-    GET      desplazar e ir al estado 3
-    IF       desplazar e ir al estado 4
-    WHILE    desplazar e ir al estado 5
-    ID       desplazar e ir al estado 6
-    LET_SIM  desplazar e ir al estado 7
+    DISPLAY  shift, and go to state 2
+    GET      shift, and go to state 3
+    IF       shift, and go to state 4
+    WHILE    shift, and go to state 5
+    ID       shift, and go to state 6
+    LET_SIM  shift, and go to state 7
 
-    sentencia            ir al estado 125
-    asignacion           ir al estado 13
-    salida               ir al estado 14
-    entrada              ir al estado 15
-    iteracion            ir al estado 16
-    decision             ir al estado 17
-    let                  ir al estado 18
-    asignacion_especial  ir al estado 19
+    sentencia            go to state 125
+    asignacion           go to state 13
+    salida               go to state 14
+    entrada              go to state 15
+    iteracion            go to state 16
+    decision             go to state 17
+    let                  go to state 18
+    asignacion_especial  go to state 19
 
 
-estado 104
+state 104
 
    60 expresion: expresion OP_SUM termino .
    63 termino: termino . OP_MUL factor
    64        | termino . OP_DIV factor
 
-    OP_DIV  desplazar e ir al estado 82
-    OP_MUL  desplazar e ir al estado 83
+    OP_DIV  shift, and go to state 82
+    OP_MUL  shift, and go to state 83
 
-    $default  reduce usando la regla 60 (expresion)
+    $default  reduce using rule 60 (expresion)
 
 
-estado 105
+state 105
 
    61 expresion: expresion OP_RES termino .
    63 termino: termino . OP_MUL factor
    64        | termino . OP_DIV factor
 
-    OP_DIV  desplazar e ir al estado 82
-    OP_MUL  desplazar e ir al estado 83
+    OP_DIV  shift, and go to state 82
+    OP_MUL  shift, and go to state 83
 
-    $default  reduce usando la regla 61 (expresion)
+    $default  reduce using rule 61 (expresion)
 
 
-estado 106
+state 106
 
    35 condicion: expresion $@6 CMP_MAY . expresion
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 71
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 71
+    ID          shift, and go to state 49
 
-    expresion          ir al estado 126
-    termino            ir al estado 52
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    expresion          go to state 126
+    termino            go to state 52
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 107
+state 107
 
    37 condicion: expresion $@7 CMP_MEN . expresion
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 71
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 71
+    ID          shift, and go to state 49
 
-    expresion          ir al estado 127
-    termino            ir al estado 52
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    expresion          go to state 127
+    termino            go to state 52
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 108
+state 108
 
    39 condicion: expresion $@8 CMP_MAYI . expresion
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 71
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 71
+    ID          shift, and go to state 49
 
-    expresion          ir al estado 128
-    termino            ir al estado 52
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    expresion          go to state 128
+    termino            go to state 52
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 109
+state 109
 
    41 condicion: expresion $@9 CMP_MENI . expresion
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 71
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 71
+    ID          shift, and go to state 49
 
-    expresion          ir al estado 129
-    termino            ir al estado 52
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    expresion          go to state 129
+    termino            go to state 52
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 110
+state 110
 
    43 condicion: expresion $@10 CMP_DIST . expresion
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 71
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 71
+    ID          shift, and go to state 49
 
-    expresion          ir al estado 130
-    termino            ir al estado 52
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    expresion          go to state 130
+    termino            go to state 52
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 111
+state 111
 
    45 condicion: expresion $@11 CMP_IGUAL . expresion
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 71
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 71
+    ID          shift, and go to state 49
 
-    expresion          ir al estado 131
-    termino            ir al estado 52
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    expresion          go to state 131
+    termino            go to state 52
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 112
+state 112
 
    64 termino: termino OP_DIV factor .
 
-    $default  reduce usando la regla 64 (termino)
+    $default  reduce using rule 64 (termino)
 
 
-estado 113
+state 113
 
    63 termino: termino OP_MUL factor .
 
-    $default  reduce usando la regla 63 (termino)
+    $default  reduce using rule 63 (termino)
 
 
-estado 114
+state 114
 
    29 iteracion: WHILE P_A condicion P_C L_A . sentencia L_C
 
-    DISPLAY  desplazar e ir al estado 2
-    GET      desplazar e ir al estado 3
-    IF       desplazar e ir al estado 4
-    WHILE    desplazar e ir al estado 5
-    ID       desplazar e ir al estado 6
-    LET_SIM  desplazar e ir al estado 7
+    DISPLAY  shift, and go to state 2
+    GET      shift, and go to state 3
+    IF       shift, and go to state 4
+    WHILE    shift, and go to state 5
+    ID       shift, and go to state 6
+    LET_SIM  shift, and go to state 7
 
-    sentencia            ir al estado 132
-    asignacion           ir al estado 13
-    salida               ir al estado 14
-    entrada              ir al estado 15
-    iteracion            ir al estado 16
-    decision             ir al estado 17
-    let                  ir al estado 18
-    asignacion_especial  ir al estado 19
+    sentencia            go to state 132
+    asignacion           go to state 13
+    salida               go to state 14
+    entrada              go to state 15
+    iteracion            go to state 16
+    decision             go to state 17
+    let                  go to state 18
+    asignacion_especial  go to state 19
 
 
-estado 115
+state 115
 
    75 cont_ids: cont_ids COMA ID .
 
-    $default  reduce usando la regla 75 (cont_ids)
+    $default  reduce using rule 75 (cont_ids)
 
 
-estado 116
+state 116
 
    74 let: LET_SIM $@19 cont_ids OP_IGUAL P_A . cont_exp P_C
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 71
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 71
+    ID          shift, and go to state 49
 
-    expresion          ir al estado 133
-    termino            ir al estado 52
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
-    cont_exp           ir al estado 134
+    expresion          go to state 133
+    termino            go to state 52
+    factor             go to state 53
+    constanteNumerica  go to state 54
+    cont_exp           go to state 134
 
 
-estado 117
+state 117
 
    14 lista_ids: lista_ids PUNTO_Y_COMA . ID
 
-    ID  desplazar e ir al estado 135
+    ID  shift, and go to state 135
 
 
-estado 118
+state 118
 
    47 condicion: P_A condicion $@12 P_C . AND P_A condicion P_C
 
-    AND  desplazar e ir al estado 136
+    AND  shift, and go to state 136
 
 
-estado 119
+state 119
 
    49 condicion: NOT expresion $@13 CMP_MAY . expresion
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 71
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 71
+    ID          shift, and go to state 49
 
-    expresion          ir al estado 137
-    termino            ir al estado 52
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    expresion          go to state 137
+    termino            go to state 52
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 120
+state 120
 
    51 condicion: NOT expresion $@14 CMP_MEN . expresion
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 71
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 71
+    ID          shift, and go to state 49
 
-    expresion          ir al estado 138
-    termino            ir al estado 52
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    expresion          go to state 138
+    termino            go to state 52
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 121
+state 121
 
    53 condicion: NOT expresion $@15 CMP_MAYI . expresion
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 71
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 71
+    ID          shift, and go to state 49
 
-    expresion          ir al estado 139
-    termino            ir al estado 52
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    expresion          go to state 139
+    termino            go to state 52
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 122
+state 122
 
    55 condicion: NOT expresion $@16 CMP_MENI . expresion
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 71
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 71
+    ID          shift, and go to state 49
 
-    expresion          ir al estado 140
-    termino            ir al estado 52
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    expresion          go to state 140
+    termino            go to state 52
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 123
+state 123
 
    57 condicion: NOT expresion $@17 CMP_DIST . expresion
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 71
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 71
+    ID          shift, and go to state 49
 
-    expresion          ir al estado 141
-    termino            ir al estado 52
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    expresion          go to state 141
+    termino            go to state 52
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 124
+state 124
 
    59 condicion: NOT expresion $@18 CMP_IGUAL . expresion
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 71
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 71
+    ID          shift, and go to state 49
 
-    expresion          ir al estado 142
-    termino            ir al estado 52
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    expresion          go to state 142
+    termino            go to state 52
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 125
+state 125
 
    30 decision: IF P_A condicion P_C L_A sentencia . L_C
    33         | IF P_A condicion P_C L_A sentencia . L_C $@4 ELSE $@5 L_A sentencia L_C
 
-    L_C  desplazar e ir al estado 143
+    L_C  shift, and go to state 143
 
 
-estado 126
+state 126
 
    35 condicion: expresion $@6 CMP_MAY expresion .
    60 expresion: expresion . OP_SUM termino
    61          | expresion . OP_RES termino
 
-    OP_SUM  desplazar e ir al estado 74
-    OP_RES  desplazar e ir al estado 75
+    OP_SUM  shift, and go to state 74
+    OP_RES  shift, and go to state 75
 
-    $default  reduce usando la regla 35 (condicion)
+    $default  reduce using rule 35 (condicion)
 
 
-estado 127
+state 127
 
    37 condicion: expresion $@7 CMP_MEN expresion .
    60 expresion: expresion . OP_SUM termino
    61          | expresion . OP_RES termino
 
-    OP_SUM  desplazar e ir al estado 74
-    OP_RES  desplazar e ir al estado 75
+    OP_SUM  shift, and go to state 74
+    OP_RES  shift, and go to state 75
 
-    $default  reduce usando la regla 37 (condicion)
+    $default  reduce using rule 37 (condicion)
 
 
-estado 128
+state 128
 
    39 condicion: expresion $@8 CMP_MAYI expresion .
    60 expresion: expresion . OP_SUM termino
    61          | expresion . OP_RES termino
 
-    OP_SUM  desplazar e ir al estado 74
-    OP_RES  desplazar e ir al estado 75
+    OP_SUM  shift, and go to state 74
+    OP_RES  shift, and go to state 75
 
-    $default  reduce usando la regla 39 (condicion)
+    $default  reduce using rule 39 (condicion)
 
 
-estado 129
+state 129
 
    41 condicion: expresion $@9 CMP_MENI expresion .
    60 expresion: expresion . OP_SUM termino
    61          | expresion . OP_RES termino
 
-    OP_SUM  desplazar e ir al estado 74
-    OP_RES  desplazar e ir al estado 75
+    OP_SUM  shift, and go to state 74
+    OP_RES  shift, and go to state 75
 
-    $default  reduce usando la regla 41 (condicion)
+    $default  reduce using rule 41 (condicion)
 
 
-estado 130
+state 130
 
    43 condicion: expresion $@10 CMP_DIST expresion .
    60 expresion: expresion . OP_SUM termino
    61          | expresion . OP_RES termino
 
-    OP_SUM  desplazar e ir al estado 74
-    OP_RES  desplazar e ir al estado 75
+    OP_SUM  shift, and go to state 74
+    OP_RES  shift, and go to state 75
 
-    $default  reduce usando la regla 43 (condicion)
+    $default  reduce using rule 43 (condicion)
 
 
-estado 131
+state 131
 
    45 condicion: expresion $@11 CMP_IGUAL expresion .
    60 expresion: expresion . OP_SUM termino
    61          | expresion . OP_RES termino
 
-    OP_SUM  desplazar e ir al estado 74
-    OP_RES  desplazar e ir al estado 75
+    OP_SUM  shift, and go to state 74
+    OP_RES  shift, and go to state 75
 
-    $default  reduce usando la regla 45 (condicion)
+    $default  reduce using rule 45 (condicion)
 
 
-estado 132
+state 132
 
    29 iteracion: WHILE P_A condicion P_C L_A sentencia . L_C
 
-    L_C  desplazar e ir al estado 144
+    L_C  shift, and go to state 144
 
 
-estado 133
+state 133
 
    60 expresion: expresion . OP_SUM termino
    61          | expresion . OP_RES termino
    78 cont_exp: expresion .
 
-    OP_SUM  desplazar e ir al estado 74
-    OP_RES  desplazar e ir al estado 75
+    OP_SUM  shift, and go to state 74
+    OP_RES  shift, and go to state 75
 
-    $default  reduce usando la regla 78 (cont_exp)
+    $default  reduce using rule 78 (cont_exp)
 
 
-estado 134
+state 134
 
    74 let: LET_SIM $@19 cont_ids OP_IGUAL P_A cont_exp . P_C
    77 cont_exp: cont_exp . PUNTO_Y_COMA expresion
 
-    P_C           desplazar e ir al estado 145
-    PUNTO_Y_COMA  desplazar e ir al estado 146
+    P_C           shift, and go to state 145
+    PUNTO_Y_COMA  shift, and go to state 146
 
 
-estado 135
+state 135
 
    14 lista_ids: lista_ids PUNTO_Y_COMA ID .
 
-    $default  reduce usando la regla 14 (lista_ids)
+    $default  reduce using rule 14 (lista_ids)
 
 
-estado 136
+state 136
 
    47 condicion: P_A condicion $@12 P_C AND . P_A condicion P_C
 
-    P_A  desplazar e ir al estado 147
+    P_A  shift, and go to state 147
 
 
-estado 137
+state 137
 
    49 condicion: NOT expresion $@13 CMP_MAY expresion .
    60 expresion: expresion . OP_SUM termino
    61          | expresion . OP_RES termino
 
-    OP_SUM  desplazar e ir al estado 74
-    OP_RES  desplazar e ir al estado 75
+    OP_SUM  shift, and go to state 74
+    OP_RES  shift, and go to state 75
 
-    $default  reduce usando la regla 49 (condicion)
+    $default  reduce using rule 49 (condicion)
 
 
-estado 138
+state 138
 
    51 condicion: NOT expresion $@14 CMP_MEN expresion .
    60 expresion: expresion . OP_SUM termino
    61          | expresion . OP_RES termino
 
-    OP_SUM  desplazar e ir al estado 74
-    OP_RES  desplazar e ir al estado 75
+    OP_SUM  shift, and go to state 74
+    OP_RES  shift, and go to state 75
 
-    $default  reduce usando la regla 51 (condicion)
+    $default  reduce using rule 51 (condicion)
 
 
-estado 139
+state 139
 
    53 condicion: NOT expresion $@15 CMP_MAYI expresion .
    60 expresion: expresion . OP_SUM termino
    61          | expresion . OP_RES termino
 
-    OP_SUM  desplazar e ir al estado 74
-    OP_RES  desplazar e ir al estado 75
+    OP_SUM  shift, and go to state 74
+    OP_RES  shift, and go to state 75
 
-    $default  reduce usando la regla 53 (condicion)
+    $default  reduce using rule 53 (condicion)
 
 
-estado 140
+state 140
 
    55 condicion: NOT expresion $@16 CMP_MENI expresion .
    60 expresion: expresion . OP_SUM termino
    61          | expresion . OP_RES termino
 
-    OP_SUM  desplazar e ir al estado 74
-    OP_RES  desplazar e ir al estado 75
+    OP_SUM  shift, and go to state 74
+    OP_RES  shift, and go to state 75
 
-    $default  reduce usando la regla 55 (condicion)
+    $default  reduce using rule 55 (condicion)
 
 
-estado 141
+state 141
 
    57 condicion: NOT expresion $@17 CMP_DIST expresion .
    60 expresion: expresion . OP_SUM termino
    61          | expresion . OP_RES termino
 
-    OP_SUM  desplazar e ir al estado 74
-    OP_RES  desplazar e ir al estado 75
+    OP_SUM  shift, and go to state 74
+    OP_RES  shift, and go to state 75
 
-    $default  reduce usando la regla 57 (condicion)
+    $default  reduce using rule 57 (condicion)
 
 
-estado 142
+state 142
 
    59 condicion: NOT expresion $@18 CMP_IGUAL expresion .
    60 expresion: expresion . OP_SUM termino
    61          | expresion . OP_RES termino
 
-    OP_SUM  desplazar e ir al estado 74
-    OP_RES  desplazar e ir al estado 75
+    OP_SUM  shift, and go to state 74
+    OP_RES  shift, and go to state 75
 
-    $default  reduce usando la regla 59 (condicion)
+    $default  reduce using rule 59 (condicion)
 
 
-estado 143
+state 143
 
    30 decision: IF P_A condicion P_C L_A sentencia L_C .
    33         | IF P_A condicion P_C L_A sentencia L_C . $@4 ELSE $@5 L_A sentencia L_C
 
-    ELSE      reduce usando la regla 31 ($@4)
-    $default  reduce usando la regla 30 (decision)
+    ELSE      reduce using rule 31 ($@4)
+    $default  reduce using rule 30 (decision)
 
-    $@4  ir al estado 148
+    $@4  go to state 148
 
 
-estado 144
+state 144
 
    29 iteracion: WHILE P_A condicion P_C L_A sentencia L_C .
 
-    $default  reduce usando la regla 29 (iteracion)
+    $default  reduce using rule 29 (iteracion)
 
 
-estado 145
+state 145
 
    74 let: LET_SIM $@19 cont_ids OP_IGUAL P_A cont_exp P_C .
 
-    $default  reduce usando la regla 74 (let)
+    $default  reduce using rule 74 (let)
 
 
-estado 146
+state 146
 
    77 cont_exp: cont_exp PUNTO_Y_COMA . expresion
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 71
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 71
+    ID          shift, and go to state 49
 
-    expresion          ir al estado 149
-    termino            ir al estado 52
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    expresion          go to state 149
+    termino            go to state 52
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 147
+state 147
 
    47 condicion: P_A condicion $@12 P_C AND P_A . condicion P_C
 
-    CONST_REAL  desplazar e ir al estado 45
-    CONST_INT   desplazar e ir al estado 46
-    P_A         desplazar e ir al estado 47
-    NOT         desplazar e ir al estado 48
-    ID          desplazar e ir al estado 49
+    CONST_REAL  shift, and go to state 45
+    CONST_INT   shift, and go to state 46
+    P_A         shift, and go to state 47
+    NOT         shift, and go to state 48
+    ID          shift, and go to state 49
 
-    condicion          ir al estado 150
-    expresion          ir al estado 51
-    termino            ir al estado 52
-    factor             ir al estado 53
-    constanteNumerica  ir al estado 54
+    condicion          go to state 150
+    expresion          go to state 51
+    termino            go to state 52
+    factor             go to state 53
+    constanteNumerica  go to state 54
 
 
-estado 148
+state 148
 
    33 decision: IF P_A condicion P_C L_A sentencia L_C $@4 . ELSE $@5 L_A sentencia L_C
 
-    ELSE  desplazar e ir al estado 151
+    ELSE  shift, and go to state 151
 
 
-estado 149
+state 149
 
    60 expresion: expresion . OP_SUM termino
    61          | expresion . OP_RES termino
    77 cont_exp: cont_exp PUNTO_Y_COMA expresion .
 
-    OP_SUM  desplazar e ir al estado 74
-    OP_RES  desplazar e ir al estado 75
+    OP_SUM  shift, and go to state 74
+    OP_RES  shift, and go to state 75
 
-    $default  reduce usando la regla 77 (cont_exp)
+    $default  reduce using rule 77 (cont_exp)
 
 
-estado 150
+state 150
 
    47 condicion: P_A condicion $@12 P_C AND P_A condicion . P_C
 
-    P_C  desplazar e ir al estado 152
+    P_C  shift, and go to state 152
 
 
-estado 151
+state 151
 
    33 decision: IF P_A condicion P_C L_A sentencia L_C $@4 ELSE . $@5 L_A sentencia L_C
 
-    $default  reduce usando la regla 32 ($@5)
+    $default  reduce using rule 32 ($@5)
 
-    $@5  ir al estado 153
+    $@5  go to state 153
 
 
-estado 152
+state 152
 
    47 condicion: P_A condicion $@12 P_C AND P_A condicion P_C .
 
-    $default  reduce usando la regla 47 (condicion)
+    $default  reduce using rule 47 (condicion)
 
 
-estado 153
+state 153
 
    33 decision: IF P_A condicion P_C L_A sentencia L_C $@4 ELSE $@5 . L_A sentencia L_C
 
-    L_A  desplazar e ir al estado 154
+    L_A  shift, and go to state 154
 
 
-estado 154
+state 154
 
    33 decision: IF P_A condicion P_C L_A sentencia L_C $@4 ELSE $@5 L_A . sentencia L_C
 
-    DISPLAY  desplazar e ir al estado 2
-    GET      desplazar e ir al estado 3
-    IF       desplazar e ir al estado 4
-    WHILE    desplazar e ir al estado 5
-    ID       desplazar e ir al estado 6
-    LET_SIM  desplazar e ir al estado 7
+    DISPLAY  shift, and go to state 2
+    GET      shift, and go to state 3
+    IF       shift, and go to state 4
+    WHILE    shift, and go to state 5
+    ID       shift, and go to state 6
+    LET_SIM  shift, and go to state 7
 
-    sentencia            ir al estado 155
-    asignacion           ir al estado 13
-    salida               ir al estado 14
-    entrada              ir al estado 15
-    iteracion            ir al estado 16
-    decision             ir al estado 17
-    let                  ir al estado 18
-    asignacion_especial  ir al estado 19
+    sentencia            go to state 155
+    asignacion           go to state 13
+    salida               go to state 14
+    entrada              go to state 15
+    iteracion            go to state 16
+    decision             go to state 17
+    let                  go to state 18
+    asignacion_especial  go to state 19
 
 
-estado 155
+state 155
 
    33 decision: IF P_A condicion P_C L_A sentencia L_C $@4 ELSE $@5 L_A sentencia . L_C
 
-    L_C  desplazar e ir al estado 156
+    L_C  shift, and go to state 156
 
 
-estado 156
+state 156
 
    33 decision: IF P_A condicion P_C L_A sentencia L_C $@4 ELSE $@5 L_A sentencia L_C .
 
-    $default  reduce usando la regla 33 (decision)
+    $default  reduce using rule 33 (decision)

@@ -360,7 +360,8 @@ char* getCodOp(char* token)
 char *eliminar_comillas(char *cadena) {
     char *cadena_temporal = malloc(strlen(cadena)+1);
     int j = 0;
-        for (int i=0; i<strlen(cadena); i++) {
+	int i;
+        for (i=0; i<strlen(cadena); i++) {
             switch (cadena[i]) {
                 case '"': break;
                 default:

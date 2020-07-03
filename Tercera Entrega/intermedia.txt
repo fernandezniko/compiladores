@@ -1,1 +1,1 @@
-b := 1 _Cuerpo_1 _Cuerpo_2 j := 2 _Cuerpo_3 c := 3 _Cuerpo_4 b == j IF j DISPLAY _Cuerpo_5 c DISPLAY 
+a := 2 _Cuerpo_1 _Cuerpo_2 b := 3 _Cuerpo_3 uno := 3 _Cuerpo_4 uno DISPLAY _Cuerpo_5 uno := 4 ; dos := 5 _Cuerpo_6 uno DISPLAY _Cuerpo_7 dos DISPLAY 

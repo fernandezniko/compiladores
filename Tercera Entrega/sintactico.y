@@ -448,11 +448,11 @@ cont_ids: cont_ids COMA ID {
 			;
 
 cont_exp: cont_exp PUNTO_Y_COMA expresion {
-								Let_cont_id = crearNodo(";",*Let_cont_id,*crearNodo("=",*crearHoja(sacarDeCola(&colaLet)),*Eptr));
+								Let_cont_id = crearNodo(";",*Let_cont_id,*crearNodo(":=",*crearHoja(sacarDeCola(&colaLet)),*Eptr));
 								cont_2++;printf("\ncont_exp - cont_exp PUNTO_Y_COMA expresion");
 								}
 			| expresion {
-								Let_cont_id = crearNodo("=",*crearHoja(sacarDeCola(&colaLet)),*Eptr);
+								Let_cont_id = crearNodo(":=",*crearHoja(sacarDeCola(&colaLet)),*Eptr);
 								cont_2++;printf("\ncont_exp - expresion");
 								}
 			;

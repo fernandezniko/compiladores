@@ -1,7 +1,15 @@
+DEFVAR
+	INT: uno;dos;tres;a;b
+ENDDEF
+
+a := 2;
+b := 3;
+
 LET uno = (3)
-LET uno,dos = (3; 4)
 
-LET uno,dos = (3;a*b)
+DISPLAY uno;
 
-LET uno, dos, tres = (3; 5; a*b)
-LET uno = (v*c)
+LET uno,dos = (4;5)
+
+DISPLAY uno;
+DISPLAY dos;
